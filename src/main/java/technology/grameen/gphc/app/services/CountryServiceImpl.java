@@ -2,8 +2,8 @@ package technology.grameen.gphc.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import technology.grameen.gphc.app.entity.GeoCountry;
-import technology.grameen.gphc.app.repositories.GeoCountryRepository;
+import technology.grameen.gphc.app.healthapp.entity.GeoCountry;
+import technology.grameen.gphc.app.healthapp.repositories.GeoCountryRepository;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package technology.grameen.gphc.app.services;
 
-import technology.grameen.gphc.app.entity.GeoCountry;
+import technology.grameen.gphc.app.healthapp.entity.GeoCountry;
 
 import java.util.List;
 

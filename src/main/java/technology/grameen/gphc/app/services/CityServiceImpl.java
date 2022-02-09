@@ -2,7 +2,7 @@ package technology.grameen.gphc.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import technology.grameen.gphc.app.repositories.GeoCityRepository;
+import technology.grameen.gphc.app.healthapp.repositories.GeoCityRepository;
 
 import java.util.List;
 

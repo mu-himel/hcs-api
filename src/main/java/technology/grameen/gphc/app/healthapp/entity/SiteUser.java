@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.entity;
+package technology.grameen.gphc.app.healthapp.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

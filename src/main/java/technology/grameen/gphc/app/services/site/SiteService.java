@@ -2,7 +2,7 @@ package technology.grameen.gphc.app.services.site;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import technology.grameen.gphc.app.entity.Site;
+import technology.grameen.gphc.app.healthapp.entity.Site;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package technology.grameen.gphc.app.repositories;
+package technology.grameen.gphc.app.healthapp.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import technology.grameen.gphc.app.entity.GeoCountry;
+import technology.grameen.gphc.app.healthapp.entity.GeoCountry;
 
 import java.util.List;
 

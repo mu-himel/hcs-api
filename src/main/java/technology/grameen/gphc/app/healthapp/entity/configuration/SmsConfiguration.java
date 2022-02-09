@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.entity.configuration;
+package technology.grameen.gphc.app.healthapp.entity.configuration;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,16 +10,14 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "email_configurations")
-public class EmailConfiguration {
+@Table(name = "sms_configurations")
+public class SmsConfiguration {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private String smtpHost;
-    private String smtpPort;
-    private String fromEmailAddress;
-    private String replyTo;
-    private Boolean isSslEnabled;
+    private String url;
+    private String apiKey;
+    private String apiSecret;
     private Boolean isActive;
 
     private UUID createdBy;

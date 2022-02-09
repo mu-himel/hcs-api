@@ -1,29 +1,25 @@
-package technology.grameen.gphc.app.entity.profile;
+package technology.grameen.gphc.app.healthapp.entity.configuration;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "doctor_profiles")
-public class DoctorProfile {
+@Table(name = "system_configurations")
+public class SystemConfiguration {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private String bmaRegNo;
-    private String speciality;
-    private String degree;
-    private String hospital;
-    private String designation;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private Profile profile;
+    private String orgName;
 
     @Column(length = 1000)
-    private String signatureFile;
+    private String logo;
 
     private UUID createdBy;
     private UUID updatedBy;

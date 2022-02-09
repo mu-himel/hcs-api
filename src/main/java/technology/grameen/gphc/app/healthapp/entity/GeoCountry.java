@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.entity;
+package technology.grameen.gphc.app.healthapp.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

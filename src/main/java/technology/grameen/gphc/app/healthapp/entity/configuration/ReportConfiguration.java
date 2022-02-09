@@ -1,29 +1,25 @@
-package technology.grameen.gphc.app.entity.profile;
+package technology.grameen.gphc.app.healthapp.entity.configuration;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.healthapp.entity.Site;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "researcher_profiles")
-public class ResearcherProfile {
+@Table(name = "report_configurations")
+public class ReportConfiguration {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private String speciality;
-    private String degree;
-    private String institute;
-    private String designation;
-    private String degreeYear;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Profile profile;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Site site;
 
-    @Column(length = 1000)
-    private String signatureFile;
+
+    private Boolean isActive;
 
     private UUID createdBy;
     private UUID updatedBy;
@@ -33,4 +29,5 @@ public class ResearcherProfile {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
 }

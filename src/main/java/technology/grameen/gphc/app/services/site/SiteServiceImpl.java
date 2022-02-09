@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import technology.grameen.gphc.app.entity.Site;
-import technology.grameen.gphc.app.repositories.SiteRepository;
+import technology.grameen.gphc.app.healthapp.entity.Site;
+import technology.grameen.gphc.app.healthapp.repositories.SiteRepository;
 
 import java.util.List;
 

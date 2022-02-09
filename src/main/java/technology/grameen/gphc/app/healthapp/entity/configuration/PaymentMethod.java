@@ -1,25 +1,23 @@
-package technology.grameen.gphc.app.entity.configuration;
+package technology.grameen.gphc.app.healthapp.entity.configuration;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import technology.grameen.gphc.app.entity.Site;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "report_configurations")
-public class ReportConfiguration {
+@Table(name = "payment_methods")
+public class PaymentMethod {
 
     @Id
     private UUID id = UUID.randomUUID();
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Site site;
-
-
-    private Boolean isActive;
+    private String methodName;
+    private String description;
+    private Boolean isEnabled;
 
     private UUID createdBy;
     private UUID updatedBy;
@@ -29,5 +27,4 @@ public class ReportConfiguration {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 }
