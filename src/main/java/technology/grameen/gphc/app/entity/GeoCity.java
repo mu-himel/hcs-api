@@ -1,6 +1,11 @@
 package technology.grameen.gphc.app.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "geo_cities")
@@ -25,6 +30,15 @@ public class GeoCity {
     private Double latitude;
     private Double longitude;
     private Integer status;
+
+    private UUID createdBy;
+    private UUID updatedBy;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public Long getId() {
         return id;

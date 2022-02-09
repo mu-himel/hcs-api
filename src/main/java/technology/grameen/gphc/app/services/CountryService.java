@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.services.location;
+package technology.grameen.gphc.app.services;
 
 import technology.grameen.gphc.app.entity.GeoCountry;
 

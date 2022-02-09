@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.services.location;
+package technology.grameen.gphc.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import technology.grameen.gphc.app.repositories.GeoCountryRepository;
 import java.util.List;
 
 @Service
-public class CountryServiceImpl implements CountryService{
+public class CountryServiceImpl implements CountryService {
 
     @Autowired
     private GeoCountryRepository countryRepository;

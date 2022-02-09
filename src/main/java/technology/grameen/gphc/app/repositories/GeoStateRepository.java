@@ -1,9 +1,10 @@
-package technology.grameen.gphc.app.entity;
+package technology.grameen.gphc.app.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import technology.grameen.gphc.app.entity.GeoState;
 
 import java.util.List;
 

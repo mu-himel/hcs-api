@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "geo_countries")
@@ -46,6 +47,9 @@ public class GeoCountry {
     @Column(name = "emojiu")
     private String emojiU;
 
+    private UUID createdBy;
+    private UUID updatedBy;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -56,6 +60,8 @@ public class GeoCountry {
 
     @Column(name = "wikidataid")
     private String wikiDataId;
+
+
 
     public Long getId() {
         return id;

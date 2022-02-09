@@ -20,17 +20,17 @@ public class Site {
     private String address2;
     private String email;
     private String contactNumber;
-    private String lon;
-    private String lat;
+    private String longitude;
+    private String latitude;
     private String postalCode;
 
     @Column(length = 1000)
     private String logo;
 
-    private Boolean showLogoInPrescription;
-    private Boolean showSiteHeader;
-    private Boolean hideAllReportHeader;
-    private Boolean allowAutoBarCodeGeneration;
+    private Boolean isShowLogoInPrescription;
+    private Boolean isShowSiteHeader;
+    private Boolean isHideAllReportHeader;
+    private Boolean isAutoBarCodeGenerationEnabled;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private GeoCountry country;

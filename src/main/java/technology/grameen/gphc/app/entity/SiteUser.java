@@ -6,14 +6,13 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "sms_configurations")
-public class SmsConfiguration {
+@Table(name = "site_users")
+public class SiteUser {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private String url;
-    private String apiKey;
-    private String apiSecret;
-    private Boolean isActive;
+    private UUID userId;
+    private Boolean status;
+
 
 }

@@ -1,11 +1,16 @@
-package technology.grameen.gphc.app.entity;
+package technology.grameen.gphc.app.entity.profile;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.entity.Site;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "user_profiles")
-public class UserProfile {
+public class Profile {
 
     @Id
     private UUID id = UUID.randomUUID();
@@ -27,6 +32,15 @@ public class UserProfile {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
+
+    private UUID createdBy;
+    private UUID updatedBy;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
 
 

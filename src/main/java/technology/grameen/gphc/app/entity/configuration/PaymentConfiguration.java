@@ -1,8 +1,11 @@
-package technology.grameen.gphc.app.entity;
+package technology.grameen.gphc.app.entity.configuration;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.entity.Site;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,8 +22,18 @@ public class PaymentConfiguration {
     private Boolean isPerformTransactionValidation;
     private String clientKey;
     private String clientSecret;
-    private Boolean enabled;
+    private Boolean isEnabled;
     private Boolean isActive;
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
+
+    private UUID createdBy;
+    private UUID updatedBy;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
 }
