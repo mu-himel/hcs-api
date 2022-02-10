@@ -1,15 +1,16 @@
-package technology.grameen.gphc.app.healthapp.entity;
+package technology.grameen.gphc.app.healthapp.entity.location;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.healthapp.entity.location.GeoCountry;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "geo_cities")
-public class GeoCity {
+@Table(name = "geo_states")
+public class GeoState {
 
     @Id
     private Long id;
@@ -17,18 +18,15 @@ public class GeoCity {
     @ManyToOne(fetch = FetchType.LAZY)
     private GeoCountry country;
 
-    @Column(length = 11)
+    @Column(length = 2)
     private String countryShortCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private GeoState state;
+    @Column(length = 32)
+    private String code;
 
-    private Integer cityNumber;
-
+    @Column(length = 128)
     private String name;
 
-    private Double latitude;
-    private Double longitude;
     private Integer status;
 
     private UUID createdBy;
@@ -39,6 +37,7 @@ public class GeoCity {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
 
     public Long getId() {
         return id;
@@ -64,20 +63,12 @@ public class GeoCity {
         this.countryShortCode = countryShortCode;
     }
 
-    public GeoState getState() {
-        return state;
+    public String getCode() {
+        return code;
     }
 
-    public void setState(GeoState state) {
-        this.state = state;
-    }
-
-    public Integer getCityNumber() {
-        return cityNumber;
-    }
-
-    public void setCityNumber(Integer cityNumber) {
-        this.cityNumber = cityNumber;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -86,22 +77,6 @@ public class GeoCity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 
     public Integer getStatus() {

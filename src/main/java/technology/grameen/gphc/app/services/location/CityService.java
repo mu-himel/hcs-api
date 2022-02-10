@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.services;
+package technology.grameen.gphc.app.services.location;
 
 import java.util.List;
 

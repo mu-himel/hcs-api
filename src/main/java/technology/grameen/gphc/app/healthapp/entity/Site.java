@@ -2,6 +2,9 @@ package technology.grameen.gphc.app.healthapp.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.healthapp.entity.location.GeoCity;
+import technology.grameen.gphc.app.healthapp.entity.location.GeoCountry;
+import technology.grameen.gphc.app.healthapp.entity.location.GeoState;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.services;
+package technology.grameen.gphc.app.services.location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

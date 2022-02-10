@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import technology.grameen.gphc.app.services.CityService;
-import technology.grameen.gphc.app.services.CountryService;
+import technology.grameen.gphc.app.services.location.CityService;
+import technology.grameen.gphc.app.services.location.CountryService;
 import technology.grameen.gphc.app.services.location.StateService;
 
 import java.util.Optional;

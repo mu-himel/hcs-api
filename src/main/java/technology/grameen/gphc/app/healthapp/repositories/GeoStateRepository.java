@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import technology.grameen.gphc.app.healthapp.entity.GeoState;
+import technology.grameen.gphc.app.healthapp.entity.location.GeoState;
 
 import java.util.List;
 
