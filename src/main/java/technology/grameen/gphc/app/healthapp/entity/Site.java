@@ -1,6 +1,7 @@
 package technology.grameen.gphc.app.healthapp.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.healthapp.entity.location.GeoCity;
 import technology.grameen.gphc.app.healthapp.entity.location.GeoCountry;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@DynamicUpdate
 @Table(name = "sites")
 public class Site {
 

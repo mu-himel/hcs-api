@@ -1,6 +1,7 @@
 package technology.grameen.gphc.app.healthapp.entity.profile;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.healthapp.entity.Site;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@DynamicUpdate
 @Table(name = "user_profiles")
 public class Profile {
 
