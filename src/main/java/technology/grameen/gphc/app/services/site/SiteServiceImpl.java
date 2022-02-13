@@ -42,13 +42,7 @@ public class SiteServiceImpl implements SiteService{
             throw new CustomException("Country not found");
         }
 
-        if(site.getCity() == null){
-            throw new CustomException("City not found");
-        }
 
-        if(site.getState() == null){
-            throw new CustomException("State not found");
-        }
 
         return siteRepository.save(site);
     }
