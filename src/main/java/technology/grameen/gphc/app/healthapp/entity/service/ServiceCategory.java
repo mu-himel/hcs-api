@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "services")
-public class Service {
+@Table(name = "service_categories")
+public class ServiceCategory {
 
     @Id
     private UUID id = UUID.randomUUID();
@@ -19,7 +19,7 @@ public class Service {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Service parent;
+    private ServiceCategory parent;
 
     private UUID createdBy;
     private UUID updatedBy;

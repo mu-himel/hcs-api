@@ -1,2 +1,4 @@
-package technology.grameen.gphc.app.services.profile;public interface ProfileService {
+package technology.grameen.gphc.app.services.profile;
+
+public interface ProfileService {
 }
