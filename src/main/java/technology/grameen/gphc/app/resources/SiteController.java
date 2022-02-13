@@ -42,9 +42,7 @@ public class SiteController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addSite(@RequestBody Site site) throws CustomException {
-        return new ResponseEntity<>(
-            siteService.addSite(site),
-            HttpStatus.CREATED
-        );
+        siteService.addSite(site);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
