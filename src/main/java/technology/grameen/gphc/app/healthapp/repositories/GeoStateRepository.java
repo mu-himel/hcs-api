@@ -24,6 +24,6 @@ public interface GeoStateRepository extends JpaRepository<GeoState,Long> {
     }
 
     @Query(value = "SELECT gs FROM GeoState gs " +
-            "JOIN FETCH gs.country c WHERE lower(gs.name) LIKE concat( lower(:name) || '%')")
-    List<State> findAllByNameContainingIgnoreCase(@Param("name") String name);
+            "JOIN FETCH gs.country c WHERE lower(gs.countryShortCode) LIKE concat( lower(:name) || '%')")
+    List<State> findAllByCountryShortCodeContainingIgnoreCase(@Param("name") String name);
 }

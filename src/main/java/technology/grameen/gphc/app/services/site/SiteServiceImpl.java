@@ -16,6 +16,9 @@ public class SiteServiceImpl implements SiteService{
     @Autowired
     private SiteRepository siteRepository;
 
+    @Autowired
+    private SiteUserService siteUserService;
+
     @Override
     public Page<Site> getAll(Pageable pageable) {
         return siteRepository.findAll(pageable);
@@ -24,6 +27,11 @@ public class SiteServiceImpl implements SiteService{
     @Override
     public List<Site> getAll() {
         return siteRepository.findAll();
+    }
+
+    @Override
+    public SiteUserService getSiteUser() {
+        return siteUserService;
     }
 
     @Override

@@ -14,6 +14,6 @@ public class StateServiceImpl implements StateService{
 
     @Override
     public List<?> getStates(String name) {
-        return stateRepository.findAllByNameContainingIgnoreCase(name);
+        return stateRepository.findAllByCountryShortCodeContainingIgnoreCase(name);
     }
 }

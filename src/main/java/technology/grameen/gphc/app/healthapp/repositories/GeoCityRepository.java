@@ -25,6 +25,6 @@ public interface GeoCityRepository extends JpaRepository<GeoCity,Long> {
 
     @Query(value = "SELECT gc FROM GeoCity gc " +
             "JOIN FETCH gc.country c " +
-            "WHERE lower(gc.name) LIKE CONCAT( lower(:name) || '%' )")
-    List<City> findAllByNameContainingIgnoreCase(String name);
+            "WHERE lower(gc.countryShortCode) LIKE CONCAT( lower(:name) || '%' )")
+    List<City> findAllByCountryShortCodeContainingIgnoreCase(String name);
 }

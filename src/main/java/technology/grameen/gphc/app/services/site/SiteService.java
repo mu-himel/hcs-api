@@ -12,5 +12,7 @@ public interface SiteService {
 
     List<Site> getAll();
 
+    SiteUserService getSiteUser();
+
     Site addSite(Site site);
 }
