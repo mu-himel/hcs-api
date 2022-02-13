@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.Site;
 import technology.grameen.gphc.app.services.site.SiteService;
 
@@ -40,7 +41,7 @@ public class SiteController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addSite(@RequestBody Site site){
+    public ResponseEntity<?> addSite(@RequestBody Site site) throws CustomException {
         return new ResponseEntity<>(
             siteService.addSite(site),
             HttpStatus.CREATED

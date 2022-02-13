@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.Site;
 import technology.grameen.gphc.app.healthapp.repositories.SiteRepository;
 
@@ -36,7 +37,19 @@ public class SiteServiceImpl implements SiteService{
 
     @Override
     @Transactional
-    public Site addSite(Site site) {
+    public Site addSite(Site site) throws CustomException {
+        if(site.getCountry() == null){
+            throw new CustomException("Country not found");
+        }
+
+        if(site.getCity() == null){
+            throw new CustomException("City not found");
+        }
+
+        if(site.getState() == null){
+            throw new CustomException("State not found");
+        }
+
         return siteRepository.save(site);
     }
 }
