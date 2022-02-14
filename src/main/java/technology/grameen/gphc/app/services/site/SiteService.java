@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface SiteService {
 
-    Page<Site> getAll(Pageable pageable);
+    Page<?> getAll(Pageable pageable);
 
     List<Site> getAll();
 

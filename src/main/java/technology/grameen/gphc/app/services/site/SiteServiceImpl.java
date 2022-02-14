@@ -23,8 +23,8 @@ public class SiteServiceImpl implements SiteService{
     private SiteUserService siteUserService;
 
     @Override
-    public Page<Site> getAll(Pageable pageable) {
-        return siteRepository.findAll(pageable);
+    public Page<?> getAll(Pageable pageable) {
+        return siteRepository.findAllSites(pageable);
     }
 
     @Override

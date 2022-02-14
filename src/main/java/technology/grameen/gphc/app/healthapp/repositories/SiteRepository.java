@@ -1,6 +1,8 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -64,4 +66,14 @@ public interface SiteRepository extends JpaRepository<Site, UUID> {
             "LEFT JOIN FETCH s.state st " +
             "WHERE s.id = :id")
     Optional<SiteInfo> findSiteById(@Param("id") UUID siteId);
+
+    @Query(value = "SELECT s FROM Site s " +
+            "LEFT JOIN FETCH s.country co" +
+            "LEFT JOIN FETCH s.city ci " +
+            "LEFT JOIN FETCH s.state st " ,
+    countQuery = "SELECT count(s) FROM Site s " +
+            "LEFT JOIN s.country co" +
+            "LEFT JOIN s.city ci " +
+            "LEFT JOIN s.state st ")
+    Page<SiteInfo> findAllSites(Pageable pageable);
 }
