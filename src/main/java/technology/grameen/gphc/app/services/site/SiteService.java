@@ -6,6 +6,7 @@ import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.Site;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SiteService {
 
@@ -16,4 +17,6 @@ public interface SiteService {
     SiteUserService getSiteUser();
 
     Site addSite(Site site) throws CustomException;
+
+    Optional<?> getSiteById(String id);
 }

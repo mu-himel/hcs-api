@@ -40,6 +40,14 @@ public class SiteController {
         );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getSite(@PathVariable String id){
+        return new ResponseEntity<>(
+                siteService.getSiteById(id),
+                HttpStatus.OK
+        );
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addSite(@RequestBody Site site) throws CustomException {
         siteService.addSite(site);

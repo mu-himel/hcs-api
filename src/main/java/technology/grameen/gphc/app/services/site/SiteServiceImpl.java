@@ -10,6 +10,8 @@ import technology.grameen.gphc.app.healthapp.entity.Site;
 import technology.grameen.gphc.app.healthapp.repositories.SiteRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SiteServiceImpl implements SiteService{
@@ -33,6 +35,11 @@ public class SiteServiceImpl implements SiteService{
     @Override
     public SiteUserService getSiteUser() {
         return siteUserService;
+    }
+
+    @Override
+    public Optional<?> getSiteById(String id) {
+        return siteRepository.findSiteById(UUID.fromString(id));
     }
 
     @Override
