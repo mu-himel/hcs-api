@@ -28,8 +28,8 @@ public class SiteServiceImpl implements SiteService{
     }
 
     @Override
-    public List<Site> getAll() {
-        return siteRepository.findAll();
+    public List<?> getAll() {
+        return siteRepository.findAllSites();
     }
 
     @Override

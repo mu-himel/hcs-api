@@ -12,7 +12,7 @@ public interface SiteService {
 
     Page<?> getAll(Pageable pageable);
 
-    List<Site> getAll();
+    List<?> getAll();
 
     SiteUserService getSiteUser();
 

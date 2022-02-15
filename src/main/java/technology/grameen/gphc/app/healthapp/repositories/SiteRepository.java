@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.Site;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -76,4 +77,10 @@ public interface SiteRepository extends JpaRepository<Site, UUID> {
             "LEFT JOIN s.city ci " +
             "LEFT JOIN s.state st ")
     Page<SiteInfo> findAllSites(Pageable pageable);
+
+    @Query(value = "SELECT s FROM Site s " +
+            "LEFT JOIN FETCH s.country co" +
+            "LEFT JOIN FETCH s.city ci " +
+            "LEFT JOIN FETCH s.state st ORDER BY s.id DESC")
+    List<SiteInfo> findAllSites();
 }
