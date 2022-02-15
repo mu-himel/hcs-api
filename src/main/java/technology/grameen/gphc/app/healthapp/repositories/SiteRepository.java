@@ -70,7 +70,7 @@ public interface SiteRepository extends JpaRepository<Site, UUID> {
     @Query(value = "SELECT s FROM Site s " +
             "LEFT JOIN FETCH s.country co" +
             "LEFT JOIN FETCH s.city ci " +
-            "LEFT JOIN FETCH s.state st " ,
+            "LEFT JOIN FETCH s.state st ORDER BY s.id DESC" ,
     countQuery = "SELECT count(s) FROM Site s " +
             "LEFT JOIN s.country co" +
             "LEFT JOIN s.city ci " +

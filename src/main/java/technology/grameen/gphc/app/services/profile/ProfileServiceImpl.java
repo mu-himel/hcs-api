@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class ProfileServiceImpl implements ProfileService{
 
@@ -22,5 +25,15 @@ public class ProfileServiceImpl implements ProfileService{
     public Boolean register(Profile profile) {
         Profile profileCreated =  addProfile(profile);
         return profileCreated !=null && profileCreated.getId() != null ? true : false;
+    }
+
+    @Override
+    @Transactional
+    public void updateProfile(String id, Profile profile) {
+        Optional<Profile> profileOp = profileRepository.findById(UUID.fromString(id));
+
+        if(profileOp.isPresent()){
+            profileRepository.save(profile);
+        }
     }
 }

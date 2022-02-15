@@ -7,4 +7,6 @@ public interface ProfileService {
     Profile addProfile(Profile profile);
 
     Boolean register(Profile profile);
+
+    void updateProfile(String id, Profile profile);
 }
