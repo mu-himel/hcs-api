@@ -1,6 +1,8 @@
 package technology.grameen.gphc.app.fileupload.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import technology.grameen.gphc.app.fileupload.exception.FileUploaderException;
 import technology.grameen.gphc.app.fileupload.property.FileUploadProperty;
@@ -13,22 +15,20 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.UUID;
 
+@Service
 public class FileUploadServiceImpl implements FileUploadService{
 
     private final Path fileLocation;
 
     @Autowired
-    private FileUploadProperty fileUploadProperty;
-
-    public FileUploadServiceImpl() {
-
-        this.fileLocation = Paths.get(fileUploadProperty.getUploadDir())
+    public FileUploadServiceImpl(FileUploadProperty properties){
+        this.fileLocation = Paths.get(properties.getUploadDir())
                 .toAbsolutePath().normalize();
 
-        try{
+        try {
             Files.createDirectories(this.fileLocation);
-        } catch (Exception e) {
-            throw new FileUploaderException("Sorry! Could not create directory");
+        }catch (Exception ex){
+            throw new FileUploaderException("Could not create directory where the uploaded file will be stored.", ex);
         }
     }
 
@@ -36,6 +36,14 @@ public class FileUploadServiceImpl implements FileUploadService{
 
     @Override
     public UploadResponse storeFile(MultipartFile file) {
+
+
+
+        try{
+            Files.createDirectories(this.fileLocation);
+        } catch (Exception e) {
+            throw new FileUploaderException("Sorry! Could not create directory");
+        }
 
         String fileOriginalName = file.getOriginalFilename();
         byte[] byteVal = (String.valueOf(Instant.now().getEpochSecond())+ fileOriginalName).getBytes();
