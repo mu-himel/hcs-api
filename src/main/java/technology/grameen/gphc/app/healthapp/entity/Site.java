@@ -49,6 +49,7 @@ public class Site {
     private Boolean isActive;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

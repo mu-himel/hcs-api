@@ -1,5 +1,7 @@
 package technology.grameen.gphc.app.healthapp.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.auth.entity.User;
 
 import javax.persistence.*;
@@ -15,8 +17,13 @@ public class SiteUser {
     private String userId;
     private Boolean status;
 
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
+
     private UUID createdBy;
     private UUID updatedBy;
 
