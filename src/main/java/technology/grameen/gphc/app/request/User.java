@@ -1,25 +1,21 @@
-package technology.grameen.gphc.app.auth.entity;
+package technology.grameen.gphc.app.request;
 
-import org.hibernate.annotations.DynamicUpdate;
-import technology.grameen.gphc.app.request.Credential;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@DynamicUpdate
-@Table(name = "user_entity")
 public class User {
 
-    @Id
     private String id;
     private String username;
     private String firstName;
     private String lastName;
+    private String email;
     private Boolean enabled;
+
+    private List<String> realmRoles = new ArrayList<>();
+    private List<Credential> credentials = new ArrayList<>();
+
 
     public String getId() {
         return id;
@@ -59,5 +55,29 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<String> getRealmRoles() {
+        return realmRoles;
+    }
+
+    public void addRealmRole(String realmRole) {
+        this.realmRoles.add(realmRole);
+    }
+
+    public List<Credential> getCredentials() {
+        return credentials;
+    }
+
+    public void addCredential(Credential credential) {
+        this.credentials.add(credential);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

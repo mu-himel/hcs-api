@@ -37,8 +37,6 @@ public class FileUploadServiceImpl implements FileUploadService{
     @Override
     public UploadResponse storeFile(MultipartFile file) {
 
-
-
         try{
             Files.createDirectories(this.fileLocation);
         } catch (Exception e) {

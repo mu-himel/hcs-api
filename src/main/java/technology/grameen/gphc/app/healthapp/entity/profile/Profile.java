@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 @DynamicUpdate
-@Table(name = "user_profiles")
+@Table(name = "profiles")
 public class Profile {
 
     @Id
