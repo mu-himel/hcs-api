@@ -15,10 +15,19 @@ public class UploadController {
     @Autowired
     private FileUploadService fileUploadService;
 
-    @PostMapping("/upload")
-    public ResponseEntity<UploadResponse> upload(@RequestParam MultipartFile file){
+    @PostMapping("/upload/{type}")
+    public ResponseEntity<UploadResponse> upload(@PathVariable String type,@RequestParam MultipartFile file){
+        String path = "";
+        if(type.equalsIgnoreCase("profile")){
+            path = "profiles";
+        }else if (type.equalsIgnoreCase("doc")){
+            path = "documents";
+        }else{
+            path = "sites";
+        }
+
         return new ResponseEntity<>(
-                fileUploadService.storeFile(file),
+                fileUploadService.storeFile(file,path),
                 HttpStatus.OK
         );
     }

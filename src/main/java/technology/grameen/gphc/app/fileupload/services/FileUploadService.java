@@ -5,7 +5,7 @@ import technology.grameen.gphc.app.fileupload.response.UploadResponse;
 
 public interface FileUploadService {
 
-    UploadResponse storeFile(MultipartFile file);
+    UploadResponse storeFile(MultipartFile file, String SubDir);
 
 
 }

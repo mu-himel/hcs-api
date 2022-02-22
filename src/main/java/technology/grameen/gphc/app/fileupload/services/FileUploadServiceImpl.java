@@ -18,10 +18,12 @@ import java.util.UUID;
 @Service
 public class FileUploadServiceImpl implements FileUploadService{
 
-    private final Path fileLocation;
+    private Path fileLocation;
+    private FileUploadProperty properties;
 
     @Autowired
     public FileUploadServiceImpl(FileUploadProperty properties){
+        this.properties = properties;
         this.fileLocation = Paths.get(properties.getUploadDir())
                 .toAbsolutePath().normalize();
 
@@ -35,9 +37,11 @@ public class FileUploadServiceImpl implements FileUploadService{
 
 
     @Override
-    public UploadResponse storeFile(MultipartFile file) {
+    public UploadResponse storeFile(MultipartFile file,String subDir) {
 
         try{
+            this.fileLocation = Paths.get(properties.getUploadDir()+subDir)
+                    .toAbsolutePath().normalize();
             Files.createDirectories(this.fileLocation);
         } catch (Exception e) {
             throw new FileUploaderException("Sorry! Could not create directory");
