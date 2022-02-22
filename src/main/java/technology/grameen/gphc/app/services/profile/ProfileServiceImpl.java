@@ -3,6 +3,8 @@ package technology.grameen.gphc.app.services.profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,11 @@ public class ProfileServiceImpl implements ProfileService{
     @Transactional
     public Profile addProfile(Profile profile) {
         return profileRepository.save(profile);
+    }
+
+    @Override
+    public Page<?> getAll(Pageable pageable) {
+        return profileRepository.findAll(pageable);
     }
 
     @Override
