@@ -40,7 +40,8 @@ public class FileUploadServiceImpl implements FileUploadService{
     public UploadResponse storeFile(MultipartFile file,String subDir) {
 
         try{
-            this.fileLocation = Paths.get(properties.getUploadDir()+subDir)
+            System.out.println(properties.getUploadDir()+"/"+subDir);
+            this.fileLocation = Paths.get(properties.getUploadDir()+"/"+subDir)
                     .toAbsolutePath().normalize();
             Files.createDirectories(this.fileLocation);
         } catch (Exception e) {

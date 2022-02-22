@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import technology.grameen.gphc.app.fileupload.response.UploadResponse;
 import technology.grameen.gphc.app.fileupload.services.FileUploadService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/v1/file-upload")
 public class UploadController {
@@ -15,12 +17,12 @@ public class UploadController {
     @Autowired
     private FileUploadService fileUploadService;
 
-    @PostMapping("/upload/{type}")
-    public ResponseEntity<UploadResponse> upload(@PathVariable String type,@RequestParam MultipartFile file){
+    @PostMapping("/upload")
+    public ResponseEntity<UploadResponse> upload(@RequestParam MultipartFile file, @RequestParam Optional<String> type){
         String path = "";
-        if(type.equalsIgnoreCase("profile")){
+        if(type.orElse("").equalsIgnoreCase("profile")){
             path = "profiles";
-        }else if (type.equalsIgnoreCase("doc")){
+        }else if (type.orElse("").equalsIgnoreCase("doc")){
             path = "documents";
         }else{
             path = "sites";
