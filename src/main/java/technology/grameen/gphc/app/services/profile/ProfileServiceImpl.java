@@ -48,7 +48,7 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public Page<?> getAll(Pageable pageable) {
-        return profileRepository.findAll(pageable);
+        return profileRepository.findAllProfiles(pageable);
     }
 
     @Override
