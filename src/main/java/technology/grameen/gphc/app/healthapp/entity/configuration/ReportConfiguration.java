@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "report_configurations")
+@Table(name = "config_report")
 public class ReportConfiguration {
 
     @Id

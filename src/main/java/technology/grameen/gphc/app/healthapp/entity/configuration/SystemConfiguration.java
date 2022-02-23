@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "system_configurations")
+@Table(name = "config_system")
 public class SystemConfiguration {
 
     @Id

@@ -16,6 +16,7 @@ import java.util.Optional;
 public class EmailConfigController {
 
     private static final Integer DEFAULT_PAGE_SIZE = 10;
+
     @Autowired
     private EmailConfigService emailConfigService;
 

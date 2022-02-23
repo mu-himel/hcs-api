@@ -31,6 +31,8 @@ public class Profile {
     private String guardianName;
     private String identityType;
     private String identityValue;
+    private Integer age;
+    private String gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
@@ -147,6 +149,22 @@ public class Profile {
 
     public void setIdentityValue(String identityValue) {
         this.identityValue = identityValue;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Site getSite() {

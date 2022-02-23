@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "email_configurations")
+@Table(name = "config_email")
 public class EmailConfiguration {
 
     @Id
