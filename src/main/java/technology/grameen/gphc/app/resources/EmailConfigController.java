@@ -10,6 +10,7 @@ import technology.grameen.gphc.app.healthapp.entity.configuration.EmailConfigura
 import technology.grameen.gphc.app.services.config.EmailConfigService;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/configs/email")
@@ -47,5 +48,15 @@ public class EmailConfigController {
             HttpStatus.CREATED
         );
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getConfig(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+          emailConfigService.getConfig(UUID.fromString(id)),
+          HttpStatus.OK
+        );
+    }
+
+
 
 }

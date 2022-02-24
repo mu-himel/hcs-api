@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.services.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -8,10 +9,12 @@ import technology.grameen.gphc.app.healthapp.entity.configuration.EmailConfigura
 import technology.grameen.gphc.app.healthapp.repositories.EmailConfigRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EmailConfigServiceImpl implements EmailConfigService {
 
+    @Autowired
     private EmailConfigRepository emailConfigRepository;
 
     @Override
@@ -28,5 +31,10 @@ public class EmailConfigServiceImpl implements EmailConfigService {
     @Override
     public Optional<EmailConfiguration> getDefaultConfig() {
         return emailConfigRepository.findByIsActive(true);
+    }
+
+    @Override
+    public Optional<EmailConfiguration> getConfig(UUID id) {
+        return emailConfigRepository.findById(id);
     }
 }

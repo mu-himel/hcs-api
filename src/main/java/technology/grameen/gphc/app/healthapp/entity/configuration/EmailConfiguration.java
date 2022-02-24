@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.healthapp.entity.configuration;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -21,6 +22,8 @@ public class EmailConfiguration {
     private String replyTo;
     private Boolean isSslEnabled;
     private Boolean isActive;
+    private String username;
+    private String password;
 
     private UUID createdBy;
     private UUID updatedBy;
@@ -103,6 +106,7 @@ public class EmailConfiguration {
         this.updatedBy = updatedBy;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -111,11 +115,28 @@ public class EmailConfiguration {
         this.createdAt = createdAt;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

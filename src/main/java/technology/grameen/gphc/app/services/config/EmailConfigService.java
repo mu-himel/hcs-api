@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import technology.grameen.gphc.app.healthapp.entity.configuration.EmailConfiguration;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface EmailConfigService {
     EmailConfiguration add(EmailConfiguration config);
@@ -12,4 +13,6 @@ public interface EmailConfigService {
     Page<EmailConfiguration> getAll(Pageable pageable);
 
     Optional<EmailConfiguration> getDefaultConfig();
+
+    Optional<EmailConfiguration> getConfig(UUID fromString);
 }
