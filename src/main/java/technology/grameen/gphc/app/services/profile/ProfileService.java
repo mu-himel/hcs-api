@@ -7,6 +7,8 @@ import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.request.User;
 
 import java.util.HashMap;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ProfileService {
 
@@ -17,4 +19,6 @@ public interface ProfileService {
     void updateProfile(String id, Profile profile);
 
     Page<?> getAll(Pageable pageable);
+
+    Optional<?> getProfileById(UUID fromString);
 }

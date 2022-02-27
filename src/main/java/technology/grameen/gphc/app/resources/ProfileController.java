@@ -11,6 +11,7 @@ import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.services.profile.ProfileService;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/profiles")
@@ -34,12 +35,26 @@ public class ProfileController {
 
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProfile(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+          profileService.getProfileById(UUID.fromString(id)),
+          HttpStatus.OK
+        );
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addProfile(@RequestBody Profile profile) throws CustomException {
         return new ResponseEntity<>(
                 profileService.register(profile),
                 HttpStatus.CREATED
         );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile){
+        profileService.updateProfile(id,profile);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

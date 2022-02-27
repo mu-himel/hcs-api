@@ -139,4 +139,9 @@ public class ProfileServiceImpl implements ProfileService{
             profileRepository.save(profile);
         }
     }
+
+    @Override
+    public Optional<?> getProfileById(UUID id) {
+        return profileRepository.findProfileById(id);
+    }
 }
