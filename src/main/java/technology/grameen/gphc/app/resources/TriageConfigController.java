@@ -11,6 +11,7 @@ import technology.grameen.gphc.app.services.config.TriageConfigService;
 
 import javax.print.attribute.IntegerSyntax;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/configs/triage")
@@ -38,6 +39,14 @@ public class TriageConfigController {
         return new ResponseEntity<>(
                 triageConfigService.addConfig(triageConfiguration),
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getConfig(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+                triageConfigService.getConfig(UUID.fromString(id)),
+                HttpStatus.OK
         );
     }
 }

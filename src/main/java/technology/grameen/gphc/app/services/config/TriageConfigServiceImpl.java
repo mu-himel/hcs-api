@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.configuration.TriageConfiguration;
 import technology.grameen.gphc.app.healthapp.repositories.TriageConfigRepository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class TriageConfigServiceImpl implements TriageConfigService{
 
@@ -23,5 +26,10 @@ public class TriageConfigServiceImpl implements TriageConfigService{
     @Override
     public Page<TriageConfiguration> getAll(Pageable pageable) {
         return triageConfigRepository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<TriageConfiguration> getConfig(UUID id) {
+        return triageConfigRepository.findById(id);
     }
 }
