@@ -29,6 +29,8 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
         String getGuardianName();
         String getIdentityType();
         String getIdentityValue();
+        String getReligion();
+        String getMaritalStatus();
         SiteInfo getSite();
         UUID getId();
     }
