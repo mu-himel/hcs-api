@@ -21,4 +21,5 @@ public interface ProfileService {
     Page<?> getAll(Pageable pageable);
 
     Optional<?> getProfileById(UUID fromString);
+    Optional<?> getProfileByUserId(String id);
 }

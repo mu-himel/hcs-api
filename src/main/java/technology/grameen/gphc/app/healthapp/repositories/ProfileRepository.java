@@ -18,6 +18,19 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
             "JOIN FETCH p.site s where p.id = :id")
     Optional<ProfilePageInfo> findProfileById(@Param("id") UUID id);
 
+    @Query(value = "SELECT pu FROM ProfileUser pu " +
+            "JOIN FETCH pu.profile p " +
+            "JOIN FETCH p.site s " +
+            "WHERE pu.userId = :id")
+    Optional<ProfileUser> findProfileByUserId(@Param("id") String id);
+
+    interface ProfileUser{
+        ProfilePageInfo getProfile();
+        String getUserId();
+        String getUsername();
+        UUID getId();
+    }
+
     interface ProfilePageInfo{
         String getBloodGroup();
         String getContactNumber();

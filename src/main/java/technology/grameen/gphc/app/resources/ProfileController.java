@@ -43,6 +43,14 @@ public class ProfileController {
         );
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getProfileByUserId(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+                profileService.getProfileByUserId(id),
+                HttpStatus.OK
+        );
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addProfile(@RequestBody Profile profile) throws CustomException {
         return new ResponseEntity<>(
@@ -51,7 +59,7 @@ public class ProfileController {
         );
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/user/{id}")
     public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile){
         profileService.updateProfile(id,profile);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

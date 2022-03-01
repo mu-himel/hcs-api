@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
+import technology.grameen.gphc.app.auth.repositories.UserRepository;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileUserRepository;
@@ -30,6 +31,9 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Autowired
     private ProfileRepository profileRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ProfileUserRepository profileUserRepository;
@@ -133,15 +137,27 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     @Transactional
     public void updateProfile(String id, Profile profile) {
-        Optional<Profile> profileOp = profileRepository.findById(UUID.fromString(id));
+        Optional<?> profileOp = profileRepository.findProfileByUserId(id);
 
         if(profileOp.isPresent()){
             profileRepository.save(profile);
+
+            // update user account
+            technology.grameen.gphc.app.auth.entity.User user = new technology.grameen.gphc.app.auth.entity.User();
+            user.setId(id);
+            user.setFirstName(profile.getFirstName());
+            user.setLastName(profile.getLastName());
+            userRepository.save(user);
         }
     }
 
     @Override
     public Optional<?> getProfileById(UUID id) {
         return profileRepository.findProfileById(id);
+    }
+
+    @Override
+    public Optional<?> getProfileByUserId(String id) {
+        return profileRepository.findProfileByUserId(id);
     }
 }

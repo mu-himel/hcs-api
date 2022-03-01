@@ -3,6 +3,7 @@ package technology.grameen.gphc.app.auth.entity;
 import org.hibernate.annotations.DynamicUpdate;
 import technology.grameen.gphc.app.request.Credential;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,15 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DynamicUpdate
 @Table(name = "user_entity")
 public class User {
 
     @Id
     private String id;
+    @Column(updatable = false)
     private String username;
     private String firstName;
     private String lastName;
+    @Column(updatable = false)
     private Boolean enabled;
 
     public String getId() {
