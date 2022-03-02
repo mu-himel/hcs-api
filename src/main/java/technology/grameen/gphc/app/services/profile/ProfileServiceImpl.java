@@ -97,19 +97,19 @@ public class ProfileServiceImpl implements ProfileService{
         String username = "";
         if(profile.getContactNumber() != null && profile.getEmail() == null){
             username = username.concat(profile.getContactNumber());
-            user.addCredential(new Credential(credential,false));
 
-        }
-
-        if(profile.getContactNumber() == null && profile.getEmail() != null){
-            username = username.concat(profile.getEmail());
-            user.addCredential(new Credential(credential,true));
         }
 
         if(profile.getEmail()!=null){
+            username = username.concat(profile.getEmail());
             user.setEmail(profile.getEmail());
         }
 
+        if(username.isEmpty()){
+            throw new CustomException("E-mail address required");
+        }
+
+        user.addCredential(new Credential(credential,true));
         user.setEnabled(true);
         user.setUsername(username);
         user.setFirstName(profile.getFirstName());
@@ -124,6 +124,7 @@ public class ProfileServiceImpl implements ProfileService{
 
             sr = response.getBody();
         }catch (HttpClientErrorException ex){
+            System.out.println(ex.getMessage());
             if(ex.getStatusCode() == HttpStatus.UNPROCESSABLE_ENTITY){
                 throw new CustomException("User Already Exist");
             }
