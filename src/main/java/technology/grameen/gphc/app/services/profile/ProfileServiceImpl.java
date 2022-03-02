@@ -15,6 +15,7 @@ import technology.grameen.gphc.app.auth.repositories.UserRepository;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileUserRepository;
+import technology.grameen.gphc.app.request.RegistrationRequest;
 import technology.grameen.gphc.app.request.User;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
@@ -57,11 +58,19 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public HashMap register(Profile profile) throws CustomException {
+        return createProfile(profile,"12345678");
+    }
 
+    @Override
+    public HashMap register(RegistrationRequest registrationRequest) throws CustomException {
+        return createProfile(registrationRequest.getProfile(),registrationRequest.getCredential());
+    }
+
+    private HashMap createProfile(Profile profile, String credential) throws CustomException {
         SimpleResponse sr = null;
         HashMap map = null;
 
-        sr = addUserAccount(profile);
+        sr = addUserAccount(profile,credential);
         Profile profileCreated = addProfile(profile);
         if (profileCreated.getId() != null) {
             map = (HashMap) sr.getObj().get();
@@ -77,18 +86,18 @@ public class ProfileServiceImpl implements ProfileService{
                 assignDefaultRole(userId);
             }
         }
-
-
         return map;
     }
 
-    private SimpleResponse addUserAccount(Profile profile) throws CustomException {
+
+
+    private SimpleResponse addUserAccount(Profile profile, String credential) throws CustomException {
         User user = new User();
 
         String username = "";
         if(profile.getContactNumber() != null && profile.getEmail() == null){
             username = username.concat(profile.getContactNumber());
-            user.addCredential(new Credential("12345678",false));
+            user.addCredential(new Credential(credential,false));
             user.setEnabled(true);
         }
 
@@ -96,7 +105,7 @@ public class ProfileServiceImpl implements ProfileService{
             user.setEnabled(true);
             username = username.concat(profile.getEmail());
             user.setEmail(profile.getEmail());
-            user.addCredential(new Credential("12345678",true));
+            user.addCredential(new Credential(credential,true));
         }
         user.setUsername(username);
         user.setFirstName(profile.getFirstName());

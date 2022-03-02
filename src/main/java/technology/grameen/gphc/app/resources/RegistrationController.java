@@ -8,6 +8,7 @@ import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.request.OtpSendRequest;
 import technology.grameen.gphc.app.request.OtpValidate;
+import technology.grameen.gphc.app.request.RegistrationRequest;
 import technology.grameen.gphc.app.response.SimpleResponse;
 import technology.grameen.gphc.app.services.profile.ProfileService;
 import technology.grameen.gphc.app.services.security.OtpService;
@@ -25,8 +26,8 @@ public class RegistrationController {
     private OtpService otpService;
 
     @PostMapping
-    public ResponseEntity<?> userRegistration(@RequestBody Profile profile) throws CustomException {
-        profileService.register(profile);
+    public ResponseEntity<?> userRegistration(@RequestBody RegistrationRequest registrationRequest) throws CustomException {
+        profileService.register(registrationRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
