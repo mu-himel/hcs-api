@@ -101,7 +101,7 @@ public class ProfileServiceImpl implements ProfileService{
 
         }
 
-        if(profile.getEmail() != null){
+        if(profile.getContactNumber() == null && profile.getEmail() != null){
             username = username.concat(profile.getEmail());
             user.setEmail(profile.getEmail());
             user.addCredential(new Credential(credential,true));
