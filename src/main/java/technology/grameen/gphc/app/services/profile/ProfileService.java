@@ -22,4 +22,6 @@ public interface ProfileService {
 
     Optional<?> getProfileById(UUID fromString);
     Optional<?> getProfileByUserId(String id);
+
+    Optional<?> getProfileByEmail(String email);
 }

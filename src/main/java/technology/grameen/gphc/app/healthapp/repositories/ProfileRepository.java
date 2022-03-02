@@ -24,6 +24,8 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
             "WHERE pu.userId = :id")
     Optional<ProfileUser> findProfileByUserId(@Param("id") String id);
 
+    Optional<?> findByEmail(String email);
+
     interface ProfileUser{
         ProfilePageInfo getProfile();
         String getUserId();

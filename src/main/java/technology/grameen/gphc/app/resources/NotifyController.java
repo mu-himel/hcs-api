@@ -8,6 +8,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import technology.grameen.gphc.app.services.notify.EmailService;
+import technology.grameen.gphc.app.services.notify.EmailServiceImpl;
+import technology.grameen.gphc.app.services.notify.NotificationService;
 
 import javax.mail.SendFailedException;
 
@@ -16,18 +19,21 @@ import javax.mail.SendFailedException;
 public class NotifyController {
 
     @Autowired
-    JavaMailSender mailSender;
+    EmailService emailService;
+
+    @Autowired
+    NotificationService notificationService;
 
     @GetMapping("/email")
     public ResponseEntity<?> sendEmail(){
 
         String message = "Hello Bhai email gese?";
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("gcloud@grameen.technology");
-        simpleMailMessage.setTo("islam.shaiful7@gmail.com");
-        simpleMailMessage.setSubject("Test");
-        simpleMailMessage.setText(message);
-        mailSender.send(simpleMailMessage);
+        emailService.setSubject("OTP Send from GPHC registration");
+        emailService.setFrom("gcloud@grameen.technology");
+        emailService.setTo("mu.himel@gmail.com");
+        emailService.setMessage(message);
+        notificationService.setNotificationProvider(emailService);
+        notificationService.notifyUser();
         return new ResponseEntity<>(
                 message,
                 HttpStatus.OK

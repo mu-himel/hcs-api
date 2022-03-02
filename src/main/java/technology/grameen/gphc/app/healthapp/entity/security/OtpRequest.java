@@ -15,9 +15,9 @@ public class OtpRequest {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private UUID token;
+    private String otp;
     private String email;
-    private Boolean verified;
+    private Boolean verified = false;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class OtpRequest {
         this.id = id;
     }
 
-    public UUID getToken() {
-        return token;
+    public String getOtp() {
+        return otp;
     }
 
-    public void setToken(UUID token) {
-        this.token = token;
+    public void setOtp(String otp) {
+        this.otp = otp;
     }
 
     public String getEmail() {
@@ -64,6 +64,10 @@ public class OtpRequest {
         this.expiredAt = expiredAt;
     }
 
+    public void setExpiredAt(LocalDateTime expiredAt, Long seconds) {
+        this.expiredAt = expiredAt.plusSeconds(seconds);
+    }
+
     public Boolean getVerified() {
         return verified;
     }
@@ -71,4 +75,5 @@ public class OtpRequest {
     public void setVerified(Boolean verified) {
         this.verified = verified;
     }
+
 }

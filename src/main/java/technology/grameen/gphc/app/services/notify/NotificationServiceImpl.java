@@ -6,24 +6,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NotificationServiceImpl implements NotificationService, EmailService{
+public class NotificationServiceImpl implements NotificationService{
 
-    @Autowired
-    JavaMailSender mailSender;
+    private NotificationProvider notificationProvider;
 
     @Override
     public void notifyUser() {
-
+        notificationProvider.send();
     }
 
-    @Override
-    public void sendEmail() {
-        String message = "Hello Bhai email gese?";
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("gcloud@grameen.technology");
-        simpleMailMessage.setTo("islam.shaiful7@gmail.com");
-        simpleMailMessage.setSubject("Test");
-        simpleMailMessage.setText(message);
-        mailSender.send(simpleMailMessage);
+    public void setNotificationProvider(NotificationProvider notificationProvider){
+        this.notificationProvider = notificationProvider;
     }
 }

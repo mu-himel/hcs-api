@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
-import technology.grameen.gphc.app.request.OtpRequest;
+import technology.grameen.gphc.app.request.OtpSendRequest;
 import technology.grameen.gphc.app.request.OtpValidate;
+import technology.grameen.gphc.app.response.SimpleResponse;
 import technology.grameen.gphc.app.services.profile.ProfileService;
+import technology.grameen.gphc.app.services.security.OtpService;
 
-import java.util.UUID;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/registration")
@@ -19,6 +21,9 @@ public class RegistrationController {
     @Autowired
     private ProfileService profileService;
 
+    @Autowired
+    private OtpService otpService;
+
     @PostMapping
     public ResponseEntity<?> userRegistration(@RequestBody Profile profile) throws CustomException {
         profileService.register(profile);
@@ -26,18 +31,28 @@ public class RegistrationController {
     }
 
     @PostMapping("/send-otp")
-    public ResponseEntity<?> sendOTPRequest(@RequestBody OtpRequest otpRequest){
+    public ResponseEntity<?> sendOTPRequest(@RequestBody OtpSendRequest otpRequest) throws CustomException {
+        Optional<?> hasEmail = profileService.getProfileByEmail(otpRequest.getEmail());
+        if(hasEmail.isPresent()){
+            throw new CustomException("Sorry! Email address already Exist");
+        }
+        String msg =  "Otp has been send to "+ otpRequest.getEmail();
+        Boolean send = otpService.sendOtp(otpRequest);
         return new ResponseEntity<>(
-                UUID.randomUUID(),
-                HttpStatus.CREATED
+                send? new SimpleResponse(HttpStatus.CREATED.value(),Optional.of(true),
+                        msg) : new SimpleResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(),Optional.of(false),
+                        "Sorry! try again later"),
+                send?  HttpStatus.CREATED : HttpStatus.UNPROCESSABLE_ENTITY
         );
     }
 
     @PostMapping("/validate-otp")
-    public ResponseEntity<?> validateOtp(@RequestBody OtpValidate otpValidate){
+    public ResponseEntity<?> validateOtp(@RequestBody OtpValidate otpValidate) throws CustomException {
+        Boolean validOtp = otpService.validateOtp(otpValidate);
         return new ResponseEntity<>(
-                null,
-                HttpStatus.OK
+            validOtp? new SimpleResponse(HttpStatus.OK.value(), Optional.of(validOtp),"Otp is valid") :
+                new SimpleResponse(HttpStatus.OK.value(), Optional.of(validOtp),"Sorry! Otp Expired, Resent"),
+            HttpStatus.OK
         );
     }
 

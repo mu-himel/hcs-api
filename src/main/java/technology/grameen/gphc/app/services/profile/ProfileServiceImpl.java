@@ -160,4 +160,9 @@ public class ProfileServiceImpl implements ProfileService{
     public Optional<?> getProfileByUserId(String id) {
         return profileRepository.findProfileByUserId(id);
     }
+
+    @Override
+    public Optional<?> getProfileByEmail(String email) {
+        return profileRepository.findByEmail(email);
+    }
 }

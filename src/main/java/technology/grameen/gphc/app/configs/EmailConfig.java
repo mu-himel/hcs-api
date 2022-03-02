@@ -2,6 +2,7 @@ package technology.grameen.gphc.app.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
@@ -10,7 +11,10 @@ import java.util.Properties;
 @Configuration
 public class EmailConfig {
 
-
+    @Bean
+    public SimpleMailMessage getSimpleMailMessage(){
+        return new SimpleMailMessage();
+    }
 
     @Bean
     public JavaMailSender getEmailSender(){
