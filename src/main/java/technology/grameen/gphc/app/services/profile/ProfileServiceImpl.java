@@ -103,8 +103,11 @@ public class ProfileServiceImpl implements ProfileService{
 
         if(profile.getContactNumber() == null && profile.getEmail() != null){
             username = username.concat(profile.getEmail());
-            user.setEmail(profile.getEmail());
             user.addCredential(new Credential(credential,true));
+        }
+
+        if(profile.getEmail()!=null){
+            user.setEmail(profile.getEmail());
         }
 
         user.setEnabled(true);
