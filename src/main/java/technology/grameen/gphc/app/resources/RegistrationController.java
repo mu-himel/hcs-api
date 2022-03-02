@@ -40,7 +40,7 @@ public class RegistrationController {
         String msg =  "Otp has been send to "+ otpRequest.getEmail();
         Boolean send = otpService.sendOtp(otpRequest);
         return new ResponseEntity<>(
-                send? new SimpleResponse(HttpStatus.CREATED.value(),Optional.of(true),
+                send? new SimpleResponse(HttpStatus.CREATED.value(),Optional.of(OtpService.DURATION),
                         msg) : new SimpleResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(),Optional.of(false),
                         "Sorry! try again later"),
                 send?  HttpStatus.CREATED : HttpStatus.UNPROCESSABLE_ENTITY

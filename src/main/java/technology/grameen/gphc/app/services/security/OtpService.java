@@ -6,6 +6,8 @@ import technology.grameen.gphc.app.request.OtpValidate;
 
 public interface OtpService {
 
+    final static Long DURATION = 60L;
+
     Boolean sendOtp(OtpSendRequest otpSendRequest) throws CustomException;
 
     Boolean validateOtp(OtpValidate otpValidate) throws CustomException;

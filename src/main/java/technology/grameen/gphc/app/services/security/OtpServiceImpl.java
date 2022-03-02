@@ -31,7 +31,7 @@ public class OtpServiceImpl implements OtpService{
     @Override
     public Boolean sendOtp(OtpSendRequest otpSendRequest) throws CustomException {
         OtpRequest otpRequest = new OtpRequest();
-        otpRequest.setExpiredAt(LocalDateTime.now(),60L);
+        otpRequest.setExpiredAt(LocalDateTime.now(),OtpService.DURATION);
         otpRequest.setEmail(otpSendRequest.getEmail());
         otpRequest.setOtp(generateOtpToken(6));
         try{

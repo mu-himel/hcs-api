@@ -14,9 +14,11 @@ import java.util.UUID;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, UUID> {
 
-    @Query(value = "SELECT p FROM Profile p " +
-            "JOIN FETCH p.site s where p.id = :id")
-    Optional<ProfilePageInfo> findProfileById(@Param("id") UUID id);
+    @Query(value = "SELECT pu FROM ProfileUser pu " +
+            "JOIN FETCH pu.profile p " +
+            "JOIN FETCH p.site s " +
+            "WHERE p.id = :id")
+    Optional<ProfileUser> findProfileById(@Param("id") UUID id);
 
     @Query(value = "SELECT pu FROM ProfileUser pu " +
             "JOIN FETCH pu.profile p " +

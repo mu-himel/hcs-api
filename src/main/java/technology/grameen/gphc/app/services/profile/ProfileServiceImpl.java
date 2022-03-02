@@ -98,15 +98,16 @@ public class ProfileServiceImpl implements ProfileService{
         if(profile.getContactNumber() != null && profile.getEmail() == null){
             username = username.concat(profile.getContactNumber());
             user.addCredential(new Credential(credential,false));
-            user.setEnabled(true);
+
         }
 
         if(profile.getEmail() != null){
-            user.setEnabled(true);
             username = username.concat(profile.getEmail());
             user.setEmail(profile.getEmail());
             user.addCredential(new Credential(credential,true));
         }
+
+        user.setEnabled(true);
         user.setUsername(username);
         user.setFirstName(profile.getFirstName());
         user.setLastName(profile.getLastName());
