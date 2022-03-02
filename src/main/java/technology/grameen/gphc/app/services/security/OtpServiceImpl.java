@@ -45,7 +45,7 @@ public class OtpServiceImpl implements OtpService{
     }
 
     private void sendOtpNotification(OtpRequest otpRequest){
-        String message = "One Time Password : "+otpRequest.getOtp();
+        String message = "One Time Password : "+otpRequest.getOtp()+"\r\nThis OTP is valid for 60 seconds";
         emailService.setSubject("OTP Send from GPHC registration");
         emailService.setFrom("gcloud@grameen.technology");
         emailService.setTo(otpRequest.getEmail());
