@@ -12,6 +12,7 @@ import technology.grameen.gphc.app.request.RegistrationRequest;
 import technology.grameen.gphc.app.response.SimpleResponse;
 import technology.grameen.gphc.app.services.profile.ProfileService;
 import technology.grameen.gphc.app.services.security.OtpService;
+import technology.grameen.gphc.app.services.security.UserService;
 
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public class RegistrationController {
 
     @Autowired
     private ProfileService profileService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private OtpService otpService;
@@ -33,10 +37,23 @@ public class RegistrationController {
 
     @PostMapping("/send-otp")
     public ResponseEntity<?> sendOTPRequest(@RequestBody OtpSendRequest otpRequest) throws CustomException {
+
+        Optional<?> hasUserAccountByEmail = userService.findUserByEmail(otpRequest.getEmail());
+
+        if(hasUserAccountByEmail.isPresent()){
+            throw new CustomException("Sorry! Email address already Exist");
+        }
+
+        Optional<?> hasUserAccountByUsername = userService.findUserByUsername(otpRequest.getEmail());
+        if(hasUserAccountByUsername.isPresent()){
+            throw new CustomException("Sorry! Email already Exist");
+        }
+
         Optional<?> hasEmail = profileService.getProfileByEmail(otpRequest.getEmail());
         if(hasEmail.isPresent()){
             throw new CustomException("Sorry! Email address already Exist");
         }
+
         String msg =  "Otp has been send to "+ otpRequest.getEmail();
         Boolean send = otpService.sendOtp(otpRequest);
         return new ResponseEntity<>(
