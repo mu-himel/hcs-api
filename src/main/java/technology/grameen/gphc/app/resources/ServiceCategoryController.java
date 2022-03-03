@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/service-category")
+@RequestMapping("/api/v1/service-categories")
 public class ServiceCategoryController {
 
     private static final Integer PAGE_SIZE = 10;

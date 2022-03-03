@@ -36,7 +36,6 @@ public class ServiceCategory {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-
     public ServiceCategory() {
     }
 

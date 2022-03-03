@@ -32,7 +32,7 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
 
     @Override
     public ServiceCategory addCategory(ServiceCategory serviceCategory) {
-        serviceCategory.setCode(serviceCategory.getName().toLowerCase());
+        serviceCategory.setCode(serviceCategory.getName().toLowerCase().replaceAll(" ","-"));
         serviceCategoryRepository.save(serviceCategory);
         return serviceCategory;
     }
