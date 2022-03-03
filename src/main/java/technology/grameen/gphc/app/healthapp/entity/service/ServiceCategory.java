@@ -37,6 +37,13 @@ public class ServiceCategory {
     private LocalDateTime updatedAt;
 
 
+    public ServiceCategory() {
+    }
+
+    public ServiceCategory(UUID id) {
+        this.id = id;
+    }
+
     public UUID getId() {
         return id;
     }
