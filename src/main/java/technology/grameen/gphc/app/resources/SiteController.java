@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.Site;
+import technology.grameen.gphc.app.request.SiteUserRequest;
 import technology.grameen.gphc.app.services.site.SiteService;
 
 import java.util.Optional;
@@ -52,5 +53,19 @@ public class SiteController {
     public ResponseEntity<?> addSite(@RequestBody Site site) throws CustomException {
         siteService.addSite(site);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/users")
+    public ResponseEntity<?> assignSiteUser(@RequestBody SiteUserRequest siteUserRequest) throws CustomException {
+        siteService.assignUser(siteUserRequest.getSiteUsers());
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> getSiteUsers(){
+        return new ResponseEntity<>(
+                siteService.getSiteUser().getUsers(),
+                HttpStatus.OK
+        );
     }
 }

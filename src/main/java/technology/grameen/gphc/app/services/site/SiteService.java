@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.Site;
+import technology.grameen.gphc.app.healthapp.entity.SiteUser;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,4 +20,6 @@ public interface SiteService {
     Site addSite(Site site) throws CustomException;
 
     Optional<?> getSiteById(String id);
+
+    void assignUser(List<SiteUser> siteUsers) throws CustomException;
 }

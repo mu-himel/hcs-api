@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.Site;
+import technology.grameen.gphc.app.healthapp.entity.SiteUser;
 import technology.grameen.gphc.app.healthapp.repositories.SiteRepository;
 
 import java.util.List;
@@ -49,8 +50,15 @@ public class SiteServiceImpl implements SiteService{
             throw new CustomException("Country not found");
         }
 
-
-
         return siteRepository.save(site);
+    }
+
+    @Override
+    public void assignUser(List<SiteUser> siteUsers) throws CustomException{
+        try {
+            siteUserService.assignUser(siteUsers);
+        }catch (Exception ex){
+            throw new CustomException(ex.getMessage());
+        }
     }
 }
