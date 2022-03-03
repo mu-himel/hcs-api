@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,12 +15,17 @@ public class ServiceCategory {
     @Id
     private UUID id = UUID.randomUUID();
 
+    private String name;
+
     private String code;
 
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ServiceCategory parent;
+
+    @OneToMany(mappedBy = "serviceCategory")
+    private List<Service> services;
 
     private UUID createdBy;
     private UUID updatedBy;

@@ -14,12 +14,15 @@ public class Service {
     @Id
     private UUID id = UUID.randomUUID();
 
+    private String name;
+
     private String code;
 
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Service parent;
+    private ServiceCategory serviceCategory;
+
 
     private UUID createdBy;
     private UUID updatedBy;
