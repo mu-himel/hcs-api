@@ -179,4 +179,9 @@ public class ProfileServiceImpl implements ProfileService{
     public Optional<?> getProfileByEmail(String email) {
         return profileRepository.findByEmail(email);
     }
+
+    @Override
+    public List<?> getProfileUsers() {
+        return profileUserRepository.findAllUser();
+    }
 }
