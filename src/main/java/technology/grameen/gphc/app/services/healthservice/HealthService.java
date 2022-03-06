@@ -13,7 +13,8 @@ public interface HealthService {
 
     Service addService(Service service);
 
-    Optional<Service> findServiceById(UUID id);
+
+    Optional<?> findServiceById(UUID id);
 
     List<?> getAll();
     Page<?> getAll(String serviceName, String serviceCode, Pageable pageable);

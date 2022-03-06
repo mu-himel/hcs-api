@@ -16,7 +16,7 @@ public interface ServiceCategoryService {
 
     ServiceCategory addCategory(ServiceCategory serviceCategory);
 
-    Optional<ServiceCategory> findById(UUID id);
+    Optional<?> findById(UUID id);
 
     Optional<?> findByCode(String code);
 }

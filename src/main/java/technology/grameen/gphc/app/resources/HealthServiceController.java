@@ -40,11 +40,11 @@ public class HealthServiceController {
             @RequestParam Optional<Boolean> sortDesc){
 
         String _sortBy = sortBy.orElse(null);
-        _sortBy = (_sortBy.contains("active")) ? "isActive":_sortBy;
+//        _sortBy = (_sortBy.contains("active")) ? "isActive":_sortBy;
         //_sortBy = (_sortBy.contains("labTestGroup")) ? "labTestGroup":_sortBy;
 
         Sort sort = null;
-        if(!_sortBy.isEmpty()) {
+        if(_sortBy!= null && !_sortBy.isEmpty()) {
             sort =   (sortDesc.orElse(false)) ? Sort.by(_sortBy).descending()
                     : Sort.by(_sortBy).ascending();
         }
@@ -60,7 +60,7 @@ public class HealthServiceController {
     public ResponseEntity<?> addService(@RequestBody Service req){
 
         Service service = healthService.addService(req);
-        return new ResponseEntity<>(service, HttpStatus.OK);
+        return new ResponseEntity<>(service, HttpStatus.CREATED);
 
     }
 
@@ -73,7 +73,7 @@ public class HealthServiceController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findServiceById(@PathVariable("id") String id){
-        Optional<Service> service = healthService.findServiceById(UUID.fromString(id));
+        Optional<?> service = healthService.findServiceById(UUID.fromString(id));
         return new ResponseEntity<>(service, HttpStatus.OK);
     }
 

@@ -28,6 +28,7 @@ public class Service {
     private UUID updatedBy;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

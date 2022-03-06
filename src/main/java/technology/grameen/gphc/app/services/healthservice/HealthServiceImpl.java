@@ -19,12 +19,13 @@ public class HealthServiceImpl implements HealthService{
 
     @Override
     public Service addService(Service service) {
-        return null;
+        service.setCode(service.getName().toLowerCase().replaceAll(" ","-"));
+        return healthServiceRepository.save(service);
     }
 
     @Override
-    public Optional<Service> findServiceById(UUID id) {
-        Optional<Service> serviceRes = healthServiceRepository.findById(id);
+    public Optional<?> findServiceById(UUID id) {
+        Optional<?> serviceRes = healthServiceRepository.findServiceById(id);
         return serviceRes;
     }
 

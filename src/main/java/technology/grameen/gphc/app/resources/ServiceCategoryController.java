@@ -57,7 +57,7 @@ public class ServiceCategoryController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> geteCategoryById(@PathVariable("id") String id){
-        Optional <ServiceCategory> serviceCategory = serviceCategoryService.findById(UUID.fromString(id));
+        Optional <?> serviceCategory = serviceCategoryService.findById(UUID.fromString(id));
         return new ResponseEntity<>(serviceCategory, HttpStatus.OK);
     }
 

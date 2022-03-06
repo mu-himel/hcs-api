@@ -32,6 +32,7 @@ public class ServiceCategory {
     private UUID updatedBy;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

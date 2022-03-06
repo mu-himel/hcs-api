@@ -19,13 +19,13 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
 
     @Override
     public List<?> getCategories() {
-        return serviceCategoryRepository.findAll();
+        return serviceCategoryRepository.findServiceCategoriesAll();
     }
 
     @Override
     public Page<?> getCategories(String categoryName, Pageable pageable) {
         if(categoryName.isEmpty()){
-            return serviceCategoryRepository.findAll(pageable);
+            return serviceCategoryRepository.findServiceCategoriesAll(pageable);
         }
         return serviceCategoryRepository.findAllByNameContainingIgnoreCase(categoryName,pageable);
     }
@@ -38,8 +38,8 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
     }
 
     @Override
-    public Optional<ServiceCategory> findById(UUID id) {
-        return serviceCategoryRepository.findById(id);
+    public Optional<?> findById(UUID id) {
+        return serviceCategoryRepository.findServiceCategoryById(id);
     }
 
     @Override
