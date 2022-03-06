@@ -14,7 +14,7 @@ public class ProfileUser implements Serializable {
     @Id
     private UUID id = UUID.randomUUID();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id",unique = true)
     private Profile profile;
 
