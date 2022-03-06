@@ -17,11 +17,13 @@ public interface SiteUserRepository extends JpaRepository<SiteUser, UUID> {
         String getLastName();
         String getUserId();
         String getUsername();
+        UUID getId();
     }
 
-    @Query(value = "SELECT pu.username, p.first_name firstName, p.last_name lastName, pu.user_id userId FROM profile_user pu " +
+    @Query(value = "SELECT cast(su.id as varchar) id, pu.username, p.first_name firstName, p.last_name lastName, pu.user_id userId FROM profile_user pu " +
             " join profiles p on p.id = pu.profile_id " +
-           " WHERE pu.user_id IN (SELECT su.user_id FROM site_users su WHERE su.site_id = :siteId)",
+            " join site_users su on su.user_id = pu.user_id" +
+           " WHERE su.site_id = :siteId",
     nativeQuery = true)
     List<ProfileUser> getUsers(@Param("siteId") UUID siteId);
 }
