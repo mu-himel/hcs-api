@@ -15,7 +15,7 @@ public class SiteUser {
     @Id
     private UUID id = UUID.randomUUID();
     private String userId;
-    private Boolean status;
+    private Boolean status=true;
 
     @CreationTimestamp
     @Column(updatable = false)
