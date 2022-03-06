@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.healthapp.entity.service;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -107,6 +108,7 @@ public class ServiceCategory {
         this.updatedBy = updatedBy;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
