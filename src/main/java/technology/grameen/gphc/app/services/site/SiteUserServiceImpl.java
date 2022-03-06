@@ -7,6 +7,7 @@ import technology.grameen.gphc.app.healthapp.entity.SiteUser;
 import technology.grameen.gphc.app.healthapp.repositories.SiteUserRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SiteUserServiceImpl implements SiteUserService{
@@ -21,7 +22,7 @@ public class SiteUserServiceImpl implements SiteUserService{
     }
 
     @Override
-    public List<?> getUsers() {
-        return siteUserRepository.getUsers();
+    public List<?> getUsers(UUID siteId) {
+        return siteUserRepository.getUsers(siteId);
     }
 }

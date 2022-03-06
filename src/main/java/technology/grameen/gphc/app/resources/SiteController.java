@@ -12,6 +12,7 @@ import technology.grameen.gphc.app.request.SiteUserRequest;
 import technology.grameen.gphc.app.services.site.SiteService;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/sites")
@@ -61,10 +62,10 @@ public class SiteController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<?> getSiteUsers(){
+    @GetMapping("/users/{siteId}")
+    public ResponseEntity<?> getSiteUsers(@PathVariable("siteId") String siteId){
         return new ResponseEntity<>(
-                siteService.getSiteUser().getUsers(),
+                siteService.getSiteUser().getUsers(UUID.fromString(siteId)),
                 HttpStatus.OK
         );
     }
