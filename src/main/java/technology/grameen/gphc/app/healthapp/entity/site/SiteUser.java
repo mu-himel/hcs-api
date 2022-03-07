@@ -1,8 +1,8 @@
-package technology.grameen.gphc.app.healthapp.entity;
+package technology.grameen.gphc.app.healthapp.entity.site;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import technology.grameen.gphc.app.auth.entity.User;
+import technology.grameen.gphc.app.healthapp.entity.site.Site;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

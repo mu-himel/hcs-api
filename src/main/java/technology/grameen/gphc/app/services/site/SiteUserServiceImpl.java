@@ -3,7 +3,7 @@ package technology.grameen.gphc.app.services.site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import technology.grameen.gphc.app.healthapp.entity.SiteUser;
+import technology.grameen.gphc.app.healthapp.entity.site.SiteUser;
 import technology.grameen.gphc.app.healthapp.repositories.SiteUserRepository;
 
 import java.util.List;

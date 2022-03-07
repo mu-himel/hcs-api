@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.exceptions.CustomException;
-import technology.grameen.gphc.app.healthapp.entity.Site;
-import technology.grameen.gphc.app.healthapp.entity.SiteUser;
+import technology.grameen.gphc.app.healthapp.entity.site.Site;
+import technology.grameen.gphc.app.healthapp.entity.site.SiteUser;
 import technology.grameen.gphc.app.healthapp.repositories.SiteRepository;
 
 import java.util.List;
@@ -23,6 +23,9 @@ public class SiteServiceImpl implements SiteService{
     @Autowired
     private SiteUserService siteUserService;
 
+    @Autowired
+    private SiteHealthService siteHealthService;
+
     @Override
     public Page<?> getAll(Pageable pageable) {
         return siteRepository.findAllSites(pageable);
@@ -36,6 +39,11 @@ public class SiteServiceImpl implements SiteService{
     @Override
     public SiteUserService getSiteUser() {
         return siteUserService;
+    }
+
+    @Override
+    public SiteHealthService getSiteHealthService() {
+        return siteHealthService;
     }
 
     @Override

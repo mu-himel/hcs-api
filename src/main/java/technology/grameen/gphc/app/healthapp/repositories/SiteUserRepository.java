@@ -1,11 +1,10 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import technology.grameen.gphc.app.healthapp.entity.SiteUser;
+import technology.grameen.gphc.app.healthapp.entity.site.SiteUser;
 
 import java.util.List;
 import java.util.UUID;

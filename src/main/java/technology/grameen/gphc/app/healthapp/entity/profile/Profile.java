@@ -3,7 +3,7 @@ package technology.grameen.gphc.app.healthapp.entity.profile;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
-import technology.grameen.gphc.app.healthapp.entity.Site;
+import technology.grameen.gphc.app.healthapp.entity.site.Site;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
