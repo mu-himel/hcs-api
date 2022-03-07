@@ -5,20 +5,34 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import technology.grameen.gphc.app.healthapp.entity.service.Service;
 import technology.grameen.gphc.app.healthapp.entity.site.Site;
 import technology.grameen.gphc.app.healthapp.entity.site.SiteService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface SiteServiceRepository extends JpaRepository<SiteService, UUID> {
 
+    interface SiteServiceInfo{
+        Service getService();
+        BigDecimal getPrice();
+        BigDecimal getRevisitPrice();
+        UUID getId();
+    }
+
+    interface Service {
+        UUID getId();
+        String getName();
+    }
+
     @Query("SELECT ss FROM SiteService ss " +
             "JOIN FETCH ss.site s1 " +
             "JOIN FETCH ss.service s2 " +
             "WHERE s1 = :site")
-    List<?> findBySite(@Param("site") Site site);
+    List<SiteServiceInfo> findBySite(@Param("site") Site site);
 
     @Modifying
     @Query("DELETE FROM SiteService ss WHERE ss.site = :site")

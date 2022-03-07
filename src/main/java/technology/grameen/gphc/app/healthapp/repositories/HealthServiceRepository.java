@@ -35,6 +35,8 @@ public interface HealthServiceRepository extends JpaRepository<Service, UUID> {
                     " WHERE lower(s.code) LIKE lower(concat('%',:serviceCode,'%'))")
     Page<ServiceDetail> findAllServicesByCode(@Param("serviceCode") String serviceCode, Pageable pageable);
 
+    Optional<ServiceDetail> findByCode(String code);
+
     interface ServiceDetailServiceCategory{
         UUID getId();
         String getName();

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.service.ServiceCategory;
 import technology.grameen.gphc.app.services.healthservice.ServiceCategoryService;
 
@@ -50,7 +51,7 @@ public class ServiceCategoryController {
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<Object> addCategory(@RequestBody ServiceCategory req){
+    public ResponseEntity<Object> addCategory(@RequestBody ServiceCategory req) throws CustomException {
         ServiceCategory serviceCategory = serviceCategoryService.addCategory(req);
         return new ResponseEntity<>(serviceCategory, HttpStatus.CREATED);
     }
