@@ -58,13 +58,17 @@ public class SiteController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> assignSiteUser(@RequestBody SiteUserRequest siteUserRequest) throws CustomException {
+    public ResponseEntity<?> assignSiteUser(@RequestBody SiteUserRequest siteUserRequest)
+            throws CustomException {
         siteService.assignUser(siteUserRequest.getSiteUsers());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/users/{siteId}")
-    public ResponseEntity<?> getSiteUsers(@PathVariable("siteId") String siteId){
+    public ResponseEntity<?> getSiteUsers(@PathVariable("siteId") String siteId) throws CustomException {
+        if(siteId == null || siteId.isEmpty()){
+            throw new CustomException("Site ID Required");
+        }
         return new ResponseEntity<>(
                 siteService.getSiteUser().getUsers(UUID.fromString(siteId)),
                 HttpStatus.OK

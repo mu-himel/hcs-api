@@ -1,6 +1,7 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,8 @@ public interface SiteServiceRepository extends JpaRepository<SiteService, UUID> 
             "JOIN FETCH ss.service s2 " +
             "WHERE s1 = :site")
     List<?> findBySite(@Param("site") Site site);
+
+    @Modifying
+    @Query("DELETE FROM SiteService ss WHERE ss.site = :site")
+    void deleteBySite(@Param("site") Site site);
 }

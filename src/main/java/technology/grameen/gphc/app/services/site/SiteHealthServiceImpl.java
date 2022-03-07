@@ -19,6 +19,9 @@ public class SiteHealthServiceImpl implements SiteHealthService{
     @Override
     @Transactional
     public void add(List<SiteService> siteServices) throws CustomException {
+        if(siteServices.size()==0){
+            throw new CustomException("No Data found to save");
+        }
         for(SiteService siteService : siteServices)  {
             if(siteService.getService() != null && siteService.getService().getId() == null){
                 throw new CustomException("Service Id is missing");
@@ -27,6 +30,7 @@ public class SiteHealthServiceImpl implements SiteHealthService{
                 throw new CustomException("Site Id is missing");
             }
         }
+        siteServiceRepository.deleteBySite(siteServices.get(0).getSite());
         siteServiceRepository.saveAll(siteServices);
     }
 
