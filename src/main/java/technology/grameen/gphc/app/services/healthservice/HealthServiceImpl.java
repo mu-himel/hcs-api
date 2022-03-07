@@ -3,6 +3,7 @@ package technology.grameen.gphc.app.services.healthservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.service.Service;
 import technology.grameen.gphc.app.healthapp.entity.service.ServiceCategory;
@@ -19,11 +20,15 @@ public class HealthServiceImpl implements HealthService{
     private HealthServiceRepository healthServiceRepository;
 
     @Override
+    @Transactional
     public Service addService(Service service) throws CustomException {
         service.setCode(service.getName().toLowerCase().replaceAll(" ","-"));
         Optional<?> serviceOp = findByCode(service.getCode());
         if(service.getId() == null && serviceOp.isPresent()){
             throw new CustomException("Service "+service.getName()+" already exist");
+        }
+        if(service.getId() == null){
+            service.setId(UUID.randomUUID());
         }
         return healthServiceRepository.save(service);
     }

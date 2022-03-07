@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Service {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private UUID id = null;
 
     private String name;
 

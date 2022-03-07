@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ServiceCategory {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private UUID id = null;
 
     private String name;
 
