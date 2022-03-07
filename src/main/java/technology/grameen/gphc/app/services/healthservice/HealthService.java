@@ -19,7 +19,7 @@ public interface HealthService {
     Optional<?> findByCode(String code);
 
     List<?> getAll();
-    Page<?> getAll(String serviceName, String serviceCode, Pageable pageable);
+    Page<?> getAll(String name, Pageable pageable);
 
     List<?> findByServiceCategory(ServiceCategory serviceCategory);
 }

@@ -77,9 +77,9 @@ public class SiteController {
     }
 
     @PostMapping("/services")
-    public ResponseEntity<?> addHealthService(@RequestBody SiteServiceRequest siteServiceRequest)
+    public ResponseEntity<?> addHealthService(@RequestBody technology.grameen.gphc.app.healthapp.entity.site.SiteService siteService1)
             throws CustomException {
-        siteService.getSiteHealthService().add(siteServiceRequest.getSiteServices());
+        siteService.getSiteHealthService().add(siteService1);
         return new ResponseEntity<>(
                 HttpStatus.CREATED
         );

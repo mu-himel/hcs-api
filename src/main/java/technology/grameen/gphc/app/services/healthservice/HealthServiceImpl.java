@@ -51,19 +51,13 @@ public class HealthServiceImpl implements HealthService{
     }
 
     @Override
-    public Page<?> getAll(String serviceName, String serviceCode, Pageable pageable) {
-        if(!serviceName.isEmpty()) {
-            return healthServiceRepository.findAllServices(serviceName, pageable);
-        }
-        if(!serviceCode.isEmpty()) {
-            return healthServiceRepository.findAllServicesByCode(serviceCode, pageable);
+    public Page<?> getAll(String name, Pageable pageable) {
+        if(!name.isEmpty()) {
+            return healthServiceRepository.findAllServices(name, pageable);
         }
 
-        if(serviceName.isEmpty() && serviceCode.isEmpty()){
-            return healthServiceRepository.findAllServices(pageable);
-        }
+        return healthServiceRepository.findAllServices(pageable);
 
-        return null;
     }
 
     @Override

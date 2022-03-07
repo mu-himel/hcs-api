@@ -13,7 +13,7 @@ public interface ServiceCategoryService {
 
     List<?> getCategories();
 
-    Page<?> getCategories(String categoryName, Pageable pageable);
+    Page<?> getCategories(String name, Pageable pageable);
 
     ServiceCategory addCategory(ServiceCategory serviceCategory) throws CustomException;
 

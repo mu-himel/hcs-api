@@ -20,10 +20,10 @@ public interface HealthServiceRepository extends JpaRepository<Service, UUID> {
     List<ServiceDetail> findAllServices();
 
     @Query(value = "SELECT s FROM Service s JOIN FETCH s.serviceCategory sc" +
-            " WHERE lower(s.name) LIKE lower(concat('%',:serviceName,'%'))",
+            " WHERE lower(s.name) LIKE lower(concat('%',:name,'%'))",
             countQuery = "SELECT COUNT(s) FROM Service s JOIN s.serviceCategory sc " +
-                    " WHERE lower(s.name) LIKE lower(concat('%',:serviceName,'%'))")
-    Page<ServiceDetail> findAllServices(@Param("serviceName") String serviceName, Pageable pageable);
+                    " WHERE lower(s.name) LIKE lower(concat('%',:name,'%'))")
+    Page<ServiceDetail> findAllServices(@Param("name") String name, Pageable pageable);
 
     @Query(value = "SELECT s FROM Service s JOIN FETCH s.serviceCategory sc",
             countQuery = "SELECT COUNT(s) FROM Service s JOIN s.serviceCategory sc")

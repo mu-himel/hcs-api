@@ -31,7 +31,7 @@ public class ServiceCategoryController {
 
     @RequestMapping(value = "")
     public ResponseEntity<?> list(
-            @RequestParam Optional<String> categoryName,
+            @RequestParam Optional<String> name,
             @RequestParam Optional<Integer> page,
             @RequestParam Optional<Integer> size,
             @RequestParam Optional<String> sortBy,
@@ -47,7 +47,7 @@ public class ServiceCategoryController {
                 : PageRequest.of(page.orElse(0),size.orElse(PAGE_SIZE));
 
         return new ResponseEntity<>(
-                serviceCategoryService.getCategories(categoryName.orElse(""),pageable), HttpStatus.OK);
+                serviceCategoryService.getCategories(name.orElse(""),pageable), HttpStatus.OK);
     }
 
     @PostMapping(value = "/add")

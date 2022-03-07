@@ -33,7 +33,7 @@ public class HealthServiceController {
 
     @RequestMapping(value = "")
     public ResponseEntity<?> list(
-            @RequestParam Optional<String> serviceName,
+            @RequestParam Optional<String> name,
             @RequestParam Optional<String> serviceCode,
             @RequestParam Optional<Integer> page,
             @RequestParam Optional<Integer> size,
@@ -53,7 +53,7 @@ public class HealthServiceController {
                 : PageRequest.of(page.orElse(0),size.orElse(PAGE_SIZE));
 
         return new ResponseEntity<>(
-                healthService.getAll(serviceName.orElse(""),serviceCode.orElse(""),pageable),
+                healthService.getAll(name.orElse(""),pageable),
                 HttpStatus.OK);
     }
 
