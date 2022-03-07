@@ -17,6 +17,18 @@ import java.util.UUID;
 @Repository
 public interface SiteRepository extends JpaRepository<Site, UUID> {
 
+    @Query(value = "SELECT s FROM Site s " +
+            "LEFT JOIN FETCH s.country co" +
+            "LEFT JOIN FETCH s.city ci " +
+            "LEFT JOIN FETCH s.state st " +
+            "WHERE lower(s.title) LIKE concat('%' || lower(:name) || '%') ORDER BY s.createdAt DESC,s.title DESC" ,
+            countQuery = "SELECT count(s) FROM Site s " +
+                    "LEFT JOIN s.country co" +
+                    "LEFT JOIN s.city ci " +
+                    "LEFT JOIN s.state st " +
+                    "WHERE lower(s.title) LIKE concat('%' || lower(:name) || '%')")
+    Page<?> findAllSitesByTitle(@Param("name") String name, Pageable pageable);
+
     interface SiteInfo{
         UUID getId();
         String getTitle();

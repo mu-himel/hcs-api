@@ -30,7 +30,7 @@ public class SiteHealthServiceImpl implements SiteHealthService{
                 throw new CustomException("Site Id is missing");
             }
         }
-        siteServiceRepository.deleteBySite(siteServices.get(0).getSite());
+
         siteServiceRepository.saveAll(siteServices);
     }
 

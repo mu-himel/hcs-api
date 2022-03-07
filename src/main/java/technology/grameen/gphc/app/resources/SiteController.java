@@ -24,13 +24,14 @@ public class SiteController {
     private SiteService siteService;
 
     @GetMapping("")
-    public ResponseEntity<?> getAll(@RequestParam Optional<Integer> page,
+    public ResponseEntity<?> getAll(@RequestParam Optional<String> name,
+                                    @RequestParam Optional<Integer> page,
                                     @RequestParam Optional<Integer> size){
 
         Pageable pageable = PageRequest.of(page.orElse(0),size.orElse(PAGE_SIZE));
 
         return new ResponseEntity<>(
-                siteService.getAll(pageable),
+                siteService.getAll(name.orElse(""),pageable),
                 HttpStatus.OK
         );
     }

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface SiteService {
 
-    Page<?> getAll(Pageable pageable);
+    Page<?> getAll(String name, Pageable pageable);
 
     List<?> getAll();
 
