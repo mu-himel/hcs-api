@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
+import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
+import technology.grameen.gphc.app.request.UserProfileRequest;
 import technology.grameen.gphc.app.services.profile.ProfileService;
 
 import java.util.Optional;
@@ -49,6 +51,13 @@ public class ProfileController {
                 profileService.getProfileByUserId(id),
                 HttpStatus.OK
         );
+    }
+
+    @PostMapping("/user/{id}/add")
+    public ResponseEntity<?> addUserProfile(@PathVariable("id") String id, @RequestBody UserProfileRequest usr){
+        Profile profile = profileService.addProfile(usr.getProfile());
+        profileService.addProfileUser(usr.getUser(),profile,new ProfileUser());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/add")

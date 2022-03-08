@@ -4,17 +4,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
+import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.request.RegistrationRequest;
 import technology.grameen.gphc.app.request.User;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public interface ProfileService {
 
     Profile addProfile(Profile profile);
+    ProfileUser addProfileUser(Map<String,Object> userInfo, Profile profile, ProfileUser profileUser);
 
     HashMap register(Profile profile) throws CustomException;
     HashMap register(RegistrationRequest registrationRequest) throws CustomException;

@@ -77,11 +77,7 @@ public class ProfileServiceImpl implements ProfileService{
             if (map != null) {
                 String userId = String.valueOf(map.get("id"));
 
-                ProfileUser profileUser = new ProfileUser();
-                profileUser.setProfile(profileCreated);
-                profileUser.setUserId(userId);
-                profileUser.setUsername(map.get("username").toString());
-                profileUserRepository.save(profileUser);
+                addProfileUser(map,profileCreated,new ProfileUser());
 
                 assignDefaultRole(userId);
             }
@@ -89,7 +85,15 @@ public class ProfileServiceImpl implements ProfileService{
         return map;
     }
 
+    @Override
+    public ProfileUser addProfileUser(Map<String,Object> userInfo, Profile profile, ProfileUser profileUser) {
 
+        profileUser.setProfile(profile);
+        profileUser.setUserId(String.valueOf(userInfo.get("id")));
+        profileUser.setUsername(String.valueOf(userInfo.get("username").toString()));
+        profileUserRepository.save(profileUser);
+        return profileUser;
+    }
 
     private SimpleResponse addUserAccount(Profile profile, String credential) throws CustomException {
         User user = new User();
