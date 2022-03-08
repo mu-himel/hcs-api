@@ -28,4 +28,7 @@ public interface ProfileService {
     Optional<?> getProfileByEmail(String email);
 
     List<?> getProfileUsers();
+
+    DoctorProfileService getDoctorProfileService();
+    ResearcherProfileService getResearcherProfileService();
 }

@@ -43,6 +43,12 @@ public class ProfileServiceImpl implements ProfileService{
     private NetworkService networkService;
 
     @Autowired
+    private DoctorProfileService doctorProfileService;
+
+    @Autowired
+    private ResearcherProfileService researcherProfileService;
+
+    @Autowired
     private Environment env;
 
     @Override
@@ -187,5 +193,16 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     public List<?> getProfileUsers() {
         return profileUserRepository.findAllUser();
+    }
+
+
+    @Override
+    public DoctorProfileService getDoctorProfileService() {
+        return doctorProfileService;
+    }
+
+    @Override
+    public ResearcherProfileService getResearcherProfileService() {
+        return researcherProfileService;
     }
 }
