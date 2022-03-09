@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.configuration.TriageConfiguration;
 import technology.grameen.gphc.app.healthapp.repositories.TriageConfigRepository;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class TriageConfigServiceImpl implements TriageConfigService{
@@ -31,5 +31,30 @@ public class TriageConfigServiceImpl implements TriageConfigService{
     @Override
     public Optional<TriageConfiguration> getConfig(UUID id) {
         return triageConfigRepository.findById(id);
+    }
+
+    @Override
+    public Map<String, Object> getRef() {
+        Map<String,Object> map = new HashMap<>();
+        Stream<TriageConfiguration> triageConfigurationStream = triageConfigRepository.findAll().stream();
+        triageConfigurationStream.forEach(triage->{
+            map.put(getFieldKey(triage),triage);
+        });
+        return map;
+    }
+    private String getFieldKey(TriageConfiguration triage){
+        String[] alias = triage.getAlias().split("-");
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<alias.length; i++){
+            String s = alias[i];
+            if(i==0){
+                sb.append(s);
+            }
+            if(i>0){
+                sb.append(String.valueOf(s.charAt(0)).toUpperCase(Locale.ROOT));
+                sb.append(s.substring(1,s.length()));
+            }
+        }
+        return sb.toString();
     }
 }

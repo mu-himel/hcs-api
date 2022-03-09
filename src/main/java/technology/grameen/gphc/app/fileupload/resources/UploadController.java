@@ -24,6 +24,8 @@ public class UploadController {
             path = "profiles";
         }else if (type.orElse("").equalsIgnoreCase("doc")){
             path = "documents";
+        }else if (type.orElse("").equalsIgnoreCase("signature")){
+            path = "signature";
         }else{
             path = "sites";
         }

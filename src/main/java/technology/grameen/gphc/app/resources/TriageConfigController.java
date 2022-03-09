@@ -49,4 +49,9 @@ public class TriageConfigController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/ref")
+    public ResponseEntity<?> getTriageRef(){
+        return new ResponseEntity<>(triageConfigService.getRef(),HttpStatus.OK);
+    }
 }
