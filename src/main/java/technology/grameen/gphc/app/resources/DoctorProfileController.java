@@ -17,7 +17,7 @@ public class DoctorProfileController {
     private ProfileService profileService;
 
     @PostMapping
-    public ResponseEntity<?> addDoctorProfile(DoctorProfile doctorProfile){
+    public ResponseEntity<?> addDoctorProfile(@RequestBody DoctorProfile doctorProfile){
         profileService.getDoctorProfileService().addDoctorProfile(doctorProfile);
         return new ResponseEntity<>(
                 HttpStatus.CREATED

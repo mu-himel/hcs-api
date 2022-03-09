@@ -17,7 +17,7 @@ public class ResearcherProfileController {
     private ProfileService profileService;
 
     @PostMapping
-    public ResponseEntity<?> addResearcherProfile(ResearcherProfile researcherProfile){
+    public ResponseEntity<?> addResearcherProfile(@RequestBody ResearcherProfile researcherProfile){
         profileService.getResearcherProfileService().addResearcherProfile(researcherProfile);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
