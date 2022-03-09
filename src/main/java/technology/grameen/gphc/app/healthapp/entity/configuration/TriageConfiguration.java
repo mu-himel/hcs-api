@@ -20,6 +20,7 @@ public class TriageConfiguration {
     private UUID id = UUID.randomUUID();
 
     private String paramName;
+    private String alias;
     private String spec;
     private String dataType;
     private String lowerWarning;
@@ -56,6 +57,14 @@ public class TriageConfiguration {
 
     public void setParamName(String paramName) {
         this.paramName = paramName;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getSpec() {
