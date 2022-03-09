@@ -38,7 +38,17 @@ public class TriageConfigServiceImpl implements TriageConfigService{
         Map<String,Object> map = new HashMap<>();
         Stream<TriageConfiguration> triageConfigurationStream = triageConfigRepository.findAll().stream();
         triageConfigurationStream.forEach(triage->{
-            map.put(getFieldKey(triage),triage);
+            Map<String,Object> tRef = new HashMap<>();
+            tRef.put("lowerWarning",triage.getLowerWarning());
+            tRef.put("upperWarning",triage.getLowerWarning());
+            tRef.put("green",triage.getGreen());
+            tRef.put("yellow",triage.getYellow());
+            tRef.put("orange",triage.getOrange());
+            tRef.put("red",triage.getRed());
+            tRef.put("paramName",triage.getParamName());
+            tRef.put("spec",triage.getSpec());
+            tRef.put("dataType",triage.getDataType());
+            map.put(getFieldKey(triage),tRef);
         });
         return map;
     }
