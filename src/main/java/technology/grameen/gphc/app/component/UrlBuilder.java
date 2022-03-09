@@ -22,8 +22,7 @@ public class UrlBuilder {
     }
 
     public String getRoleEndPoint(){
-        String url = env.getProperty("auth.domain")+env.getProperty("auth.admin.realm.app")+
-                env.getProperty("uri.roles");
+        String url = env.getProperty("auth.role.user");
 
         return url;
     }

@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.services.profile;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -8,22 +9,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 import technology.grameen.gphc.app.auth.repositories.UserRepository;
+import technology.grameen.gphc.app.component.UrlBuilder;
 import technology.grameen.gphc.app.exceptions.CustomException;
+import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
+import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileUserRepository;
+import technology.grameen.gphc.app.request.Credential;
 import technology.grameen.gphc.app.request.RegistrationRequest;
 import technology.grameen.gphc.app.request.User;
-import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
-import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
-import technology.grameen.gphc.app.request.Credential;
 import technology.grameen.gphc.app.request.UserRole;
 import technology.grameen.gphc.app.response.SimpleResponse;
 import technology.grameen.gphc.app.services.network.NetworkService;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Service
@@ -50,6 +54,9 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Autowired
     private Environment env;
+
+    @Autowired
+    private UrlBuilder urlBuilder;
 
     @Override
     @Transactional
@@ -177,7 +184,24 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public Optional<?> getProfileById(UUID id) {
-        return profileRepository.findProfileById(id);
+
+        Optional<ProfileRepository.ProfileUser> profileUserOp = profileRepository.findProfileById(id);
+        Map<String, Object> map = new HashMap<>();
+
+        if(profileUserOp.isPresent()) {
+            ProfileRepository.ProfileUser profileUser = profileUserOp.get();
+            ResponseEntity<?> response = networkService.get(urlBuilder.getRoleEndPoint() + "/"
+                    + profileUser.getUserId(), null, Object.class);
+            Optional<?> userRole = Optional.ofNullable(response.getBody());
+
+            map.put("profile", profileUser.getProfile());
+            map.put("userId", profileUser.getUserId());
+            map.put("username", profileUser.getUsername());
+            map.put("id", profileUser.getId());
+            map.put("role", userRole);
+        }
+
+        return Optional.of(map);
     }
 
     @Override

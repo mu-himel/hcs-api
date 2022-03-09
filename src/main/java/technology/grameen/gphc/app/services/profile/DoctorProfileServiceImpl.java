@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.profile.DoctorProfile;
 import technology.grameen.gphc.app.healthapp.repositories.DoctorProfileRepository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class DoctorProfileServiceImpl implements DoctorProfileService{
 
@@ -16,5 +19,10 @@ public class DoctorProfileServiceImpl implements DoctorProfileService{
     @Transactional
     public DoctorProfile addDoctorProfile(DoctorProfile doctorProfile) {
         return doctorProfileRepository.save(doctorProfile);
+    }
+
+    @Override
+    public Optional<?> getDetailByProfile(UUID id) {
+        return doctorProfileRepository.findById(id);
     }
 }
