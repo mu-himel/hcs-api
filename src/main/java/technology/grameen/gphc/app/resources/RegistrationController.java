@@ -29,6 +29,7 @@ public class RegistrationController {
     @Autowired
     private OtpService otpService;
 
+
     @PostMapping
     public ResponseEntity<?> userRegistration(@RequestBody RegistrationRequest registrationRequest) throws CustomException {
         profileService.register(registrationRequest);

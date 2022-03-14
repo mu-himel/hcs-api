@@ -48,5 +48,15 @@ public class UrlBuilder {
         return url;
     }
 
+    public String getEhrEndpoint(){
+        String url = env.getProperty("ehr");
+        return url;
+    }
+
+    public String getFhirEndpoint(){
+        String url = env.getProperty("fhir");
+        return url;
+    }
+
 
 }

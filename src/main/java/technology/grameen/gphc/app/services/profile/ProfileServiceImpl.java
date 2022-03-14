@@ -1,6 +1,5 @@
 package technology.grameen.gphc.app.services.profile;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
@@ -24,10 +22,13 @@ import technology.grameen.gphc.app.request.Credential;
 import technology.grameen.gphc.app.request.RegistrationRequest;
 import technology.grameen.gphc.app.request.User;
 import technology.grameen.gphc.app.request.UserRole;
+import technology.grameen.gphc.app.request.fhir.NameInfo;
+import technology.grameen.gphc.app.request.fhir.Patient;
+import technology.grameen.gphc.app.request.fhir.TextProperty;
 import technology.grameen.gphc.app.response.SimpleResponse;
 import technology.grameen.gphc.app.services.network.NetworkService;
+import technology.grameen.gphc.app.services.register.FhirRegisterService;
 
-import java.io.Serializable;
 import java.util.*;
 
 @Service
@@ -58,6 +59,9 @@ public class ProfileServiceImpl implements ProfileService{
     @Autowired
     private UrlBuilder urlBuilder;
 
+    @Autowired
+    private FhirRegisterService registerService;
+
     @Override
     @Transactional
     public Profile addProfile(Profile profile) {
@@ -84,6 +88,23 @@ public class ProfileServiceImpl implements ProfileService{
         HashMap map = null;
 
         sr = addUserAccount(profile,credential);
+
+        Patient patient = new Patient();
+        TextProperty maritalStatus = new TextProperty(profile.getMaritalStatus());
+        patient.setMaritalStatus(maritalStatus);
+        patient.setEmail(profile.getEmail());
+        patient.setGender(profile.getGender());
+        List<NameInfo> names = new ArrayList<>();
+        names.add(new NameInfo(profile.getFirstName(),profile.getLastName()));
+        patient.setName(names);
+        Optional<?> patientIdOp = registerService.getPatientId();
+        if(patientIdOp.isPresent()){
+            Map<String,Object> responseMap = (Map<String, Object>) patientIdOp.get();
+            Map<String,String> mapEhrId = (Map<String, String>)responseMap.get("ehr_id");
+            patient.setId(mapEhrId.get("value"));
+            registerService.registerPatient(patient);
+        }
+
         Profile profileCreated = addProfile(profile);
         if (profileCreated.getId() != null) {
             map = (HashMap) sr.getObj().get();

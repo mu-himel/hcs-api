@@ -26,15 +26,17 @@ public class BasicCheckup {
     private Double waistHipRatio;
     private Double temperature;
     private Double oxygenOfBlood;
-    private Double bpSys;
-    private Double bpDia;
+    private Double bloodPressureSystolic;
+    private Double bloodPressureDiastolic;
     private Double bloodGlucose;
     private String bloodGlucoseType;
     private Double bloodHemoglobin;
+    // Urinalysis
     private String urinaryGlucose;
     private String urinaryProtein;
     private String urinaryUrobilinogen;
     private Double urinaryPh;
+
     private Double pulseRate;
     private String arrhythmia;
     private Double cholesterol;
