@@ -20,6 +20,7 @@ import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileUserRepository;
 import technology.grameen.gphc.app.request.*;
+import technology.grameen.gphc.app.request.fhir.CommonProperty;
 import technology.grameen.gphc.app.request.fhir.NameInfo;
 import technology.grameen.gphc.app.request.fhir.Patient;
 import technology.grameen.gphc.app.request.fhir.TextProperty;
@@ -90,7 +91,11 @@ public class ProfileServiceImpl implements ProfileService{
         Patient patient = new Patient();
         TextProperty maritalStatus = new TextProperty(profile.getMaritalStatus());
         patient.setMaritalStatus(maritalStatus);
-        patient.setEmail(profile.getEmail());
+        List<CommonProperty> telecom = new ArrayList<>();
+        telecom.add(new CommonProperty("email", profile.getEmail(),"home"));
+        telecom.add(new CommonProperty("phone", profile.getContactNumber(),"home"));
+        telecom.add(new CommonProperty("phone", profile.getContactNumber2(),"work"));
+        patient.setTelecom(telecom);
         patient.setGender(profile.getGender());
         List<NameInfo> names = new ArrayList<>();
         names.add(new NameInfo(profile.getFirstName(),profile.getLastName()));
@@ -100,6 +105,7 @@ public class ProfileServiceImpl implements ProfileService{
             Map<String,Object> responseMap = (Map<String, Object>) patientIdOp.get();
             Map<String,String> mapEhrId = (Map<String, String>)responseMap.get("ehr_id");
             patient.setId(mapEhrId.get("value"));
+            profile.setId(UUID.fromString(patient.getId()));
             registerService.registerPatient(patient);
         }
 

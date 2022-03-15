@@ -5,6 +5,12 @@ public class CommonProperty {
     private String value;
     private String use;
 
+    public CommonProperty(String system, String value, String use) {
+        this.system = system;
+        this.value = value;
+        this.use = use;
+    }
+
     public String getSystem() {
         return system;
     }
