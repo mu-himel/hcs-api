@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.services.profile;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -18,10 +19,7 @@ import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
 import technology.grameen.gphc.app.healthapp.repositories.ProfileUserRepository;
-import technology.grameen.gphc.app.request.Credential;
-import technology.grameen.gphc.app.request.RegistrationRequest;
-import technology.grameen.gphc.app.request.User;
-import technology.grameen.gphc.app.request.UserRole;
+import technology.grameen.gphc.app.request.*;
 import technology.grameen.gphc.app.request.fhir.NameInfo;
 import technology.grameen.gphc.app.request.fhir.Patient;
 import technology.grameen.gphc.app.request.fhir.TextProperty;
@@ -75,19 +73,19 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public HashMap register(Profile profile) throws CustomException {
-        return createProfile(profile,"12345678");
+        return createProfile(profile,"12345678",true, true);
     }
 
     @Override
     public HashMap register(RegistrationRequest registrationRequest) throws CustomException {
-        return createProfile(registrationRequest.getProfile(),registrationRequest.getCredential());
+        return createProfile(registrationRequest.getProfile(),registrationRequest.getCredential(), true, false);
     }
 
-    private HashMap createProfile(Profile profile, String credential) throws CustomException {
+    private HashMap createProfile(Profile profile, String credential, Boolean isPublic, Boolean sendEmail) throws CustomException {
         SimpleResponse sr = null;
         HashMap map = null;
 
-        sr = addUserAccount(profile,credential);
+        sr = addUserAccount(profile,credential, isPublic, sendEmail);
 
         Patient patient = new Patient();
         TextProperty maritalStatus = new TextProperty(profile.getMaritalStatus());
@@ -129,7 +127,7 @@ public class ProfileServiceImpl implements ProfileService{
         return profileUser;
     }
 
-    private SimpleResponse addUserAccount(Profile profile, String credential) throws CustomException {
+    private SimpleResponse addUserAccount(Profile profile, String credential, Boolean isPublic, Boolean sendEmail) throws CustomException {
         User user = new User();
 
         String username = "";
@@ -152,8 +150,11 @@ public class ProfileServiceImpl implements ProfileService{
         user.setUsername(username);
         user.setFirstName(profile.getFirstName());
         user.setLastName(profile.getLastName());
-
-        HttpEntity<?> payload = new HttpEntity(user);
+        AuthUserRequest authUserRequest = new AuthUserRequest();
+        authUserRequest.setUser(user);
+        authUserRequest.setPublic(isPublic);
+        authUserRequest.setSendEmail(sendEmail);
+        HttpEntity<?> payload = new HttpEntity(authUserRequest);
         SimpleResponse sr = null;
         ResponseEntity<SimpleResponse> response = null;
         try {
