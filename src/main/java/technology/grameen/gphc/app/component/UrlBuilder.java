@@ -49,12 +49,17 @@ public class UrlBuilder {
     }
 
     public String getEhrEndpoint(){
-        String url = env.getProperty("ehr");
+        String url = env.getProperty("ehr")+env.getProperty("ehr.register");
         return url;
     }
 
     public String getFhirEndpoint(){
         String url = env.getProperty("fhir");
+        return url;
+    }
+
+    public String getEhrCompositionEndpoint(){
+        String url = env.getProperty("ehr")+env.getProperty("ehr.composition");
         return url;
     }
 
