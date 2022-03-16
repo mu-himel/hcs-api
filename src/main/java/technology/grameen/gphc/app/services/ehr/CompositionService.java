@@ -8,7 +8,7 @@ public interface CompositionService {
 
    void addEhr(Map<String,?> composition);
 
-   List<?> getAllEhr();
+   Optional<?> getAllEhr();
 
    Optional<?> getEhrByPatient(String patientId);
 }
