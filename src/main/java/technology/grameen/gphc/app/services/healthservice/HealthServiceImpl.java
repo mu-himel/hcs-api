@@ -22,10 +22,14 @@ public class HealthServiceImpl implements HealthService{
     @Override
     @Transactional
     public Service addService(Service service) throws CustomException {
-        service.setCode(service.getName().toLowerCase().replaceAll(" ","-"));
+
+        if(service.getCode() == null || service.getCode().isEmpty()){
+            throw new CustomException("Service code is required");
+        }
+
         Optional<?> serviceOp = findByCode(service.getCode());
         if(service.getId() == null && serviceOp.isPresent()){
-            throw new CustomException("Service "+service.getName()+" already exist");
+            throw new CustomException("Service Code "+service.getCode()+" already exist");
         }
         if(service.getId() == null){
             service.setId(UUID.randomUUID());

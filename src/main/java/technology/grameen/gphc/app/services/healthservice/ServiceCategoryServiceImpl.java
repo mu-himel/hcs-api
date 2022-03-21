@@ -35,11 +35,13 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
     @Override
     @Transactional
     public ServiceCategory addCategory(ServiceCategory serviceCategory) throws CustomException {
-
-        serviceCategory.setCode(serviceCategory.getName().toLowerCase().replaceAll(" ","-"));
+        if(serviceCategory.getCode() == null || serviceCategory.getCode().isEmpty()){
+            throw new CustomException("Service Category Code required");
+        }
+//        serviceCategory.setCode(serviceCategory.getName().toLowerCase().replaceAll(" ","-"));
         Optional<?> categoryOp = findByCode(serviceCategory.getCode());
         if(serviceCategory.getId() == null && categoryOp.isPresent()){
-            throw new CustomException("Service Category already exist with name " + serviceCategory.getName());
+            throw new CustomException("Service Category already exist with code " + serviceCategory.getCode());
         }
         if(serviceCategory.getId() == null) {
             serviceCategory.setId(UUID.randomUUID());

@@ -16,13 +16,13 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
 
     @Query(value = "SELECT pu FROM ProfileUser pu " +
             "JOIN FETCH pu.profile p " +
-            "JOIN FETCH p.site s " +
+            "LEFT JOIN FETCH p.site s " +
             "WHERE p.id = :id")
     Optional<ProfileUser> findProfileById(@Param("id") UUID id);
 
     @Query(value = "SELECT pu FROM ProfileUser pu " +
             "JOIN FETCH pu.profile p " +
-            "JOIN FETCH p.site s " +
+            "LEFT JOIN FETCH p.site s " +
             "WHERE pu.userId = :id")
     Optional<ProfileUser> findProfileByUserId(@Param("id") String id);
 

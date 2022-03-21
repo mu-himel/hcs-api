@@ -52,6 +52,7 @@ public class AuthDBManager {
         return builder.dataSource(dataSource).properties(properties)
                 .packages("technology.grameen.gphc.app.auth.entity")
                 .persistenceUnit("User")
+                .persistenceUnit("Role")
                 .build();
     }
 

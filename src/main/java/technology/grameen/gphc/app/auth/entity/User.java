@@ -3,12 +3,10 @@ package technology.grameen.gphc.app.auth.entity;
 import org.hibernate.annotations.DynamicUpdate;
 import technology.grameen.gphc.app.request.Credential;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_entity")
@@ -23,6 +21,12 @@ public class User {
     private String email;
     @Column(updatable = false)
     private Boolean enabled;
+
+    @ManyToMany
+    @JoinTable(name ="user_role_mapping", joinColumns = {
+            @JoinColumn(name = "user_id")
+    },inverseJoinColumns = { @JoinColumn(name = "role_id")})
+    private Set<Role> role;
 
     public String getId() {
         return id;
