@@ -30,6 +30,8 @@ public class TriageConfiguration {
     private String orange;
     private String red;
     private Boolean isActive;
+    private String triageFor;
+    private String stage;
 
     @Column(updatable = false)
     private UUID createdBy;
@@ -169,5 +171,21 @@ public class TriageConfiguration {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getTriageFor() {
+        return triageFor;
+    }
+
+    public void setTriageFor(String triageFor) {
+        this.triageFor = triageFor;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 }

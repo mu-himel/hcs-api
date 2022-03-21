@@ -26,7 +26,7 @@ public interface ProfileService {
     Optional<?> getProfileByUserId(String id);
 
     Optional<?> getProfileByEmail(String email);
-
+    Optional<?> getProfileByPid(String email);
     List<?> getProfileUsers();
 
     DoctorProfileService getDoctorProfileService();

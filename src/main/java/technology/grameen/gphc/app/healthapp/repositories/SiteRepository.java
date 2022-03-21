@@ -61,6 +61,7 @@ public interface SiteRepository extends JpaRepository<Site, UUID> {
         Long getId();
         String getIso2();
         String getName();
+        String getTimezones();
     }
 
     interface GeoCity{

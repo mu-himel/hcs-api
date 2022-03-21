@@ -28,6 +28,8 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
 
     Optional<?> findByEmail(String email);
 
+    Optional<ProfilePageInfo> findByPid(String id);
+
     interface ProfileUser{
         ProfilePageInfo getProfile();
         String getUserId();
@@ -50,6 +52,7 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
         String getMaritalStatus();
         SiteInfo getSite();
         UUID getId();
+        String getPid();
     }
 
     interface SiteInfo{
@@ -58,7 +61,7 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
     }
 
     @Query(value = "SELECT p FROM Profile p " +
-            "JOIN FETCH p.site s",
+            "LEFT JOIN FETCH p.site s",
     countQuery = "SELECT count(p) FROM Profile p JOIN p.site s")
     Page<ProfilePageInfo> findAllProfiles(Pageable pageable);
 }

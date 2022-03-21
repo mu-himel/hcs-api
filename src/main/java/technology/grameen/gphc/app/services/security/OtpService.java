@@ -11,4 +11,6 @@ public interface OtpService {
     Boolean sendOtp(OtpSendRequest otpSendRequest) throws CustomException;
 
     Boolean validateOtp(OtpValidate otpValidate) throws CustomException;
+
+    String generateOtpToken(int len);
 }

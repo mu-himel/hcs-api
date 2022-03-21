@@ -27,6 +27,7 @@ import technology.grameen.gphc.app.request.fhir.TextProperty;
 import technology.grameen.gphc.app.response.SimpleResponse;
 import technology.grameen.gphc.app.services.network.NetworkService;
 import technology.grameen.gphc.app.services.register.FhirRegisterService;
+import technology.grameen.gphc.app.services.security.OtpService;
 
 import java.util.*;
 
@@ -60,6 +61,9 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Autowired
     private FhirRegisterService registerService;
+
+    @Autowired
+    private OtpService otpService;
 
     @Override
     @Transactional
@@ -109,6 +113,7 @@ public class ProfileServiceImpl implements ProfileService{
             registerService.registerPatient(patient);
         }
 
+        profile.setPid(otpService.generateOtpToken(10));
         Profile profileCreated = addProfile(profile);
         if (profileCreated.getId() != null) {
             map = (HashMap) sr.getObj().get();
@@ -230,6 +235,18 @@ public class ProfileServiceImpl implements ProfileService{
         }
 
         return Optional.of(map);
+    }
+
+    @Override
+    public Optional<?> getProfileByPid(String id) {
+        Optional<ProfileRepository.ProfilePageInfo> profileUserOp = profileRepository.findByPid(id);
+
+
+        if(profileUserOp.isPresent()) {
+            return Optional.of(profileUserOp.get());
+        }
+
+        return Optional.empty();
     }
 
     @Override

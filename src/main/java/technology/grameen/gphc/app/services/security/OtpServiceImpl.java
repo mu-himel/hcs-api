@@ -81,7 +81,8 @@ public class OtpServiceImpl implements OtpService{
         return true;
     }
 
-    private String generateOtpToken(int len){
+    @Override
+    public String generateOtpToken(int len) {
         String otpToken = "";
         for(int i=1; i<=len; i++){
             Double randomDigit = Math.random()*10;

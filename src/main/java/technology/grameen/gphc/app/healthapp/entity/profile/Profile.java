@@ -34,6 +34,7 @@ public class Profile {
     private String identityValue;
     private Integer age;
     private String gender;
+    private String pid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
@@ -206,5 +207,13 @@ public class Profile {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }
