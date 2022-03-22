@@ -32,6 +32,7 @@ public class TriageConfiguration {
     private Boolean isActive;
     private String triageFor;
     private String stage;
+    private String unit;
 
     @Column(updatable = false)
     private UUID createdBy;
@@ -187,5 +188,13 @@ public class TriageConfiguration {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }
