@@ -1,6 +1,7 @@
 package technology.grameen.gphc.app.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -32,13 +33,20 @@ public class ProfileController {
 
 
     @GetMapping("")
-    public ResponseEntity<?> all(@RequestParam Optional<Integer> page,
-                                 @RequestParam Optional<Integer> size){
+    public ResponseEntity<?> all( @RequestParam Optional<Integer> page,
+                                  @RequestParam Optional<Integer> size,
+                                  @RequestParam Optional<String> firstName,
+                                  @RequestParam Optional<String> lastName,
+                                  @RequestParam Optional<String> email,
+                                  @RequestParam Optional<String> contactNumber,
+                                  @RequestParam Optional<String> siteId,
+                                  @RequestParam Optional<String> roleId){
 
         Pageable pageable = PageRequest.of(page.orElse(0),size.orElse(PAGE_SIZE));
-
+        Page<?> pages = profileService.getAll(pageable,firstName,lastName,email,
+                contactNumber,siteId,roleId);
         return new ResponseEntity<>(
-                profileService.getAll(pageable),
+                pages,
                 HttpStatus.OK
         );
 

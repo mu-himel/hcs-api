@@ -1,6 +1,5 @@
 package technology.grameen.gphc.app.services.profile;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -25,6 +24,7 @@ import technology.grameen.gphc.app.request.fhir.NameInfo;
 import technology.grameen.gphc.app.request.fhir.Patient;
 import technology.grameen.gphc.app.request.fhir.TextProperty;
 import technology.grameen.gphc.app.response.SimpleResponse;
+import technology.grameen.gphc.app.services.criteria.ProfileCriteriaRepository;
 import technology.grameen.gphc.app.services.network.NetworkService;
 import technology.grameen.gphc.app.services.register.FhirRegisterService;
 import technology.grameen.gphc.app.services.security.OtpService;
@@ -65,6 +65,9 @@ public class ProfileServiceImpl implements ProfileService{
     @Autowired
     private OtpService otpService;
 
+    @Autowired
+    ProfileCriteriaRepository profileCriteriaRepository;
+
     @Override
     @Transactional
     public Profile addProfile(Profile profile) {
@@ -72,8 +75,21 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
-    public Page<?> getAll(Pageable pageable) {
-        return profileRepository.findAllProfiles(pageable);
+    public Page<?> getAll(Pageable pageable, Optional<String> firstName, Optional<String> lastName,
+                          Optional<String> email, Optional<String> contactNumber,
+                          Optional<String> siteId, Optional<String> roleId) {
+
+
+
+        if(!firstName.isPresent() && !lastName.isPresent() &&
+                !contactNumber.isPresent() && !email.isPresent()
+                && !siteId.isPresent() && !roleId.isPresent()){
+            return profileRepository.findAllProfiles(pageable);
+        }else{
+            return profileCriteriaRepository.findByWhere(pageable, firstName.orElse(""), lastName.orElse(""),
+                    email.orElse(""), contactNumber.orElse(""),siteId.orElse(""));
+        }
+
     }
 
     @Override

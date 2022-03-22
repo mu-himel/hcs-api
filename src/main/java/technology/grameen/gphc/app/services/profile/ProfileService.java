@@ -6,7 +6,6 @@ import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.request.RegistrationRequest;
-import technology.grameen.gphc.app.request.User;
 
 import java.util.*;
 
@@ -20,7 +19,9 @@ public interface ProfileService {
 
     void updateProfile(String id, Profile profile);
 
-    Page<?> getAll(Pageable pageable);
+    Page<?> getAll(Pageable pageable, Optional<String> firstName, Optional<String> lastName,
+                   Optional<String> email, Optional<String> contactNumber,
+                   Optional<String> siteId, Optional<String> roleId);
 
     Optional<?> getProfileById(UUID fromString);
     Optional<?> getProfileByUserId(String id);
