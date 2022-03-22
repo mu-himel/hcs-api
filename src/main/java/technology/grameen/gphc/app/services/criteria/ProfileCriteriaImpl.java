@@ -30,10 +30,10 @@ public class ProfileCriteriaImpl  implements ProfileCriteriaRepository{
 
     @Override
     public Page<?> findByWhere(Pageable pageable, String firstName, String lastName,
-                               String email,String contactNumber, String siteId) {
+                               String email,String contactNumber, String siteId, String roleId) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<CustomProfile> cq = cb.createQuery(CustomProfile.class);
-        Metamodel m = entityManager.getMetamodel();
+
         Root<Profile> root = cq.from(Profile.class);
         Join<Profile, Site> site = root.join("site", JoinType.LEFT);
         List<Predicate> predicates = new ArrayList<>();
@@ -56,6 +56,11 @@ public class ProfileCriteriaImpl  implements ProfileCriteriaRepository{
 
         if(!siteId.isEmpty()) {
             Predicate pSite = cb.equal(site.get("id"), UUID.fromString(siteId));
+            predicates.add(pSite);
+        }
+
+        if(!roleId.isEmpty()) {
+            Predicate pSite = cb.equal(root.get("roleId"), roleId);
             predicates.add(pSite);
         }
         cq.select(cb.construct(CustomProfile.class,root.get("id"),root.get("firstName"),root.get("lastName"),

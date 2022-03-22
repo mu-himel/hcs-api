@@ -47,6 +47,7 @@ public interface SiteRepository extends JpaRepository<Site, UUID> {
         Boolean getHideAllReportHeader();
         Boolean getAutoBarCodeGenerationEnabled();
         Boolean getActive();
+        String getTimeZone();
 
         @JsonFormat(pattern = "yyyy-mm-dd")
         LocalDateTime getCreatedAt();

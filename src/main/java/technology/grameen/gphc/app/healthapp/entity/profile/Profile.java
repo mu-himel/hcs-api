@@ -35,6 +35,7 @@ public class Profile {
     private Integer age;
     private String gender;
     private String pid;
+    private String roleId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Site site;
@@ -215,5 +216,13 @@ public class Profile {
 
     public void setPid(String pid) {
         this.pid = pid;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 }

@@ -28,6 +28,7 @@ public class Site {
     private String longitude;
     private String latitude;
     private String postalCode;
+    private String timeZone;
 
     @Column(length = 1000)
     private String logo;
@@ -229,5 +230,13 @@ public class Site {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 }

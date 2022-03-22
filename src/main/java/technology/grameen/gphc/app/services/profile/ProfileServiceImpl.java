@@ -87,7 +87,8 @@ public class ProfileServiceImpl implements ProfileService{
             return profileRepository.findAllProfiles(pageable);
         }else{
             return profileCriteriaRepository.findByWhere(pageable, firstName.orElse(""), lastName.orElse(""),
-                    email.orElse(""), contactNumber.orElse(""),siteId.orElse(""));
+                    email.orElse(""), contactNumber.orElse(""),siteId.orElse(""),
+                    roleId.orElse(""));
         }
 
     }

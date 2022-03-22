@@ -10,5 +10,5 @@ import java.util.List;
 public interface ProfileCriteriaRepository {
 
     Page<?> findByWhere(Pageable pageable, String firstName, String lastName,
-                        String email, String contactNumber, String siteId);
+                        String email, String contactNumber, String siteId,String roleId);
 }
