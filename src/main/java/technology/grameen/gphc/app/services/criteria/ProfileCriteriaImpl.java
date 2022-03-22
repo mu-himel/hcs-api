@@ -36,9 +36,6 @@ public class ProfileCriteriaImpl  implements ProfileCriteriaRepository{
         Metamodel m = entityManager.getMetamodel();
         Root<Profile> root = cq.from(Profile.class);
         Join<Profile, Site> site = root.join("site", JoinType.LEFT);
-        Join<Site, GeoCountry> country = site.join("country");
-        Join<Site, GeoCity> city = site.join("city");
-        Join<Site, GeoState> state = site.join("state");
         List<Predicate> predicates = new ArrayList<>();
         if(!firstName.isEmpty()) {
             Predicate pFirstName = cb.like(root.get("firstName"), firstName+"%");
