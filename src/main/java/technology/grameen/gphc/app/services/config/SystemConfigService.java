@@ -8,5 +8,5 @@ public interface SystemConfigService {
 
     void addConfig(SystemConfiguration systemConfiguration);
 
-    Optional<SystemConfiguration> getSystemConfig();
+    Optional<?> getSystemConfig();
 }
