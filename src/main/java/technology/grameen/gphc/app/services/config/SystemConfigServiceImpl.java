@@ -22,6 +22,6 @@ public class SystemConfigServiceImpl implements SystemConfigService{
 
     @Override
     public Optional<SystemConfiguration> getSystemConfig() {
-        return systemConfigRepository.findAll().stream().findFirst();
+        return systemConfigRepository.findAll().stream().findAny();
     }
 }

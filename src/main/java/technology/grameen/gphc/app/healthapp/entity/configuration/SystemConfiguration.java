@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.healthapp.entity.configuration;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.healthapp.entity.location.GeoCountry;
@@ -32,6 +33,7 @@ public class SystemConfiguration {
     private UUID updatedBy;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
@@ -101,6 +103,7 @@ public class SystemConfiguration {
         this.updatedBy = updatedBy;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -109,6 +112,7 @@ public class SystemConfiguration {
         this.createdAt = createdAt;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
