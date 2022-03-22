@@ -65,9 +65,17 @@ public class ProfileCriteriaImpl  implements ProfileCriteriaRepository{
                 site.get("id"),site.get("title")));
         cq.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
 
-        List<CustomProfile> result = entityManager.createQuery(cq).getResultList();
+        List<CustomProfile> result = entityManager.createQuery(cq)
+                .setFirstResult((int)pageable.getOffset()).setMaxResults(pageable.getPageSize()).getResultList();
 
-        int count = (result!=null)? result.size():0;
+
+        // count
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<Profile> countRoot = countQuery.from(Profile.class);
+        Join<Profile, Site> cSite = countRoot.join("site", JoinType.LEFT);
+        countQuery.select(cb.count(countRoot.get("id"))).where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
+
+        Long count = entityManager.createQuery(countQuery).getSingleResult();
 
         Page<CustomProfile> page = new PageImpl<>(result,pageable,count);
         return page;
