@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.services.medicine;
 
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.medicine.MedicineGroup;
 
 import java.util.List;
@@ -7,4 +8,6 @@ import java.util.List;
 public interface MedicineGroupService {
 
     List<MedicineGroup> getMedicineGroupsByName(String name);
+
+    void add(MedicineGroup medicineGroup) throws CustomException;
 }

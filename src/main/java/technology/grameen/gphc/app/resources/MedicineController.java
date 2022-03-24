@@ -1,6 +1,7 @@
 package technology.grameen.gphc.app.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import technology.grameen.gphc.app.exceptions.CustomException;
@@ -24,6 +25,6 @@ public class MedicineController {
     @PostMapping
     public ResponseEntity<?> addMedicine(@RequestBody Medicine medicine) throws CustomException {
         medicineService.addMedicine(medicine);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

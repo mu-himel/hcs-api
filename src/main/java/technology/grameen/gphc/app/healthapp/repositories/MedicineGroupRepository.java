@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface MedicineGroupRepository extends JpaRepository<MedicineGroup, UUID> {
     List<MedicineGroup> findByName(String name);
+
+    Integer countByName(String name);
 }
