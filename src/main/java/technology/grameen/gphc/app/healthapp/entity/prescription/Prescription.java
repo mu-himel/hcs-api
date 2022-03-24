@@ -3,11 +3,8 @@ package technology.grameen.gphc.app.healthapp.entity.prescription;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
-import technology.grameen.gphc.app.healthapp.entity.prescription.Advice;
-import technology.grameen.gphc.app.healthapp.entity.prescription.ChiefComplaint;
-import technology.grameen.gphc.app.healthapp.entity.prescription.Disease;
-import technology.grameen.gphc.app.healthapp.entity.prescription.Test;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
+import technology.grameen.gphc.app.healthapp.entity.service.Service;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,25 +21,25 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ChiefComplaint chiefCompliant;
+     @OneToMany
+    private List<ChiefComplaint> chiefCompliants;
     private String otherChiefCompliant;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Disease disease;
+    @OneToMany
+    private List<Disease> diseases;
 
     @OneToMany
     private List<Medicine> medicines;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Advice advice;
+    @OneToMany
+    private List<Advice> advices;
     private String otherAdvice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile doctor;
 
     @OneToMany
-    private List<Test> test;
+    private List<Service> services;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -53,7 +50,6 @@ public class Prescription {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 
     public UUID getId() {
         return id;
@@ -71,14 +67,6 @@ public class Prescription {
         this.patient = patient;
     }
 
-    public ChiefComplaint getChiefCompliant() {
-        return chiefCompliant;
-    }
-
-    public void setChiefCompliant(ChiefComplaint chiefCompliant) {
-        this.chiefCompliant = chiefCompliant;
-    }
-
     public String getOtherChiefCompliant() {
         return otherChiefCompliant;
     }
@@ -87,23 +75,6 @@ public class Prescription {
         this.otherChiefCompliant = otherChiefCompliant;
     }
 
-    public Disease getDisease() {
-        return disease;
-    }
-
-    public void setDisease(Disease disease) {
-        this.disease = disease;
-    }
-
-
-
-    public Advice getAdvice() {
-        return advice;
-    }
-
-    public void setAdvice(Advice advice) {
-        this.advice = advice;
-    }
 
     public String getOtherAdvice() {
         return otherAdvice;
@@ -120,8 +91,6 @@ public class Prescription {
     public void setDoctor(Profile doctor) {
         this.doctor = doctor;
     }
-
-
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -153,5 +122,45 @@ public class Prescription {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Medicine> getMedicines() {
+        return medicines;
+    }
+
+    public void setMedicines(List<Medicine> medicines) {
+        this.medicines = medicines;
+    }
+
+    public List<ChiefComplaint> getChiefCompliants() {
+        return chiefCompliants;
+    }
+
+    public void setChiefCompliants(List<ChiefComplaint> chiefCompliants) {
+        this.chiefCompliants = chiefCompliants;
+    }
+
+    public List<Disease> getDiseases() {
+        return diseases;
+    }
+
+    public void setDiseases(List<Disease> diseases) {
+        this.diseases = diseases;
+    }
+
+    public List<Advice> getAdvices() {
+        return advices;
+    }
+
+    public void setAdvices(List<Advice> advices) {
+        this.advices = advices;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }
