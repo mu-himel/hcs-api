@@ -25,9 +25,9 @@ public class BasicCheckupController {
     @PostMapping
     public ResponseEntity<?> addCheckup(@RequestBody BasicCheckupRequest basicCheckupReq){
         BasicCheckup basicCheckup = checkupService.add(basicCheckupReq.getBasicCheckup());
-        if(basicCheckup.getCreatedAt()!=null){
-            compositionService.addEhr(basicCheckupReq.getEhr());
-        }
+//        if(basicCheckup.getCreatedAt()!=null){
+//            compositionService.addEhr(basicCheckupReq.getEhr());
+//        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
