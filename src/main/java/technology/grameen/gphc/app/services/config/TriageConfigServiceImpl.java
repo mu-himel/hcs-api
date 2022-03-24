@@ -34,37 +34,43 @@ public class TriageConfigServiceImpl implements TriageConfigService{
     }
 
     @Override
-    public Map<String, Object> getRef() {
+    public Map<String, Object> getRef(String triageFor) {
         Map<String,Object> map = new HashMap<>();
-        Stream<TriageConfiguration> triageConfigurationStream = triageConfigRepository.findAll().stream();
+        Stream<TriageConfiguration> triageConfigurationStream = triageConfigRepository.findByTriageFor(triageFor).stream();
         triageConfigurationStream.forEach(triage->{
-            Map<String,Object> tRef = new HashMap<>();
-            tRef.put("lowerWarning",triage.getLowerWarning());
-            tRef.put("upperWarning",triage.getLowerWarning());
-            tRef.put("green",triage.getGreen());
-            tRef.put("yellow",triage.getYellow());
-            tRef.put("orange",triage.getOrange());
-            tRef.put("red",triage.getRed());
-            tRef.put("paramName",triage.getParamName());
-            tRef.put("spec",triage.getSpec());
-            tRef.put("dataType",triage.getDataType());
-            map.put(getFieldKey(triage),tRef);
+            String key = getFieldKey(triage);
+            if(Objects.nonNull(key)) {
+                Map<String, Object> tRef = new HashMap<>();
+                tRef.put("lowerWarning", triage.getLowerWarning());
+                tRef.put("upperWarning", triage.getLowerWarning());
+                tRef.put("green", triage.getGreen());
+                tRef.put("yellow", triage.getYellow());
+                tRef.put("orange", triage.getOrange());
+                tRef.put("red", triage.getRed());
+                tRef.put("paramName", triage.getParamName());
+                tRef.put("spec", triage.getSpec());
+                tRef.put("dataType", triage.getDataType());
+                map.put(key, tRef);
+            }
         });
         return map;
     }
     private String getFieldKey(TriageConfiguration triage){
-        String[] alias = triage.getAlias().split("-");
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i<alias.length; i++){
-            String s = alias[i];
-            if(i==0){
-                sb.append(s);
+        if(Objects.nonNull(triage.getAlias())) {
+            String[] alias = triage.getAlias().split("-");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < alias.length; i++) {
+                String s = alias[i];
+                if (i == 0) {
+                    sb.append(s);
+                }
+                if (i > 0) {
+                    sb.append(String.valueOf(s.charAt(0)).toUpperCase(Locale.ROOT));
+                    sb.append(s.substring(1, s.length()));
+                }
             }
-            if(i>0){
-                sb.append(String.valueOf(s.charAt(0)).toUpperCase(Locale.ROOT));
-                sb.append(s.substring(1,s.length()));
-            }
+            return sb.toString();
         }
-        return sb.toString();
+        return null;
     }
 }

@@ -42,16 +42,19 @@ public class TriageConfigController {
         );
     }
 
+
+
+    @GetMapping("/ref/{triageFor}")
+    public ResponseEntity<?> getTriageRef(@PathVariable("triageFor") String triageFor){
+
+        return new ResponseEntity<>(triageConfigService.getRef(triageFor),HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getConfig(@PathVariable("id") String id){
         return new ResponseEntity<>(
                 triageConfigService.getConfig(UUID.fromString(id)),
                 HttpStatus.OK
         );
-    }
-
-    @GetMapping("/ref")
-    public ResponseEntity<?> getTriageRef(){
-        return new ResponseEntity<>(triageConfigService.getRef(),HttpStatus.OK);
     }
 }

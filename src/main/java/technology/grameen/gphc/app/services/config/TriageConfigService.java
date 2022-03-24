@@ -16,5 +16,5 @@ public interface TriageConfigService {
 
     Optional<TriageConfiguration> getConfig(UUID id);
 
-    Map<String, Object> getRef();
+    Map<String, Object> getRef(String triageFor);
 }
