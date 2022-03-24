@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.healthapp.entity;
+package technology.grameen.gphc.app.healthapp.entity.prescription;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,6 +11,7 @@ import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -30,8 +31,8 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Disease disease;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Medicine medicine;
+    @OneToMany
+    private List<Medicine> medicines;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Advice advice;
@@ -40,8 +41,8 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile doctor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Test test;
+    @OneToMany
+    private List<Test> test;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -94,13 +95,7 @@ public class Prescription {
         this.disease = disease;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
-    }
 
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
-    }
 
     public Advice getAdvice() {
         return advice;
@@ -126,13 +121,7 @@ public class Prescription {
         this.doctor = doctor;
     }
 
-    public Test getTest() {
-        return test;
-    }
 
-    public void setTest(Test test) {
-        this.test = test;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

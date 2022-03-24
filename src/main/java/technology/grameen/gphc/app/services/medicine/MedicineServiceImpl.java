@@ -1,0 +1,38 @@
+package technology.grameen.gphc.app.services.medicine;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import technology.grameen.gphc.app.exceptions.CustomException;
+import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
+import technology.grameen.gphc.app.healthapp.repositories.MedicineRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class MedicineServiceImpl implements MedicineService{
+
+    @Autowired
+    private MedicineRepository medicineRepository;
+
+    @Override
+    public List<Medicine> getMedicineListByName(String name) {
+        if(name.isEmpty()){
+            return new ArrayList<>();
+        }
+        return medicineRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    @Override
+    @Transactional
+    public Medicine addMedicine(Medicine medicine) throws CustomException {
+
+        Integer exist = medicineRepository.countByNameAndMedicineGroup(medicine.getName(),
+                medicine.getMedicineGroup());
+        if(exist>0){
+            throw new CustomException("Medicine already exist under same group, Please try something else");
+        }
+        return medicineRepository.save(medicine);
+    }
+}

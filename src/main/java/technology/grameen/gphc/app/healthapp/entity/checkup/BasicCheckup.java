@@ -13,7 +13,7 @@ import java.util.UUID;
 public class BasicCheckup {
 
     @Id
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile profile;
