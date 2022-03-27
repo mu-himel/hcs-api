@@ -30,12 +30,12 @@ public class BasicCheckup {
     private Double oxygenOfBlood;
     private Double bloodPressureSystolic;
     private Double bloodPressureDiastolic;
-    private Double bloodSugar;
-    private String bloodSugarType;
+    private Double bloodSugarRbs;
+    private String bloodSugarFbs;
     private Double bloodHemoglobin;
     // Urinalysis
-    private String urinaryGlucose;
-    private String urinaryProtein;
+    private String urineSugar;
+    private String urineProtin;
     private String urinaryUrobilinogen;
     private Double urinaryPh;
 
@@ -46,7 +46,7 @@ public class BasicCheckup {
     private String hbsag;
     private String bloodGroup;
     private String isDonor;
-    private String smoker;
+    private String smoking;
     private String additionalTest;
 
     @Column(updatable = false)
@@ -140,7 +140,21 @@ public class BasicCheckup {
         this.waistHipRatioFemale = waistHipRatioFemale;
     }
 
+    public Double getBloodSugarRbs() {
+        return bloodSugarRbs;
+    }
 
+    public void setBloodSugarRbs(Double bloodSugarRbs) {
+        this.bloodSugarRbs = bloodSugarRbs;
+    }
+
+    public String getBloodSugarFbs() {
+        return bloodSugarFbs;
+    }
+
+    public void setBloodSugarFbs(String bloodSugarFbs) {
+        this.bloodSugarFbs = bloodSugarFbs;
+    }
 
     public Double getTemperature() {
         return temperature;
@@ -174,21 +188,7 @@ public class BasicCheckup {
         this.bloodPressureDiastolic = bloodPressureDiastolic;
     }
 
-    public Double getBloodSugar() {
-        return bloodSugar;
-    }
 
-    public void setBloodSugar(Double bloodSugar) {
-        this.bloodSugar = bloodSugar;
-    }
-
-    public String getBloodSugarType() {
-        return bloodSugarType;
-    }
-
-    public void setBloodSugarType(String bloodSugarType) {
-        this.bloodSugarType = bloodSugarType;
-    }
 
     public Double getBloodHemoglobin() {
         return bloodHemoglobin;
@@ -198,20 +198,20 @@ public class BasicCheckup {
         this.bloodHemoglobin = bloodHemoglobin;
     }
 
-    public String getUrinaryGlucose() {
-        return urinaryGlucose;
+    public String getUrineSugar() {
+        return urineSugar;
     }
 
-    public void setUrinaryGlucose(String urinaryGlucose) {
-        this.urinaryGlucose = urinaryGlucose;
+    public void setUrineSugar(String urineSugar) {
+        this.urineSugar = urineSugar;
     }
 
-    public String getUrinaryProtein() {
-        return urinaryProtein;
+    public String getUrineProtin() {
+        return urineProtin;
     }
 
-    public void setUrinaryProtein(String urinaryProtein) {
-        this.urinaryProtein = urinaryProtein;
+    public void setUrineProtin(String urineProtin) {
+        this.urineProtin = urineProtin;
     }
 
     public String getUrinaryUrobilinogen() {
@@ -286,12 +286,12 @@ public class BasicCheckup {
         this.isDonor = isDonor;
     }
 
-    public String getSmoker() {
-        return smoker;
+    public String getSmoking() {
+        return smoking;
     }
 
-    public void setSmoker(String smoker) {
-        this.smoker = smoker;
+    public void setSmoking(String smoking) {
+        this.smoking = smoking;
     }
 
     public String getAdditionalTest() {
