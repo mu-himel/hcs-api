@@ -44,7 +44,7 @@ public class BasicCheckup {
     private Double bloodCholesterol;
     private Double bloodUricAcid;
     private String hbsag;
-    private String bloodGroup;
+    private String bloodGrouping;
     private String isDonor;
     private String smoking;
     private String additionalTest;
@@ -188,7 +188,13 @@ public class BasicCheckup {
         this.bloodPressureDiastolic = bloodPressureDiastolic;
     }
 
+    public String getBloodGrouping() {
+        return bloodGrouping;
+    }
 
+    public void setBloodGrouping(String bloodGrouping) {
+        this.bloodGrouping = bloodGrouping;
+    }
 
     public Double getBloodHemoglobin() {
         return bloodHemoglobin;
@@ -270,13 +276,7 @@ public class BasicCheckup {
         this.hbsag = hbsag;
     }
 
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
 
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
 
     public String getIsDonor() {
         return isDonor;

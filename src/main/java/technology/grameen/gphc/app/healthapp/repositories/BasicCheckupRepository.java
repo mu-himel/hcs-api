@@ -42,11 +42,11 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
 
         Double getBloodPressureDiastolic();
 
-        Double getBloodSugar();
-        String getBloodSugarType();
+        Double getBloodSugarFbs();
+        String getBloodSugarRbs();
         Double getBloodHemoglobin();
-        String getUrinaryGlucose();
-        String getUrinaryProtein();
+        String getUrineSugar();
+        String getUrineProtin();
 
         String getUrinaryUrobilinogen();
 
@@ -62,11 +62,11 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
 
         String getHbsag();
 
-        String getBloodGroup();
+        String getBloodGrouping();
 
         String getIsDonor();
 
-        String getSmoker();
+        String getSmoking();
 
         String getAdditionalTest();
 
