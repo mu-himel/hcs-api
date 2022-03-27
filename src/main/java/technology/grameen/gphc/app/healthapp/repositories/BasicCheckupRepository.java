@@ -26,11 +26,13 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
 
         Double getBmi();
 
-        Double getWaist();
+        Double getWaistMale();
+        Double getWaistFemale();
 
         Double getHip();
 
-        Double getWaistHipRatio();
+        Double getWaistHipRatioMale();
+        Double getWaistHipRatioFemale();
 
         Double getTemperature();
 
@@ -40,8 +42,8 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
 
         Double getBloodPressureDiastolic();
 
-        Double getBloodGlucose();
-        String getBloodGlucoseType();
+        Double getBloodSugar();
+        String getBloodSugarType();
         Double getBloodHemoglobin();
         String getUrinaryGlucose();
         String getUrinaryProtein();
