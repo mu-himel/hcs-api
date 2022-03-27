@@ -12,7 +12,7 @@ public interface TriageConfigService {
 
     TriageConfiguration addConfig(TriageConfiguration triageConfiguration);
 
-    Page<TriageConfiguration> getAll(Pageable pageable);
+    Page<TriageConfiguration> getAll(Pageable pageable, String paramName);
 
     Optional<TriageConfiguration> getConfig(UUID id);
 

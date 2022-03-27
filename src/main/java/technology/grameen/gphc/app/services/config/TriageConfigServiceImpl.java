@@ -24,8 +24,11 @@ public class TriageConfigServiceImpl implements TriageConfigService{
     }
 
     @Override
-    public Page<TriageConfiguration> getAll(Pageable pageable) {
-        return triageConfigRepository.findAll(pageable);
+    public Page<TriageConfiguration> getAll(Pageable pageable, String paramName) {
+        if(paramName.isEmpty()){
+            return triageConfigRepository.findAll(pageable);
+        }
+        return triageConfigRepository.findAllByParamName(pageable, paramName);
     }
 
     @Override

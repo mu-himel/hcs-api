@@ -23,13 +23,15 @@ public class TriageConfigController {
     private TriageConfigService triageConfigService;
 
     @GetMapping
-    public ResponseEntity<?> getAll(@RequestParam Optional<Integer> page,
+    public ResponseEntity<?> getAll(
+            @RequestParam Optional<String> paramName,
+            @RequestParam Optional<Integer> page,
                                     @RequestParam Optional<Integer> size){
 
         Pageable pageable = PageRequest.of(page.orElse(0),size.orElse(DEFAULT_PAGE_SIZE));
 
         return new ResponseEntity<>(
-              triageConfigService.getAll(pageable),
+              triageConfigService.getAll(pageable, paramName.orElse("")),
               HttpStatus.OK
         );
     }
