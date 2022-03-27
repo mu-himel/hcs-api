@@ -1,4 +1,4 @@
-package technology.grameen.gphc.app.services;
+package technology.grameen.gphc.app.services.prescription;
 
 import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 

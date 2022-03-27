@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
-import technology.grameen.gphc.app.services.prescription.PrescriptionService;
+import technology.grameen.gphc.app.healthapp.entity.prescription.ChiefComplaint;
+import technology.grameen.gphc.app.services.prescription.ChiefComplaintService;
 
 @RestController
-@RequestMapping("/api/v1/prescription")
-public class PrescriptionController {
+@RequestMapping("/api/v1/chief-complaints")
+public class ChiefComplaintController {
 
     @Autowired
-    private PrescriptionService prescriptionService;
+    private ChiefComplaintService chiefComplaintService;
 
     @PostMapping
-    public ResponseEntity<?> savePrescription(@RequestBody Prescription prescription){
-        prescriptionService.addPrescription(prescription);
+    public ResponseEntity<?> addChiefComplaint(@RequestBody ChiefComplaint chiefComplaint){
+        chiefComplaintService.add(chiefComplaint);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
