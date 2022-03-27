@@ -21,15 +21,17 @@ public class BasicCheckup {
     private Double height;
     private Double weight;
     private Double bmi;
-    private Double waist;
+    private Double waistMale;
+    private Double waistFemale;
     private Double hip;
-    private Double waistHipRatio;
+    private Double waistHipRatioFemale;
+    private Double waistHipRatioMale;
     private Double temperature;
     private Double oxygenOfBlood;
     private Double bloodPressureSystolic;
     private Double bloodPressureDiastolic;
-    private Double bloodGlucose;
-    private String bloodGlucoseType;
+    private Double bloodSugar;
+    private String bloodSugarType;
     private Double bloodHemoglobin;
     // Urinalysis
     private String urinaryGlucose;
@@ -98,12 +100,20 @@ public class BasicCheckup {
         this.bmi = bmi;
     }
 
-    public Double getWaist() {
-        return waist;
+    public Double getWaistMale() {
+        return waistMale;
     }
 
-    public void setWaist(Double waist) {
-        this.waist = waist;
+    public void setWaistMale(Double waistMale) {
+        this.waistMale = waistMale;
+    }
+
+    public Double getWaistFemale() {
+        return waistFemale;
+    }
+
+    public void setWaistFemale(Double waistFemale) {
+        this.waistFemale = waistFemale;
     }
 
     public Double getHip() {
@@ -114,13 +124,23 @@ public class BasicCheckup {
         this.hip = hip;
     }
 
-    public Double getWaistHipRatio() {
-        return waistHipRatio;
+    public Double getWaistHipRatioMale() {
+        return waistHipRatioMale;
     }
 
-    public void setWaistHipRatio(Double waistHipRatio) {
-        this.waistHipRatio = waistHipRatio;
+    public void setWaistHipRatioMale(Double waistHipRatioMale) {
+        this.waistHipRatioMale = waistHipRatioMale;
     }
+
+    public Double getWaistHipRatioFemale() {
+        return waistHipRatioFemale;
+    }
+
+    public void setWaistHipRatioFemale(Double waistHipRatioFemale) {
+        this.waistHipRatioFemale = waistHipRatioFemale;
+    }
+
+
 
     public Double getTemperature() {
         return temperature;
@@ -154,20 +174,20 @@ public class BasicCheckup {
         this.bloodPressureDiastolic = bloodPressureDiastolic;
     }
 
-    public Double getBloodGlucose() {
-        return bloodGlucose;
+    public Double getBloodSugar() {
+        return bloodSugar;
     }
 
-    public void setBloodGlucose(Double bloodGlucose) {
-        this.bloodGlucose = bloodGlucose;
+    public void setBloodSugar(Double bloodSugar) {
+        this.bloodSugar = bloodSugar;
     }
 
-    public String getBloodGlucoseType() {
-        return bloodGlucoseType;
+    public String getBloodSugarType() {
+        return bloodSugarType;
     }
 
-    public void setBloodGlucoseType(String bloodGlucoseType) {
-        this.bloodGlucoseType = bloodGlucoseType;
+    public void setBloodSugarType(String bloodSugarType) {
+        this.bloodSugarType = bloodSugarType;
     }
 
     public Double getBloodHemoglobin() {
