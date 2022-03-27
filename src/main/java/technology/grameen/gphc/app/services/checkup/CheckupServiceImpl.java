@@ -29,4 +29,9 @@ public class CheckupServiceImpl implements CheckupService{
         profile.setId(UUID.fromString(id));
         return checkupRepository.findByProfile(profile);
     }
+
+    @Override
+    public Optional<?> getPatientCheckupById(String id) {
+        return checkupRepository.findCheckupDataById(UUID.fromString(id));
+    }
 }

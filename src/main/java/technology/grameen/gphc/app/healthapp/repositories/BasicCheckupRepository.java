@@ -3,6 +3,7 @@ package technology.grameen.gphc.app.healthapp.repositories;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.checkup.BasicCheckup;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
@@ -94,4 +95,11 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
             "LEFT JOIN FETCH s.country " +
             "WHERE p=:profile")
     List<PatientCheckup> findByProfile(Profile profile);
+
+    @Query(value = "SELECT bc FROM BasicCheckup bc " +
+            "LEFT JOIN FETCH bc.profile p " +
+            "LEFT JOIN FETCH p.site s " +
+            "LEFT JOIN FETCH s.country " +
+            "WHERE bc.id=:id")
+    Optional<PatientCheckup> findCheckupDataById(@Param("id") UUID id);
 }

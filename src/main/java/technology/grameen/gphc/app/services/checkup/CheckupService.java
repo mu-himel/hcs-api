@@ -11,4 +11,5 @@ public interface CheckupService {
     BasicCheckup add(BasicCheckup checkup);
 
     List<?> getPatientCheckup(String id);
+    Optional<?> getPatientCheckupById(String id);
 }

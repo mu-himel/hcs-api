@@ -33,5 +33,10 @@ public class BasicCheckupController {
         return ResponseEntity.ok().body(checkupService.getPatientCheckup(id));
     }
 
+    @GetMapping("/by-id/{id}")
+    public ResponseEntity<?> getBasicCheckupData(@PathVariable("id") String id){
+        return ResponseEntity.ok().body(checkupService.getPatientCheckupById(id));
+    }
+
 
 }
