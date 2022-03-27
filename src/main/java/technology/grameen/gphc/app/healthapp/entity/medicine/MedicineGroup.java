@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.healthapp.entity.medicine;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 public class MedicineGroup {
 
     @Id
-    private UUID id;
+    private UUID id=UUID.randomUUID();
     private String name;
     private String alias;
     private String description;
@@ -77,6 +78,7 @@ public class MedicineGroup {
         this.updatedBy = updatedBy;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -85,6 +87,7 @@ public class MedicineGroup {
         this.createdAt = createdAt;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }

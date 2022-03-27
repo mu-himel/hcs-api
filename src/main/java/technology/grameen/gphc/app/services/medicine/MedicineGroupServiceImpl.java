@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.services.medicine;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.exceptions.CustomException;
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class MedicineGroupServiceImpl implements MedicineGroupService{
 
+    @Autowired
     private MedicineGroupRepository medicineGroupRepository;
 
     @Override
@@ -25,6 +27,9 @@ public class MedicineGroupServiceImpl implements MedicineGroupService{
 
     @Override
     public List<MedicineGroup> getMedicineGroupsByName(String name) {
+        if(name.isEmpty()){
+            return medicineGroupRepository.findAll();
+        }
         return medicineGroupRepository.findByName(name);
     }
 }
