@@ -1,5 +1,7 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.medicine.MedicineGroup;
@@ -12,4 +14,6 @@ public interface MedicineGroupRepository extends JpaRepository<MedicineGroup, UU
     List<MedicineGroup> findByName(String name);
 
     Integer countByName(String name);
+
+    Page<MedicineGroup> findByName(String name, Pageable pageable);
 }

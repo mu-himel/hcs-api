@@ -1,6 +1,8 @@
 package technology.grameen.gphc.app.services.medicine;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.exceptions.CustomException;
@@ -31,5 +33,13 @@ public class MedicineGroupServiceImpl implements MedicineGroupService{
             return medicineGroupRepository.findAll();
         }
         return medicineGroupRepository.findByName(name);
+    }
+
+    @Override
+    public Page<MedicineGroup> getMedicineGroupsByName(String name, Pageable pageable) {
+        if(name.isEmpty()){
+            return medicineGroupRepository.findAll(pageable);
+        }
+        return medicineGroupRepository.findByName(name,pageable);
     }
 }
