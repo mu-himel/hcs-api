@@ -31,11 +31,12 @@ public class MedicineServiceImpl implements MedicineService{
     @Override
     @Transactional
     public Medicine addMedicine(Medicine medicine) throws CustomException {
-
-        Integer exist = medicineRepository.countByNameAndMedicineGroup(medicine.getName(),
-                medicine.getMedicineGroup());
-        if(exist>0){
-            throw new CustomException("Medicine already exist under same group, Please try something else");
+        if(medicine.getCreatedAt()==null) {
+            Integer exist = medicineRepository.countByNameAndMedicineGroup(medicine.getName(),
+                    medicine.getMedicineGroup());
+            if (exist > 0) {
+                throw new CustomException("Medicine already exist under same group, Please try something else");
+            }
         }
         return medicineRepository.save(medicine);
     }

@@ -78,7 +78,7 @@ public class MedicineGroup {
         this.updatedBy = updatedBy;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -87,7 +87,7 @@ public class MedicineGroup {
         this.createdAt = createdAt;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
