@@ -30,6 +30,14 @@ public class MedicineController {
                 .body(medicineService.getMedicineByName(name.orElse(""),pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getMedicineById(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+                medicineService.getMedicineById(id),
+                HttpStatus.OK
+        );
+    }
+
     @GetMapping("/list")
     public ResponseEntity<?> getListByName(@RequestParam("name") Optional<String> name){
         return ResponseEntity.ok().body(medicineService.getMedicineListByName(name.orElse("")));

@@ -10,6 +10,7 @@ import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
 import technology.grameen.gphc.app.healthapp.entity.medicine.MedicineGroup;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -27,4 +28,8 @@ public interface MedicineRepository extends JpaRepository<Medicine, UUID> {
     @Query(value = "SELECT m FROM Medicine m JOIN FETCH m.medicineGroup mg ",
             countQuery = "SELECT m FROM Medicine m JOIN m.medicineGroup mg ")
     Page<Medicine> findAll(Pageable pageable);
+
+    @Query(value = "SELECT m FROM Medicine m JOIN FETCH m.medicineGroup mg " +
+            " WHERE m.id = :id")
+    Optional<Medicine> findById(@Param("id") UUID id);
 }

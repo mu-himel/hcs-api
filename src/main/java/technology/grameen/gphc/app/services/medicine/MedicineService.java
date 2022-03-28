@@ -6,6 +6,7 @@ import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MedicineService {
 
@@ -14,4 +15,6 @@ public interface MedicineService {
     Medicine addMedicine(Medicine medicine) throws CustomException;
 
     Page<Medicine> getMedicineByName(String orElse, Pageable pageable);
+
+    Optional<?> getMedicineById(String id);
 }

@@ -15,5 +15,6 @@ public interface MedicineGroupRepository extends JpaRepository<MedicineGroup, UU
 
     Integer countByName(String name);
 
-    Page<MedicineGroup> findByName(String name, Pageable pageable);
+
+    Page<MedicineGroup> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

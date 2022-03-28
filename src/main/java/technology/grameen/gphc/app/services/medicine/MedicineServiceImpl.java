@@ -11,6 +11,8 @@ import technology.grameen.gphc.app.healthapp.repositories.MedicineRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MedicineServiceImpl implements MedicineService{
@@ -44,5 +46,10 @@ public class MedicineServiceImpl implements MedicineService{
             medicineRepository.findAll(pageable);
         }
         return medicineRepository.findByNameContainingIgnoreCase(name, pageable);
+    }
+
+    @Override
+    public Optional<?> getMedicineById(String id) {
+        return medicineRepository.findById(UUID.fromString(id));
     }
 }

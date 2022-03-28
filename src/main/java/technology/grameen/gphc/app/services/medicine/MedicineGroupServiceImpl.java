@@ -40,6 +40,6 @@ public class MedicineGroupServiceImpl implements MedicineGroupService{
         if(name.isEmpty()){
             return medicineGroupRepository.findAll(pageable);
         }
-        return medicineGroupRepository.findByName(name,pageable);
+        return medicineGroupRepository.findByNameContainingIgnoreCase(name,pageable);
     }
 }
