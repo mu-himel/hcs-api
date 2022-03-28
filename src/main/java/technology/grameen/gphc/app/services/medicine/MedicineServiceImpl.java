@@ -1,6 +1,8 @@
 package technology.grameen.gphc.app.services.medicine;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.exceptions.CustomException;
@@ -34,5 +36,13 @@ public class MedicineServiceImpl implements MedicineService{
             throw new CustomException("Medicine already exist under same group, Please try something else");
         }
         return medicineRepository.save(medicine);
+    }
+
+    @Override
+    public Page<Medicine> getMedicineByName(String name, Pageable pageable) {
+        if(name.isEmpty()){
+            medicineRepository.findAll(pageable);
+        }
+        return medicineRepository.findByNameContainingIgnoreCase(name, pageable);
     }
 }
