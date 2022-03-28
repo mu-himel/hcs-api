@@ -10,6 +10,8 @@ import technology.grameen.gphc.app.healthapp.entity.medicine.MedicineGroup;
 import technology.grameen.gphc.app.healthapp.repositories.MedicineGroupRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MedicineGroupServiceImpl implements MedicineGroupService{
@@ -20,9 +22,11 @@ public class MedicineGroupServiceImpl implements MedicineGroupService{
     @Override
     @Transactional
     public void add(MedicineGroup medicineGroup) throws CustomException {
-        Integer exist = medicineGroupRepository.countByName(medicineGroup.getName());
-        if(exist>0){
-            throw new CustomException("Medicine Group already exist");
+        if(medicineGroup.getCreatedAt() == null) {
+            Integer exist = medicineGroupRepository.countByName(medicineGroup.getName());
+            if (exist > 0) {
+                throw new CustomException("Medicine Group already exist");
+            }
         }
         medicineGroupRepository.save(medicineGroup);
     }
@@ -33,6 +37,11 @@ public class MedicineGroupServiceImpl implements MedicineGroupService{
             return medicineGroupRepository.findAll();
         }
         return medicineGroupRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<?> getMedicineGroupsById(UUID id) {
+        return medicineGroupRepository.findById(id);
     }
 
     @Override

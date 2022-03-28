@@ -11,6 +11,7 @@ import technology.grameen.gphc.app.healthapp.entity.medicine.MedicineGroup;
 import technology.grameen.gphc.app.services.medicine.MedicineGroupService;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/medicine-groups")
@@ -34,6 +35,14 @@ public class MedicineGroupController {
     public ResponseEntity<?> getAllByName(@RequestParam Optional<String> name){
         return ResponseEntity.ok()
                 .body(medicineGroupService.getMedicineGroupsByName(name.orElse("")));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+                medicineGroupService.getMedicineGroupsById(UUID.fromString(id)),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
