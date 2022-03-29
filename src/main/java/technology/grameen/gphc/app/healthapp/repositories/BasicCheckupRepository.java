@@ -87,6 +87,9 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
         UUID getId();
         String getFirstName();
         String getLastName();
+        Integer getAge();
+        String getGender();
+        String getPid();
     }
 
     @Query(value = "SELECT bc FROM BasicCheckup bc " +
