@@ -59,7 +59,8 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
 
         Double getBloodCholesterol();
 
-        Double getBloodUricAcid();
+        Double getBloodUricAcidMale();
+        Double getBloodUricAcidFemale();
 
         String getHbsag();
 

@@ -42,7 +42,8 @@ public class BasicCheckup {
     private Double pulseRate;
     private String arrhythmia;
     private Double bloodCholesterol;
-    private Double bloodUricAcid;
+    private Double bloodUricAcidMale;
+    private Double bloodUricAcidFemale;
     private String hbsag;
     private String bloodGrouping;
     private String isDonor;
@@ -260,12 +261,20 @@ public class BasicCheckup {
         this.bloodCholesterol = bloodCholesterol;
     }
 
-    public Double getBloodUricAcid() {
-        return bloodUricAcid;
+    public Double getBloodUricAcidMale() {
+        return bloodUricAcidMale;
     }
 
-    public void setBloodUricAcid(Double bloodUricAcid) {
-        this.bloodUricAcid = bloodUricAcid;
+    public void setBloodUricAcidMale(Double bloodUricAcidMale) {
+        this.bloodUricAcidMale = bloodUricAcidMale;
+    }
+
+    public Double getBloodUricAcidFemale() {
+        return bloodUricAcidFemale;
+    }
+
+    public void setBloodUricAcidFemale(Double bloodUricAcidFemale) {
+        this.bloodUricAcidFemale = bloodUricAcidFemale;
     }
 
     public String getHbsag() {
