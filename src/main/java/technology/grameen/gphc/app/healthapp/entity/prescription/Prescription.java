@@ -2,6 +2,7 @@ package technology.grameen.gphc.app.healthapp.entity.prescription;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.healthapp.entity.checkup.BasicCheckup;
 import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.entity.service.Service;
@@ -40,6 +41,9 @@ public class Prescription {
 
     @OneToMany
     private List<Service> services;
+
+    @OneToOne
+    private BasicCheckup basicCheckup;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -162,5 +166,13 @@ public class Prescription {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    public BasicCheckup getBasicCheckup() {
+        return basicCheckup;
+    }
+
+    public void setBasicCheckup(BasicCheckup basicCheckup) {
+        this.basicCheckup = basicCheckup;
     }
 }

@@ -2,6 +2,7 @@ package technology.grameen.gphc.app.healthapp.entity.checkup;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 
 import javax.persistence.*;
@@ -49,6 +50,9 @@ public class BasicCheckup {
     private String isDonor;
     private String smoking;
     private String additionalTest;
+
+    @OneToOne(mappedBy = "basicCheckup")
+    private Prescription prescription;
 
     @Column(updatable = false)
     private String createdBy;
