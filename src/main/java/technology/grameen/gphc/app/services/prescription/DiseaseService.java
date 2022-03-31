@@ -4,10 +4,13 @@ import technology.grameen.gphc.app.healthapp.entity.prescription.ChiefComplaint;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Disease;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DiseaseService {
 
     void add(Disease disease);
 
     List<Disease> getAll();
+
+    Optional<?> getById(String id);
 }

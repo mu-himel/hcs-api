@@ -7,6 +7,8 @@ import technology.grameen.gphc.app.healthapp.entity.prescription.Disease;
 import technology.grameen.gphc.app.healthapp.repositories.DiseaseRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DiseaseServiceImpl implements DiseaseService{
@@ -23,5 +25,10 @@ public class DiseaseServiceImpl implements DiseaseService{
     @Override
     public List<Disease> getAll() {
         return diseaseRepository.findAll();
+    }
+
+    @Override
+    public Optional<?> getById(String id) {
+        return diseaseRepository.findById(UUID.fromString(id));
     }
 }

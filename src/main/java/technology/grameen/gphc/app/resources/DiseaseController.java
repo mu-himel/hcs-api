@@ -24,4 +24,12 @@ public class DiseaseController {
     public ResponseEntity<?> getAll(){
         return new ResponseEntity<>(diseaseService.getAll(),HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable("id") String id){
+        return new ResponseEntity(
+                diseaseService.getById(id),
+                HttpStatus.OK
+        );
+    }
 }
