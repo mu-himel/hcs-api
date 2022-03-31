@@ -21,7 +21,7 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile patient;
 
-     @OneToMany
+    @OneToMany
     private List<ChiefComplaint> chiefCompliants;
     private String otherChiefCompliant;
 
@@ -29,7 +29,7 @@ public class Prescription {
     private List<Disease> diseases;
 
     @OneToMany
-    private List<Medicine> medicines;
+    private List<PrescriptionMedicine> medicines;
 
     @OneToMany
     private List<Advice> advices;
@@ -124,11 +124,11 @@ public class Prescription {
         this.updatedAt = updatedAt;
     }
 
-    public List<Medicine> getMedicines() {
+    public List<PrescriptionMedicine> getMedicines() {
         return medicines;
     }
 
-    public void setMedicines(List<Medicine> medicines) {
+    public void setMedicines(List<PrescriptionMedicine> medicines) {
         this.medicines = medicines;
     }
 

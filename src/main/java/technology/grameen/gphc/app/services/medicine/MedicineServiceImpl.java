@@ -23,7 +23,7 @@ public class MedicineServiceImpl implements MedicineService{
     @Override
     public List<Medicine> getMedicineListByName(String name) {
         if(name.isEmpty()){
-            return new ArrayList<>();
+            return medicineRepository.findAll();
         }
         return medicineRepository.findByNameContainingIgnoreCase(name);
     }
