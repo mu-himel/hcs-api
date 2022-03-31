@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.service.ServiceCategory;
+import technology.grameen.gphc.app.healthapp.repositories.ServiceCategoryRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,5 +20,5 @@ public interface ServiceCategoryService {
 
     Optional<?> findById(UUID id);
 
-    Optional<?> findByCode(String code);
+    Optional<ServiceCategoryRepository.IServiceCategory> findByCode(String code);
 }

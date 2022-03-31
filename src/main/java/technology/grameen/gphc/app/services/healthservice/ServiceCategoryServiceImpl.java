@@ -56,7 +56,7 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
     }
 
     @Override
-    public Optional<?> findByCode(String code) {
+    public Optional<ServiceCategoryRepository.IServiceCategory> findByCode(String code) {
         return serviceCategoryRepository.findByCodeIgnoreCase(code);
     }
 }
