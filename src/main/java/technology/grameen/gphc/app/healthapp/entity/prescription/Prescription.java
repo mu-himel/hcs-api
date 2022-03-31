@@ -28,7 +28,7 @@ public class Prescription {
     @OneToMany
     private List<Disease> diseases;
 
-    @OneToMany
+    @OneToMany(mappedBy = "prescription")
     private List<PrescriptionMedicine> medicines;
 
     @OneToMany

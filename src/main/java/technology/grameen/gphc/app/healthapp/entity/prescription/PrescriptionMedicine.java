@@ -24,8 +24,8 @@ public class PrescriptionMedicine {
     private Integer duration;
     private String durationUnit;
 
-    @ManyToOne
-    private Dose dose;
+
+    private String dose;
     private String medicineType;
 
     public UUID getId() {
@@ -60,11 +60,11 @@ public class PrescriptionMedicine {
         this.duration = duration;
     }
 
-    public Dose getDose() {
+    public String getDose() {
         return dose;
     }
 
-    public void setDose(Dose dose) {
+    public void setDose(String dose) {
         this.dose = dose;
     }
 
