@@ -10,16 +10,16 @@ import java.util.UUID;
 public class Hospital {
 
     @Id
-    private UUID uuid= UUID.randomUUID();
+    private UUID id= UUID.randomUUID();
     private String title;
     private String description;
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -1,6 +1,5 @@
 package technology.grameen.gphc.app.services.security;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +11,6 @@ import technology.grameen.gphc.app.request.OtpValidate;
 import technology.grameen.gphc.app.services.notify.EmailService;
 import technology.grameen.gphc.app.services.notify.NotificationService;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;
 

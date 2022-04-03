@@ -1,6 +1,6 @@
 package technology.grameen.gphc.app.healthapp.entity.configuration;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
