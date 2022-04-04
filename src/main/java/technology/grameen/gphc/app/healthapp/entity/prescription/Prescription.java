@@ -22,28 +22,28 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile patient;
 
-    @OneToMany
-    private List<ChiefComplaint> chiefComplaints;
+    @OneToMany(mappedBy = "prescription")
+    private List<PrescriptionChiefComplaint> chiefComplaints;
     private String otherChiefComplaint;
 
-    @OneToMany
-    private List<Disease> diseases;
+    @OneToMany(mappedBy = "prescription")
+    private List<PrescriptionDisease> diseases;
 
     @OneToMany(mappedBy = "prescription")
     private List<PrescriptionMedicine> medicines;
 
-    @OneToMany
-    private List<Advice> advices;
+    @OneToMany(mappedBy = "prescription")
+    private List<PrescriptionAdvice> advices;
 
     private String otherAdvice;
 
-    @OneToMany
-    private List<Hospital> hospitals;
+    @OneToMany(mappedBy = "prescription")
+    private List<PrescriptionHospital> hospitals;
 
     private String  doctor;
 
-    @OneToMany
-    private List<Service> services;
+    @OneToMany(mappedBy = "prescription")
+    private List<PrescriptionService> services;
 
     @OneToOne
     private BasicCheckup basicCheckup;
@@ -138,44 +138,45 @@ public class Prescription {
         this.medicines = medicines;
     }
 
-    public List<ChiefComplaint> getChiefComplaints() {
+    public List<PrescriptionChiefComplaint> getChiefComplaints() {
         return chiefComplaints;
     }
 
-    public void setChiefComplaints(List<ChiefComplaint> chiefComplaints) {
+    public void setChiefComplaints(List<PrescriptionChiefComplaint> chiefComplaints) {
         this.chiefComplaints = chiefComplaints;
     }
 
-    public List<Disease> getDiseases() {
+
+    public List<PrescriptionDisease> getDiseases() {
         return diseases;
     }
 
-    public void setDiseases(List<Disease> diseases) {
+    public void setDiseases(List<PrescriptionDisease> diseases) {
         this.diseases = diseases;
     }
 
-    public List<Advice> getAdvices() {
+    public List<PrescriptionAdvice> getAdvices() {
         return advices;
     }
 
-    public void setAdvices(List<Advice> advices) {
+    public void setAdvices(List<PrescriptionAdvice> advices) {
         this.advices = advices;
     }
 
-    public List<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(List<Service> services) {
-        this.services = services;
-    }
-
-    public List<Hospital> getHospitals() {
+    public List<PrescriptionHospital> getHospitals() {
         return hospitals;
     }
 
-    public void setHospitals(List<Hospital> hospitals) {
+    public void setHospitals(List<PrescriptionHospital> hospitals) {
         this.hospitals = hospitals;
+    }
+
+    public List<PrescriptionService> getServices() {
+        return services;
+    }
+
+    public void setServices(List<PrescriptionService> services) {
+        this.services = services;
     }
 
     public BasicCheckup getBasicCheckup() {

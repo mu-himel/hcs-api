@@ -17,15 +17,15 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, UUID
     interface Prescription{
        UUID getId();
        Patient getPatient();
-       List<ChiefComplaint> getChiefComplaints();
+       List<PrescriptionChiefComplaint> getChiefComplaints();
        String getOtherChiefComplaint();
-       List<Disease> getDiseases();
+       List<PrescriptionDisease> getDiseases();
        List<PrescriptionMedicine> getMedicines();
-       List<Advice> getAdvices();
+       List<PrescriptionAdvice> getAdvices();
        String getOtherAdvice();
-       List<Hospital> getHospitals();
+       List<PrescriptionHospital> getHospitals();
        String getDoctor();
-       List<HService> getServices();
+       List<PrescriptionService> getServices();
         BasicCheckup getBasicCheckup();
     }
     interface Medicine{
@@ -39,7 +39,10 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, UUID
         String getDurationUnit();
         String getDose();
         String getMedicineType();
+    }
 
+    interface PrescriptionService{
+        HService getService();
     }
 
     interface HService{

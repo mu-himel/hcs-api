@@ -42,7 +42,7 @@ public class PrescriptionMedicine {
         this.medicine = medicine;
     }
 
-
+    @JsonBackReference
     public Prescription getPrescription() {
         return prescription;
     }

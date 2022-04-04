@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.healthapp.entity.service;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -84,6 +85,7 @@ public class ServiceCategory {
     public void setParent(ServiceCategory parent) {
         this.parent = parent;
     }
+
 
     public List<Service> getServices() {
         return services;
