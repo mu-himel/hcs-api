@@ -172,6 +172,14 @@ public class Prescription {
         this.services = services;
     }
 
+    public List<Hospital> getHospitals() {
+        return hospitals;
+    }
+
+    public void setHospitals(List<Hospital> hospitals) {
+        this.hospitals = hospitals;
+    }
+
     public BasicCheckup getBasicCheckup() {
         return basicCheckup;
     }
