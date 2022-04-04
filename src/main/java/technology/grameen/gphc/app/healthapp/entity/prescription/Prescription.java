@@ -23,8 +23,8 @@ public class Prescription {
     private Profile patient;
 
     @OneToMany
-    private List<ChiefComplaint> chiefCompliants;
-    private String otherChiefCompliant;
+    private List<ChiefComplaint> chiefComplaints;
+    private String otherChiefComplaint;
 
     @OneToMany
     private List<Disease> diseases;
@@ -40,8 +40,7 @@ public class Prescription {
     @OneToMany
     private List<Hospital> hospitals;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Profile doctor;
+    private String  doctor;
 
     @OneToMany
     private List<Service> services;
@@ -75,14 +74,13 @@ public class Prescription {
         this.patient = patient;
     }
 
-    public String getOtherChiefCompliant() {
-        return otherChiefCompliant;
+    public String getOtherChiefComplaint() {
+        return otherChiefComplaint;
     }
 
-    public void setOtherChiefCompliant(String otherChiefCompliant) {
-        this.otherChiefCompliant = otherChiefCompliant;
+    public void setOtherChiefComplaint(String otherChiefComplaint) {
+        this.otherChiefComplaint = otherChiefComplaint;
     }
-
 
     public String getOtherAdvice() {
         return otherAdvice;
@@ -92,11 +90,11 @@ public class Prescription {
         this.otherAdvice = otherAdvice;
     }
 
-    public Profile getDoctor() {
+    public String getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Profile doctor) {
+    public void setDoctor(String doctor) {
         this.doctor = doctor;
     }
 
@@ -140,12 +138,12 @@ public class Prescription {
         this.medicines = medicines;
     }
 
-    public List<ChiefComplaint> getChiefCompliants() {
-        return chiefCompliants;
+    public List<ChiefComplaint> getChiefComplaints() {
+        return chiefComplaints;
     }
 
-    public void setChiefCompliants(List<ChiefComplaint> chiefCompliants) {
-        this.chiefCompliants = chiefCompliants;
+    public void setChiefComplaints(List<ChiefComplaint> chiefComplaints) {
+        this.chiefComplaints = chiefComplaints;
     }
 
     public List<Disease> getDiseases() {

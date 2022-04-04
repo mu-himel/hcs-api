@@ -7,6 +7,7 @@ import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 import technology.grameen.gphc.app.healthapp.repositories.PrescriptionMedicineRepository;
 import technology.grameen.gphc.app.healthapp.repositories.PrescriptionRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,5 +30,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionMedicineRepository.save(medicine);
             });
         }
+    }
+
+    @Override
+    public Optional<?> getById(String id) {
+        return prescriptionRepository.findPrescriptionById(UUID.fromString(id));
     }
 }

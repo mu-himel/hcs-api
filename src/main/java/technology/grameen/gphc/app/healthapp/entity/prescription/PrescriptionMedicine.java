@@ -1,11 +1,9 @@
 package technology.grameen.gphc.app.healthapp.entity.prescription;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -15,7 +13,7 @@ public class PrescriptionMedicine {
     @Id
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Medicine medicine;
 
     @ManyToOne
@@ -43,6 +41,7 @@ public class PrescriptionMedicine {
     public void setMedicine(Medicine medicine) {
         this.medicine = medicine;
     }
+
 
     public Prescription getPrescription() {
         return prescription;

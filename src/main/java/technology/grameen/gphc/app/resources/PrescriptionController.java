@@ -3,10 +3,7 @@ package technology.grameen.gphc.app.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 import technology.grameen.gphc.app.services.prescription.PrescriptionService;
 
@@ -21,5 +18,13 @@ public class PrescriptionController {
     public ResponseEntity<?> savePrescription(@RequestBody Prescription prescription){
         prescriptionService.addPrescription(prescription);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getPrescriptionById(@PathVariable("id") String id){
+      return new ResponseEntity<>(
+        prescriptionService.getById(id),
+        HttpStatus.OK
+      );
     }
 }
