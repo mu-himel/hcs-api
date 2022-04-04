@@ -34,7 +34,11 @@ public class Prescription {
 
     @OneToMany
     private List<Advice> advices;
+
     private String otherAdvice;
+
+    @OneToMany
+    private List<Hospital> hospitals;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile doctor;
