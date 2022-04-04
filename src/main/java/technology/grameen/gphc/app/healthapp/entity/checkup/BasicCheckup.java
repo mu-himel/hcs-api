@@ -1,6 +1,7 @@
 package technology.grameen.gphc.app.healthapp.entity.checkup;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@DynamicUpdate
 @Table(name = "basic_checkups")
 public class BasicCheckup {
 
@@ -50,6 +52,7 @@ public class BasicCheckup {
     private String isDonor;
     private String smoking;
     private String additionalTest;
+    private Boolean isPrescribed;
 
     @OneToOne(mappedBy = "basicCheckup")
     private Prescription prescription;
@@ -345,5 +348,13 @@ public class BasicCheckup {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Boolean getPrescribed() {
+        return isPrescribed;
+    }
+
+    public void setPrescribed(Boolean prescribed) {
+        isPrescribed = prescribed;
     }
 }

@@ -12,4 +12,6 @@ public interface CheckupService {
 
     List<?> getPatientCheckup(String id);
     Optional<?> getPatientCheckupById(String id);
+
+    void updateCheckupAsPrescribed(BasicCheckup checkup);
 }

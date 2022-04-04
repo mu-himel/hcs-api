@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 import technology.grameen.gphc.app.healthapp.repositories.*;
+import technology.grameen.gphc.app.services.checkup.CheckupService;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -33,10 +34,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private PrescriptionServiceRepository prescriptionServiceRepository;
 
+    @Autowired
+    private CheckupService checkupService;
+
     @Override
     @Transactional
     public void addPrescription(Prescription prescription) {
         prescriptionRepository.save(prescription);
+        checkupService.updateCheckupAsPrescribed(prescription.getBasicCheckup());
         if(prescription.getChiefComplaints().size()>0){
             prescription.getChiefComplaints().forEach((cc)->{
                 cc.setId(UUID.randomUUID());

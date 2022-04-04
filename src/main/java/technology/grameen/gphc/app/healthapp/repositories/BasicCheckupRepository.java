@@ -71,6 +71,7 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
         String getSmoking();
 
         String getAdditionalTest();
+        Boolean getPrescribed();
 
         String getCreatedBy();
 

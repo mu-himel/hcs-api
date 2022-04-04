@@ -34,4 +34,11 @@ public class CheckupServiceImpl implements CheckupService{
     public Optional<?> getPatientCheckupById(String id) {
         return checkupRepository.findCheckupDataById(UUID.fromString(id));
     }
+
+    @Override
+    @Transactional
+    public void updateCheckupAsPrescribed(BasicCheckup checkup) {
+        checkup.setPrescribed(true);
+        checkupRepository.save(checkup);
+    }
 }
