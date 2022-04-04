@@ -16,7 +16,7 @@ public class PrescriptionMedicine {
     @ManyToOne(fetch = FetchType.LAZY)
     private Medicine medicine;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Prescription prescription;
 
     private Integer duration;
