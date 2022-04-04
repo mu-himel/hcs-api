@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
+import technology.grameen.gphc.app.healthapp.repositories.PrescriptionMedicineRepository;
 import technology.grameen.gphc.app.healthapp.repositories.PrescriptionRepository;
+
+import java.util.UUID;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -12,9 +15,19 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private PrescriptionRepository prescriptionRepository;
 
+    @Autowired
+    private PrescriptionMedicineRepository prescriptionMedicineRepository;
+
     @Override
     @Transactional
     public void addPrescription(Prescription prescription) {
         prescriptionRepository.save(prescription);
+        if(prescription.getMedicines().size()>0){
+            prescription.getMedicines().forEach((medicine)->{
+                medicine.setId(UUID.randomUUID());
+                medicine.setPrescription(prescription);
+                prescriptionMedicineRepository.save(medicine);
+            });
+        }
     }
 }

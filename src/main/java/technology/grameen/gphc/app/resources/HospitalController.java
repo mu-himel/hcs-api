@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Hospital;
 import technology.grameen.gphc.app.services.prescription.HospitalService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +22,7 @@ public class HospitalController {
 
 
     @PostMapping
-    public ResponseEntity<?> addHospital(@RequestBody Hospital hospital){
+    public ResponseEntity<?> addHospital(@RequestBody @Valid Hospital hospital){
         hospitalService.addHospital(hospital);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

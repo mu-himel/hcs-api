@@ -3,6 +3,7 @@ package technology.grameen.gphc.app.healthapp.entity.prescription;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
@@ -11,6 +12,7 @@ public class Hospital {
 
     @Id
     private UUID id= UUID.randomUUID();
+    @NotNull(message = "Title is required")
     private String title;
     private String description;
 
