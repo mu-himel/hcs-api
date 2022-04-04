@@ -9,4 +9,6 @@ public interface PrescriptionService {
     void addPrescription(Prescription prescription);
 
     Optional<?> getById(String id);
+
+    Optional<?> getByCheckup(String id);
 }

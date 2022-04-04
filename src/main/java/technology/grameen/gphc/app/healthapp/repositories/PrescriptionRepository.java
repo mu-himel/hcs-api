@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import technology.grameen.gphc.app.healthapp.entity.checkup.BasicCheckup;
 import technology.grameen.gphc.app.healthapp.entity.medicine.Medicine;
 import technology.grameen.gphc.app.healthapp.entity.prescription.*;
 
@@ -13,6 +14,13 @@ import java.util.UUID;
 
 @Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, UUID> {
+
+    @Query(value = "SELECT pr FROM Prescription pr " +
+            "JOIN FETCH pr.patient p " +
+            "LEFT JOIN FETCH pr.basicCheckup bc " +
+            "where pr.basicCheckup = :checkup")
+    Optional<Prescription> findPrescriptionByCheckup(
+            @Param("checkup")technology.grameen.gphc.app.healthapp.entity.checkup.BasicCheckup checkup);
 
     interface Prescription{
        UUID getId();

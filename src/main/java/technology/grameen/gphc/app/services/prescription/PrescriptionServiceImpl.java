@@ -3,6 +3,7 @@ package technology.grameen.gphc.app.services.prescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import technology.grameen.gphc.app.healthapp.entity.checkup.BasicCheckup;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Prescription;
 import technology.grameen.gphc.app.healthapp.repositories.*;
 import technology.grameen.gphc.app.services.checkup.CheckupService;
@@ -89,5 +90,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public Optional<?> getById(String id) {
         return prescriptionRepository.findPrescriptionById(UUID.fromString(id));
+    }
+
+    @Override
+    public Optional<?> getByCheckup(String id) {
+        BasicCheckup checkup = new BasicCheckup();
+        checkup.setId(UUID.fromString(id));
+        return prescriptionRepository.findPrescriptionByCheckup(checkup);
     }
 }
