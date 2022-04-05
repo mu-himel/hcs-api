@@ -31,8 +31,8 @@ public class PrescriptionController {
     @GetMapping("/checkup/{id}")
     public ResponseEntity<?> getPrescriptionByCheckup(@PathVariable("id") String id){
         return new ResponseEntity<>(
-                prescriptionService.getByCheckup(id),
-                HttpStatus.OK
+            prescriptionService.getByCheckup(id),
+            HttpStatus.OK
         );
     }
 }

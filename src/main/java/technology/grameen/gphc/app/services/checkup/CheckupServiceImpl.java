@@ -38,7 +38,12 @@ public class CheckupServiceImpl implements CheckupService{
     @Override
     @Transactional
     public void updateCheckupAsPrescribed(BasicCheckup checkup) {
-        checkup.setPrescribed(true);
-        checkupRepository.save(checkup);
+        Optional<BasicCheckup> checkupOp = checkupRepository.findById(checkup.getId());
+        if(checkupOp.isPresent()) {
+            BasicCheckup ch = checkupOp.get();
+            ch.setPrescribed(true);
+            checkupRepository.save(ch);
+        }
+
     }
 }
