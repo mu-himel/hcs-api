@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface CompositionService {
 
-   void addEhr(Map<String,?> composition);
+   Optional<?> addEhr(Map<String,?> composition, String patientId);
 
    Optional<?> getAllEhr();
 

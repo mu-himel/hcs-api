@@ -9,6 +9,8 @@ import technology.grameen.gphc.app.request.BasicCheckupRequest;
 import technology.grameen.gphc.app.services.checkup.CheckupService;
 import technology.grameen.gphc.app.services.ehr.CompositionService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/v1/checkup")
 public class BasicCheckupController {
@@ -22,10 +24,13 @@ public class BasicCheckupController {
     @PostMapping
     public ResponseEntity<?> addCheckup(@RequestBody BasicCheckupRequest basicCheckupReq){
         BasicCheckup basicCheckup = checkupService.add(basicCheckupReq.getBasicCheckup());
-//        if(basicCheckup.getCreatedAt()!=null){
-//            compositionService.addEhr(basicCheckupReq.getEhr());
-//        }
-        return new ResponseEntity<>(HttpStatus.OK);
+        Optional<?> result = Optional.empty();
+        if(basicCheckup.getCreatedAt()!=null){
+            if(basicCheckupReq.getEhr()!=null && basicCheckupReq.getEhr().size()>0) {
+                result = compositionService.addEhr(basicCheckupReq.getEhr(),basicCheckup.getProfile().getId().toString());
+            }
+        }
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
     @GetMapping("/patient/{id}")

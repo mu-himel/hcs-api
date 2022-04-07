@@ -23,12 +23,14 @@ public class CompositionServiceImpl implements CompositionService{
     private NetworkService networkService;
 
     @Override
-    public void addEhr(Map<String, ?> composition) {
+    public Optional<?> addEhr(Map<String, ?> composition,String patientId) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         HttpEntity<Map<String,?>> payload = new HttpEntity<>(composition,headers);
-        ResponseEntity<?> response = networkService.post(urlBuilder.getEhrCompositionEndpoint(),payload,Map.class);
+        String url = urlBuilder.getEhrCompositionEndpoint() + "?format=FLAT&templateId=NCD.v0&ehrId="+patientId;
+        ResponseEntity<?> response = networkService.post(url,payload,Map.class);
         HttpStatus status = response.getStatusCode();
+        return Optional.ofNullable(response.getBody());
     }
 
     @Override
