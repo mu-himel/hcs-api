@@ -64,4 +64,8 @@ public class UrlBuilder {
     }
 
 
+    public String getEhrQueryEndPoint() {
+        String url = env.getProperty("ehr")+env.getProperty("ehr.query");
+        return url;
+    }
 }

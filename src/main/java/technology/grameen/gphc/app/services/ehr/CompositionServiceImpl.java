@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import technology.grameen.gphc.app.component.UrlBuilder;
 import technology.grameen.gphc.app.services.network.NetworkService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -46,9 +47,21 @@ public class CompositionServiceImpl implements CompositionService{
     public Optional<?> getEhrByPatient(String patientId) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
-        HttpEntity<?> payload = new HttpEntity<>(headers);
-        ResponseEntity<?> response = networkService.get(urlBuilder.getEhrCompositionEndpoint()+"/"+patientId,
-                    payload,Map.class);
+        Map<String,String> query = new HashMap<>();
+        String q = getQuerySting(patientId);
+        query.put("q",q);
+        HttpEntity<Map<String,String>> payload = new HttpEntity<>(query,headers);
+        String url = urlBuilder.getEhrQueryEndPoint();
+        ResponseEntity<?> response = networkService.post(url, payload,Map.class);
         return Optional.ofNullable(response.getBody());
     }
+
+    private String getQuerySting(String patientId){
+        return "SELECT c/content[openEHR-EHR-OBSERVATION.height.v2], " +
+                "c/content[openEHR-EHR-OBSERVATION.body_weight.v2]  " +
+                "FROM EHR e CONTAINS COMPOSITION c [openEHR-EHR-COMPOSITION.encounter.v1] " +
+                "WHERE e/ehr_id/value='"+patientId+"'";
+    }
+
+
 }
