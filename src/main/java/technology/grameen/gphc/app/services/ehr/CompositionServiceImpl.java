@@ -10,7 +10,6 @@ import technology.grameen.gphc.app.component.UrlBuilder;
 import technology.grameen.gphc.app.services.network.NetworkService;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -58,8 +57,19 @@ public class CompositionServiceImpl implements CompositionService{
 
     private String getQuerySting(String patientId){
         return "SELECT c/content[openEHR-EHR-OBSERVATION.height.v2], " +
-                "c/content[openEHR-EHR-OBSERVATION.body_weight.v2]  " +
-                "FROM EHR e CONTAINS COMPOSITION c [openEHR-EHR-COMPOSITION.encounter.v1] " +
+                "c/content[openEHR-EHR-OBSERVATION.body_weight.v2], " +
+                "c/content[openEHR-EHR-OBSERVATION.body_mass_index.v2], " +
+                "c/content[openEHR-EHR-OBSERVATION.waist_circumference.v1], " +
+                "c/content[openEHR-EHR-OBSERVATION.hip_circumference.v1], " +
+                "c/content[openEHR-EHR-OBSERVATION.waist_hip_ratio.v0], " +
+                "c/content[openEHR-EHR-OBSERVATION.body_temperature.v2], " +
+                "c/content[openEHR-EHR-OBSERVATION.pulse_oximetry.v1], " +
+                "c/content[openEHR-EHR-OBSERVATION.blood_pressure.v2], " +
+                "c/content[openEHR-EHR-OBSERVATION.pulse.v2], " +
+                "c/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1],  " +
+                "c/content[openEHR-EHR-OBSERVATION.urinalysis.v1], " +
+                "c/content[openEHR-EHR-EVALUATION.tobacco_smoking_summary.v1] FROM EHR e " +
+                "CONTAINS COMPOSITION c [openEHR-EHR-COMPOSITION.encounter.v1] " +
                 "WHERE e/ehr_id/value='"+patientId+"'";
     }
 
