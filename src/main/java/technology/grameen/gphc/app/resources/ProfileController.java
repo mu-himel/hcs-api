@@ -92,4 +92,10 @@ public class ProfileController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping("/user/{id}/role")
+    public ResponseEntity<?> updateProfileRole(@PathVariable("id") String id, @RequestBody Map<String,String> role){
+        profileService.updateRoleOnProfile(id,role.get("name"));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

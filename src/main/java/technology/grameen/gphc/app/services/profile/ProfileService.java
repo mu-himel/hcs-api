@@ -32,4 +32,6 @@ public interface ProfileService {
 
     DoctorProfileService getDoctorProfileService();
     ResearcherProfileService getResearcherProfileService();
+
+    void updateRoleOnProfile(String id, String role);
 }

@@ -3,6 +3,7 @@ package technology.grameen.gphc.app.healthapp.repositories;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,10 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
     Optional<?> findByEmail(String email);
 
     Optional<ProfilePageInfo> findByPid(String id);
+
+    @Modifying
+    @Query(value = "UPDATE Profile p SET p.roleId = :role WHERE p.id=:id")
+    void updateRole(@Param("id") UUID id,@Param("role") String role);
 
     interface ProfileUser{
         ProfilePageInfo getProfile();
