@@ -233,6 +233,7 @@ public class ProfileServiceImpl implements ProfileService{
     }
 
     @Override
+    @Transactional
     public void updateRoleOnProfile(String id, String role) {
         Optional<ProfileRepository.ProfileUser> profileOp = profileRepository.findProfileByUserId(id);
         if(profileOp.isPresent()){
