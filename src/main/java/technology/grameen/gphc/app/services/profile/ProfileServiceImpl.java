@@ -233,6 +233,9 @@ public class ProfileServiceImpl implements ProfileService{
             user.setId(id);
             user.setFirstName(profile.getFirstName());
             user.setLastName(profile.getLastName());
+            if(!p.getProfile().getEmail().isEmpty()) {
+                user.setEmail(p.getProfile().getEmail());
+            }
             userRepository.save(user);
         }
     }
