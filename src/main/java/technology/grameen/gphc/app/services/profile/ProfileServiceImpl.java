@@ -217,11 +217,19 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     @Transactional
-    public void updateProfile(String id, Profile profile) {
+    public void updateProfile(String id, Profile profile) throws CustomException {
         Optional<?> profileOp = profileRepository.findProfileByUserId(id);
 
+
         if(profileOp.isPresent()){
+
             ProfileRepository.ProfileUser p = (ProfileRepository.ProfileUser)profileOp.get();
+            if(p.getProfile().getEmail().isEmpty() && !profile.getEmail().isEmpty()) {
+               Optional<?> user = userRepository.findByEmail(profile.getEmail());
+               if(user.isPresent()){
+                   throw new CustomException("Sorry! Email address already exist");
+               }
+            }
             if(!p.getProfile().getEmail().isEmpty()){
                 profile.setEmail(p.getProfile().getEmail());
             }

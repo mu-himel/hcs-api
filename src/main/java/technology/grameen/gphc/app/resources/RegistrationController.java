@@ -76,7 +76,8 @@ public class RegistrationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProfile(@PathVariable String id, @RequestBody Profile profile){
+    public ResponseEntity<?> updateProfile(@PathVariable String id, @RequestBody Profile profile)
+            throws CustomException {
         profileService.updateProfile(id,profile);
         return new ResponseEntity<>(
             HttpStatus.NO_CONTENT

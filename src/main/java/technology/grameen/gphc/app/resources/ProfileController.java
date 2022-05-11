@@ -87,7 +87,8 @@ public class ProfileController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile){
+    public ResponseEntity<?> updateProfile(@PathVariable("id") String id, @RequestBody Profile profile)
+                                                throws CustomException {
         profileService.updateProfile(id,profile);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

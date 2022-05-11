@@ -17,7 +17,7 @@ public interface ProfileService {
     HashMap register(Profile profile) throws CustomException;
     HashMap register(RegistrationRequest registrationRequest) throws CustomException;
 
-    void updateProfile(String id, Profile profile);
+    void updateProfile(String id, Profile profile) throws CustomException;
 
     Page<?> getAll(Pageable pageable, Optional<String> firstName, Optional<String> lastName,
                    Optional<String> email, Optional<String> contactNumber,
