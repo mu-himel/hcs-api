@@ -221,6 +221,8 @@ public class ProfileServiceImpl implements ProfileService{
         Optional<?> profileOp = profileRepository.findProfileByUserId(id);
 
         if(profileOp.isPresent()){
+            ProfileRepository.ProfileUser p = (ProfileRepository.ProfileUser)profileOp.get();
+            profile.setRoleId(p.getProfile().getRoleId());
             profileRepository.save(profile);
 
             // update user account

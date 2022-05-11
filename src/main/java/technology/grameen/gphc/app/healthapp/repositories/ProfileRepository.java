@@ -61,6 +61,7 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
         SiteInfo getSite();
         UUID getId();
         String getPid();
+        String getRoleId();
     }
 
     interface SiteInfo{
