@@ -222,6 +222,9 @@ public class ProfileServiceImpl implements ProfileService{
 
         if(profileOp.isPresent()){
             ProfileRepository.ProfileUser p = (ProfileRepository.ProfileUser)profileOp.get();
+            if(!p.getProfile().getEmail().isEmpty()){
+                profile.setEmail(p.getProfile().getEmail());
+            }
             profile.setRoleId(p.getProfile().getRoleId());
             profileRepository.save(profile);
 

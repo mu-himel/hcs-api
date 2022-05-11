@@ -24,7 +24,6 @@ public class Profile {
 
     @Column(length = 1000)
     private String profileImage;
-    @Column(updatable = false)
     private String email;
     private String contactNumber;
     private String contactNumber2;
