@@ -21,6 +21,7 @@ public interface ResearcherProfileRepository extends JpaRepository<ResearcherPro
         String getDegreeYear();
         String getDesignation();
         String getInstitute();
+        String getSignatureFile();
 
         @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss")
         LocalDateTime getCreatedAt();

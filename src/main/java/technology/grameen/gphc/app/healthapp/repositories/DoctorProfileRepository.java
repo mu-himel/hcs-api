@@ -21,6 +21,8 @@ public interface DoctorProfileRepository extends JpaRepository<DoctorProfile, UU
         String getDegree();
         String getHospital();
         Profile getProfile();
+        String getDesignation();
+        String getSignatureFile();
         @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss")
         LocalDateTime getCreatedAt();
     }
