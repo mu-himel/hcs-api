@@ -23,6 +23,6 @@ public class DoctorProfileServiceImpl implements DoctorProfileService{
 
     @Override
     public Optional<?> getDetailByProfile(UUID id) {
-        return doctorProfileRepository.findById(id);
+        return doctorProfileRepository.findByProfileId(id);
     }
 }
