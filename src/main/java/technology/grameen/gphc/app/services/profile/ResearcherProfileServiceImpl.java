@@ -22,7 +22,7 @@ public class ResearcherProfileServiceImpl implements ResearcherProfileService{
     }
 
     @Override
-    public Optional<?> getDetailByProfieId(UUID id) {
-        return researcherProfileRepository.findById(id);
+    public Optional<?> getDetailByProfileId(UUID id) {
+        return researcherProfileRepository.findByProfileId(id);
     }
 }

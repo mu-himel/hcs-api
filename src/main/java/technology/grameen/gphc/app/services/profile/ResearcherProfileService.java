@@ -9,5 +9,5 @@ public interface ResearcherProfileService {
 
     ResearcherProfile addResearcherProfile(ResearcherProfile researcherProfile);
 
-    Optional<?> getDetailByProfieId(UUID id);
+    Optional<?> getDetailByProfileId(UUID id);
 }

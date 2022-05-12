@@ -20,9 +20,12 @@ public interface DoctorProfileRepository extends JpaRepository<DoctorProfile, UU
         String getSpeciality();
         String getDegree();
         String getHospital();
-
+        Profile getProfile();
         @JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss")
         LocalDateTime getCreatedAt();
+    }
+    interface Profile{
+        UUID getId();
     }
     @Query(value = "SELECT dp FROM DoctorProfile dp " +
             "JOIN FETCH dp.profile p WHERE p.id = :profileId")

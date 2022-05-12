@@ -25,7 +25,7 @@ public class ResearcherProfileController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getDoctorProfileByProfileId(@PathVariable("id") String id){
         return new ResponseEntity<>(
-            profileService.getResearcherProfileService().getDetailByProfieId(UUID.fromString(id)),
+            profileService.getResearcherProfileService().getDetailByProfileId(UUID.fromString(id)),
             HttpStatus.OK
         );
     }
