@@ -220,30 +220,29 @@ public class ProfileServiceImpl implements ProfileService{
     public void updateProfile(String id, Profile profile) throws CustomException {
         Optional<?> profileOp = profileRepository.findProfileByUserId(id);
 
-
+        technology.grameen.gphc.app.auth.entity.User user = new technology.grameen.gphc.app.auth.entity.User();
         if(profileOp.isPresent()){
 
             ProfileRepository.ProfileUser p = (ProfileRepository.ProfileUser)profileOp.get();
-            if(p.getProfile().getEmail().isEmpty() && !profile.getEmail().isEmpty()) {
-               Optional<?> user = userRepository.findByEmail(profile.getEmail());
-               if(user.isPresent()){
+            if(p.getProfile().getEmail()==null && !profile.getEmail().isEmpty()) {
+               Optional<?> userOp = userRepository.findByEmail(profile.getEmail());
+               if(userOp.isPresent()){
                    throw new CustomException("Sorry! Email address already exist");
+               }else{
+                   user.setEmail(profile.getEmail());
                }
-            }
-            if(!p.getProfile().getEmail().isEmpty()){
+            }else{
                 profile.setEmail(p.getProfile().getEmail());
             }
+
+
             profile.setRoleId(p.getProfile().getRoleId());
             profileRepository.save(profile);
 
             // update user account
-            technology.grameen.gphc.app.auth.entity.User user = new technology.grameen.gphc.app.auth.entity.User();
             user.setId(id);
             user.setFirstName(profile.getFirstName());
             user.setLastName(profile.getLastName());
-            if(!p.getProfile().getEmail().isEmpty()) {
-                user.setEmail(p.getProfile().getEmail());
-            }
             userRepository.save(user);
         }
     }

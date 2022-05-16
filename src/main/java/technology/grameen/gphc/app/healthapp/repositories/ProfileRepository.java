@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.services.criteria.ProfileCriteriaRepository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -62,6 +64,13 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
         UUID getId();
         String getPid();
         String getRoleId();
+        String getGender();
+        String getAgeDays();
+        String getAgeMonth();
+        String getAgeYear();
+        @JsonFormat(pattern = "YYYY-MM-DD")
+        LocalDate getDob();
+
     }
 
     interface SiteInfo{
