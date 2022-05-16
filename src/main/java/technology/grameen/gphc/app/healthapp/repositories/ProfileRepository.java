@@ -68,7 +68,8 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
         String getAgeDays();
         String getAgeMonth();
         String getAgeYear();
-        @JsonFormat(pattern = "YYYY-MM-DD")
+
+        @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate getDob();
 
     }
