@@ -28,6 +28,15 @@ public class MedicalHistoryController {
         );
     }
 
+    @PutMapping("/:id")
+    public ResponseEntity<?> updateMedicalHistory(@RequestBody MedicalHistory medicalHistory,
+                                                  @PathVariable("id") String id){
+        medicalHistoryService.updateMedicalHistory(id,medicalHistory);
+        return new ResponseEntity<>(
+                HttpStatus.NO_CONTENT
+        );
+    }
+
 
     @GetMapping("")
     public ResponseEntity<?> getAll(@RequestParam Optional<Integer> page,

@@ -10,7 +10,7 @@ public interface MedicalHistoryService {
 
     MedicalHistory addMedicalHistory(MedicalHistory medicalHistory);
 
-    MedicalHistory updateMedicalHistory(MedicalHistory medicalHistory);
+    void updateMedicalHistory(String id, MedicalHistory medicalHistory);
 
     Optional<?> getMedicalHistoryById(String id);
 
