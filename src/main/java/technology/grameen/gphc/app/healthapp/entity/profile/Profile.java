@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import technology.grameen.gphc.app.healthapp.entity.site.Site;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -33,6 +34,10 @@ public class Profile {
     private String identityValue;
     private Integer age;
     private String gender;
+    private String ageDays;
+    private String ageMonth;
+    private String ageYear;
+    private LocalDate dob;
     private String pid;
     private String roleId;
 
@@ -223,5 +228,37 @@ public class Profile {
 
     public void setRoleId(String roleId) {
         this.roleId = roleId;
+    }
+
+    public String getAgeDays() {
+        return ageDays;
+    }
+
+    public void setAgeDays(String ageDays) {
+        this.ageDays = ageDays;
+    }
+
+    public String getAgeMonth() {
+        return ageMonth;
+    }
+
+    public void setAgeMonth(String ageMonth) {
+        this.ageMonth = ageMonth;
+    }
+
+    public String getAgeYear() {
+        return ageYear;
+    }
+
+    public void setAgeYear(String ageYear) {
+        this.ageYear = ageYear;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 }
