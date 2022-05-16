@@ -29,9 +29,6 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-
-
-
     @GetMapping("")
     public ResponseEntity<?> all( @RequestParam Optional<Integer> page,
                                   @RequestParam Optional<Integer> size,
