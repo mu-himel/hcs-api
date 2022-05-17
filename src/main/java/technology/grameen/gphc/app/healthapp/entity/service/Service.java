@@ -2,9 +2,11 @@ package technology.grameen.gphc.app.healthapp.entity.service;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import technology.grameen.gphc.app.healthapp.entity.subscription.SubscriptionPackage;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +24,9 @@ public class Service {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ServiceCategory serviceCategory;
+
+    @ManyToMany
+    private Set<SubscriptionPackage> subscriptionPackages;
 
 
     private UUID createdBy;
