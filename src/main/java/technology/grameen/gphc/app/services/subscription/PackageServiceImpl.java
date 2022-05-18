@@ -19,8 +19,19 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     @Transactional
-    public SubscriptionPackage addPackage(SubscriptionPackage subscriptionPackage) {
-        return subscriptionPackageRepository.save(subscriptionPackage);
+    public void addPackage(SubscriptionPackage subscriptionPackage) {
+        SubscriptionPackage sp = subscriptionPackageRepository.save(subscriptionPackage);
+        sp.getServices().stream().forEach(s->{
+            s.addPackage(sp);
+        });
+    }
+
+    @Override
+    public void updatePackage(String id, SubscriptionPackage subscriptionPackage) {
+        Optional<SubscriptionPackage> op = getPackageById(id);
+        if(op.isPresent()){
+            subscriptionPackageRepository.save(subscriptionPackage);
+        }
     }
 
     @Override

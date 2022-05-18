@@ -8,7 +8,9 @@ import java.util.Optional;
 
 public interface PackageService {
 
-    SubscriptionPackage addPackage(SubscriptionPackage subscriptionPackage);
+    void addPackage(SubscriptionPackage subscriptionPackage);
+
+    void updatePackage(String id, SubscriptionPackage subscriptionPackage);
 
     Optional<SubscriptionPackage> getPackageById(String id);
 

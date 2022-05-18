@@ -6,6 +6,8 @@ import technology.grameen.gphc.app.healthapp.entity.subscription.SubscriptionPac
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,7 +28,7 @@ public class Service {
     private ServiceCategory serviceCategory;
 
     @ManyToMany
-    private Set<SubscriptionPackage> subscriptionPackages;
+    private Set<SubscriptionPackage> subscriptionPackages = new LinkedHashSet<>();
 
 
     private UUID createdBy;
@@ -109,5 +111,17 @@ public class Service {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Set<SubscriptionPackage> getSubscriptionPackages() {
+        return subscriptionPackages;
+    }
+
+    public void setSubscriptionPackages(Set<SubscriptionPackage> subscriptionPackages) {
+        this.subscriptionPackages = subscriptionPackages;
+    }
+
+    public void addPackage(SubscriptionPackage sp) {
+        this.subscriptionPackages.add(sp);
     }
 }
