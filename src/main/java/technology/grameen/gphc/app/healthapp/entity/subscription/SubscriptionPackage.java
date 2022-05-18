@@ -7,6 +7,7 @@ import technology.grameen.gphc.app.healthapp.entity.service.Service;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class SubscriptionPackage {
     private BigDecimal discountedAmount;
 
     @ManyToMany(mappedBy = "subscriptionPackages")
-    private Set<Service> services;
+    private Set<Service> services = new LinkedHashSet<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;

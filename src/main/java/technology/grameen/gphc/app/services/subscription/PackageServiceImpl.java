@@ -27,6 +27,7 @@ public class PackageServiceImpl implements PackageService{
     }
 
     @Override
+    @Transactional
     public void updatePackage(String id, SubscriptionPackage subscriptionPackage) {
         Optional<SubscriptionPackage> op = getPackageById(id);
         if(op.isPresent()){
