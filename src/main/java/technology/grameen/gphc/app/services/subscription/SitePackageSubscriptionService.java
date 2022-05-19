@@ -1,4 +1,9 @@
 package technology.grameen.gphc.app.services.subscription;
 
+import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
+
+import java.util.Optional;
+
 public interface SitePackageSubscriptionService {
+    SitePackage subscribePackage(SitePackage sitePackage);
 }
