@@ -40,4 +40,14 @@ public class TestDocumentController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/{id}/detail")
+    public ResponseEntity<?> getDetailById(
+            @PathVariable("id") String id){
+
+        return new ResponseEntity<>(
+                testDocumentService.getById(id),
+                HttpStatus.OK
+        );
+    }
 }

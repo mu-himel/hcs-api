@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.profile.TestDocument;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -20,6 +21,10 @@ public interface TestDocumentRepository extends JpaRepository<TestDocument, UUID
             "JOIN td.profile p " +
             "WHERE p.id=:profileId")
     Page<TextDocumentInfo> findAllByProfileId(@Param("profileId") UUID profileId, Pageable pageable);
+
+    @Query(value = "SELECT td FROM TestDocument td " +
+            "JOIN FETCH td.profile p WHERE td.id=:id")
+    Optional<TextDocumentInfo> findTestDocumentById(@Param("id") UUID profileId);
 
     interface Profile{
         UUID getId();

@@ -13,5 +13,7 @@ public interface TestDocumentService {
 
     Optional<?> getTestDocumentById(String id);
 
-    Page<TestDocumentRepository.TextDocumentInfo> getAll(String profileId, Pageable pageable);
+    Page<?> getAll(String profileId, Pageable pageable);
+
+    Optional<?> getById(String id);
 }
