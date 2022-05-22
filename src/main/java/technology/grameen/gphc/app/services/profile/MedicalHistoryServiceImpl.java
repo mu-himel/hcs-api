@@ -26,38 +26,22 @@ public class MedicalHistoryServiceImpl implements MedicalHistoryService{
     @Override
     @Transactional
     public void updateMedicalHistory(String id, MedicalHistory medicalHistory) {
-        Optional<MedicalHistory> medicalHistoryOp = getMedicalHistoryById(id);
+        Optional<MedicalHistoryRepository.MedicalHistoryInfo> medicalHistoryOp = getMedicalHistoryById(id);
         if(medicalHistoryOp.isPresent()){
-            MedicalHistory medicalHistory1 = medicalHistoryOp.get();
-            medicalHistory1.setAllergicDrugName(medicalHistory.getAllergicDrugName());
-            medicalHistory1.setAnyFamilyMemberSuffering(medicalHistory.getAnyFamilyMemberSuffering());
-            medicalHistory1.setAnySymptom(medicalHistory.getAnySymptom());
-            medicalHistory1.setCholesterolSufferingDuration(medicalHistory.getCholesterolSufferingDuration());
-            medicalHistory1.setDiabeticSufferingDuration(medicalHistory.getDiabeticSufferingDuration());
-            medicalHistory1.setElapsedTimeFromLastMeal(medicalHistory.getElapsedTimeFromLastMeal());
-            medicalHistory1.setEverDiagnosedAnemicByDoctor(medicalHistory.getEverDiagnosedAnemicByDoctor());
-            medicalHistory1.setFirstVisit(medicalHistory.getFirstVisit());
-            medicalHistory1.setHasBloodPressure(medicalHistory.getHasBloodPressure());
-            medicalHistory1.setHasCholesterol(medicalHistory.getHasCholesterol());
-            medicalHistory1.setHasDiabetic(medicalHistory.getHasDiabetic());
-            medicalHistory1.setHaveAnyDrugAllergy(medicalHistory.getHaveAnyDrugAllergy());
-            medicalHistory1.setHypertensiveSufferingDuration(medicalHistory.getHypertensiveSufferingDuration());
-            medicalHistory1.setMedicineForBloodPressure(medicalHistory.getMedicineForBloodPressure());
-            medicalHistory1.setMedicineForCholesterol(medicalHistory.getMedicineForCholesterol());
-            medicalHistory1.setMedicineForDiabetic(medicalHistory.getMedicineForDiabetic());
-            medicalHistory1.setRegularSmoker(medicalHistory.getRegularSmoker());
-            medicalHistory1.setSymptomDetail(medicalHistory.getSymptomDetail());
-            medicalHistory1.setTakingMedicineForFollowingDisease(medicalHistory.getTakingMedicineForFollowingDisease());
+            MedicalHistoryRepository.MedicalHistoryInfo medicalHistory1 = medicalHistoryOp.get();
+            medicalHistory.setId(medicalHistory1.getId());
+            medicalHistory.setCreatedAt(medicalHistory1.getCreatedAt());
+            medicalHistoryRepository.save(medicalHistory);
         }
     }
 
     @Override
-    public Optional<MedicalHistory> getMedicalHistoryById(String id) {
-        return medicalHistoryRepository.findById(UUID.fromString(id));
+    public Optional<MedicalHistoryRepository.MedicalHistoryInfo> getMedicalHistoryById(String id) {
+        return medicalHistoryRepository.findMedicalHistoryById(UUID.fromString(id));
     }
 
     @Override
-    public Page<?> getAll(Pageable pageable) {
-        return medicalHistoryRepository.findAll(pageable);
+    public Page<?> getAll(String id, Pageable pageable) {
+        return medicalHistoryRepository.findAllByProfile(UUID.fromString(id),pageable);
     }
 }

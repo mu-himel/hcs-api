@@ -38,15 +38,27 @@ public class MedicalHistoryController {
     }
 
 
-    @GetMapping("")
-    public ResponseEntity<?> getAll(@RequestParam Optional<Integer> page,
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAll(
+            @PathVariable("id") String id,
+            @RequestParam Optional<Integer> page,
                                     @RequestParam Optional<Integer> size
                                     ){
         Pageable pageable = PageRequest.of(page.orElse(0),size.orElse(PAGE_LIMIT));
 
         return new ResponseEntity<>(
-                medicalHistoryService.getAll(pageable),
+                medicalHistoryService.getAll(id,pageable),
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/{id}/detail")
+    public ResponseEntity<?> getDetailById(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+                medicalHistoryService.getMedicalHistoryById(id),
+                HttpStatus.OK
+        );
+    }
+
+
 }
