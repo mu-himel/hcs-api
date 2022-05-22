@@ -29,7 +29,7 @@ public class TestDocumentServiceImpl implements TestDocumentService{
     }
 
     @Override
-    public Page<?> getAll(Pageable pageable) {
-        return testDocumentRepository.findAll(pageable);
+    public Page<TestDocumentRepository.TextDocumentInfo> getAll(String profileId, Pageable pageable) {
+        return testDocumentRepository.findAllByProfileId(UUID.fromString(profileId), pageable);
     }
 }

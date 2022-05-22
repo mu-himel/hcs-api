@@ -28,13 +28,15 @@ public class TestDocumentController {
         );
     }
 
-    @GetMapping("")
-    public ResponseEntity<?> getAll(@RequestParam Optional<Integer> page,
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAll(
+            @PathVariable("id") String profileId,
+            @RequestParam Optional<Integer> page,
                                     @RequestParam Optional<Integer> size){
         Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(PAGE_LIMIT));
 
         return new ResponseEntity<>(
-                testDocumentService.getAll(pageable),
+                testDocumentService.getAll(profileId,pageable),
                 HttpStatus.OK
         );
     }
