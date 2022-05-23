@@ -69,6 +69,9 @@ public interface MedicalHistoryRepository extends JpaRepository<MedicalHistory, 
 
         String getAllergicDrugName();
 
+        Boolean getEverHadAnyOperation();
+        String getOperationName();
+
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime getCreatedAt();
 

@@ -47,6 +47,10 @@ public class MedicalHistory {
 
     private String allergicDrugName;
 
+    private Boolean everHadAnyOperation;
+
+    private String operationName;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -239,5 +243,21 @@ public class MedicalHistory {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public Boolean getEverHadAnyOperation() {
+        return everHadAnyOperation;
+    }
+
+    public void setEverHadAnyOperation(Boolean everHadAnyOperation) {
+        this.everHadAnyOperation = everHadAnyOperation;
+    }
+
+    public String getOperationName() {
+        return operationName;
+    }
+
+    public void setOperationName(String operationName) {
+        this.operationName = operationName;
     }
 }
