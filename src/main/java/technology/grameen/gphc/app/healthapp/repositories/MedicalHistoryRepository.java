@@ -80,4 +80,8 @@ public interface MedicalHistoryRepository extends JpaRepository<MedicalHistory, 
 
         Profile getProfile();
     }
+
+    interface Profile {
+        UUID getId();
+    }
 }
