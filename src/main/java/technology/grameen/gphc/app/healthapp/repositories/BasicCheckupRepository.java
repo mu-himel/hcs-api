@@ -98,7 +98,7 @@ public interface BasicCheckupRepository extends JpaRepository<BasicCheckup, UUID
             "LEFT JOIN FETCH bc.profile p " +
             "LEFT JOIN FETCH p.site s " +
             "LEFT JOIN FETCH s.country " +
-            "WHERE p=:profile")
+            "WHERE p=:profile order by bc.createdAt asc")
     List<PatientCheckup> findByProfile(Profile profile);
 
     @Query(value = "SELECT bc FROM BasicCheckup bc " +
