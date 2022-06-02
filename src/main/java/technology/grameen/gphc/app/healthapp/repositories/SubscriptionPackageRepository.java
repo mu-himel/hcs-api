@@ -19,12 +19,27 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
 
     @Query(value = "SELECT p from SubscriptionPackage p JOIN FETCH p.services",
     countQuery = "SELECT count(p) from SubscriptionPackage p JOIN p.services")
-    Page<SubscriptionPackageInfo> findAllPackages(Pageable pageable);
+    Page<SubscriptionPackageListInfo> findAllPackages(Pageable pageable);
+
+    @Query(value = "SELECT p from SubscriptionPackage p JOIN FETCH p.services " +
+            "WHERE lower(p.packageTitle) LIKE (:name||'%')",
+            countQuery = "SELECT count(p) from SubscriptionPackage p JOIN p.services" +
+                    " WHERE lower(p.packageTitle) LIKE (:name||'%')")
+    Page<SubscriptionPackageListInfo> findAllPackagesByName(@Param("name") String name, Pageable pageable);
 
     interface SubscriptionPackageInfo{
         UUID getId();
         String getPackageTitle();
         List<Service> getServices();
+        String getPackageDetail();
+        String getPackageCode();
+        BigDecimal getTotalAmount();
+        BigDecimal getDiscountedAmount();
+    }
+
+    interface SubscriptionPackageListInfo{
+        UUID getId();
+        String getPackageTitle();
         String getPackageDetail();
         String getPackageCode();
         BigDecimal getTotalAmount();

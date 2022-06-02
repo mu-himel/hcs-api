@@ -41,7 +41,10 @@ public class PackageServiceImpl implements PackageService{
     }
 
     @Override
-    public Page<?> getAll(Pageable pageable) {
+    public Page<?> getAll(String name, Pageable pageable) {
+        if(!name.isEmpty()){
+            return subscriptionPackageRepository.findAllPackagesByName(name,pageable);
+        }
         return subscriptionPackageRepository.findAllPackages(pageable);
     }
 }

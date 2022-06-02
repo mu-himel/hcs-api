@@ -14,5 +14,5 @@ public interface PackageService {
 
     Optional<?> getPackageById(String id);
 
-    Page<?> getAll(Pageable pageable);
+    Page<?> getAll(String name, Pageable pageable);
 }
