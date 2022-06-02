@@ -88,4 +88,20 @@ public class SubscriptionPackage {
     public void setServices(Set<Service> services) {
         this.services = services;
     }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public BigDecimal getDiscountedAmount() {
+        return discountedAmount;
+    }
+
+    public void setDiscountedAmount(BigDecimal discountedAmount) {
+        this.discountedAmount = discountedAmount;
+    }
 }
