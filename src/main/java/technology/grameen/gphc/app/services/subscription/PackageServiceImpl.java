@@ -31,7 +31,10 @@ public class PackageServiceImpl implements PackageService{
     public void updatePackage(String id, SubscriptionPackage subscriptionPackage) {
         Optional<?> op = getPackageById(id);
         if(op.isPresent()){
-            subscriptionPackageRepository.save(subscriptionPackage);
+            SubscriptionPackage sp = subscriptionPackageRepository.save(subscriptionPackage);
+            sp.getServices().stream().forEach(s->{
+                s.addPackage(sp);
+            });
         }
     }
 
