@@ -29,15 +29,15 @@ public class PackageServiceImpl implements PackageService{
     @Override
     @Transactional
     public void updatePackage(String id, SubscriptionPackage subscriptionPackage) {
-        Optional<SubscriptionPackage> op = getPackageById(id);
+        Optional<?> op = getPackageById(id);
         if(op.isPresent()){
             subscriptionPackageRepository.save(subscriptionPackage);
         }
     }
 
     @Override
-    public Optional<SubscriptionPackage> getPackageById(String id) {
-        return subscriptionPackageRepository.findById(UUID.fromString(id));
+    public Optional<?> getPackageById(String id) {
+        return subscriptionPackageRepository.findPackageById(UUID.fromString(id));
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface PackageService {
 
     void updatePackage(String id, SubscriptionPackage subscriptionPackage);
 
-    Optional<SubscriptionPackage> getPackageById(String id);
+    Optional<?> getPackageById(String id);
 
     Page<?> getAll(Pageable pageable);
 }
