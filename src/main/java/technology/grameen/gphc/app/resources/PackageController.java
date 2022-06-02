@@ -47,8 +47,10 @@ public class PackageController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(@RequestParam Optional<Integer> page,
-                                    @RequestParam Optional<Integer> size){
+    public ResponseEntity<?> getAll(
+            @RequestParam("name") String name,
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<Integer> size){
 
         Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(PAGE_LIMIT));
         return new ResponseEntity<>(

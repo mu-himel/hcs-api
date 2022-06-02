@@ -1,5 +1,7 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +16,10 @@ import java.util.UUID;
 
 @Repository
 public interface SubscriptionPackageRepository extends JpaRepository<SubscriptionPackage, UUID> {
+
+    @Query(value = "SELECT p from SubscriptionPackage p JOIN FETCH p.services",
+    countQuery = "SELECT count(p) from SubscriptionPackage p JOIN p.services")
+    Page<SubscriptionPackageInfo> findAllPackages(Pageable pageable);
 
     interface SubscriptionPackageInfo{
         UUID getId();

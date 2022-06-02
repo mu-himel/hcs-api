@@ -42,6 +42,6 @@ public class PackageServiceImpl implements PackageService{
 
     @Override
     public Page<?> getAll(Pageable pageable) {
-        return subscriptionPackageRepository.findAll(pageable);
+        return subscriptionPackageRepository.findAllPackages(pageable);
     }
 }
