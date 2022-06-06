@@ -28,8 +28,8 @@ public class PatientSubscription {
     private BigDecimal totalAmount;
     private BigDecimal discountedAmount;
     private String code;
-    private String status;
-    private String paymentStatus;
+    private String status = "pending";
+    private String paymentStatus = "pending";
 
     @CreationTimestamp
     private LocalDateTime createdAt;
