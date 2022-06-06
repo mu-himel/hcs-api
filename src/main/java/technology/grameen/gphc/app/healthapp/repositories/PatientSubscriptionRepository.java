@@ -33,6 +33,12 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
             "JOIN ps.profile p ")
     Page<PatientSubscriptionListInfo> findSubscriptions(Pageable pageable);
 
+    @Query(value = "SELECT ps FROM PatientSubscription ps " +
+            "JOIN FETCH ps.subscriptionPackage sp " +
+            "JOIN FETCH sp.services s " +
+            "WHERE ps.id=:id")
+    Optional<PatientSubscriptionInfo> findSubscriptionById(@Param("id") UUID id);
+
     interface PatientSubscriptionListInfo{
         UUID getId();
         ProfileInfo getProfile();
@@ -57,6 +63,8 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
         String getPackageTitle();
     }
 
+
+
     interface PatientSubscriptionInfo{
         UUID getId();
         String getCode();
@@ -72,6 +80,8 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
 
         BigDecimal getTotalAmount();
         BigDecimal getDiscountedAmount();
+
+        ProfileInfo getProfile();
 
         SubscriptionPackageRepository.SubscriptionPackageInfo getSubscriptionPackage();
     }

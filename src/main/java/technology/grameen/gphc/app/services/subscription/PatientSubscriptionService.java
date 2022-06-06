@@ -14,4 +14,6 @@ public interface PatientSubscriptionService {
     Optional<?> getPatientSubscriptionByProfile(Profile profile);
 
     Page<?> getPatientSubscriptions(Pageable pageable);
+
+    Optional<?> getPatientSubscriptionById(String id);
 }

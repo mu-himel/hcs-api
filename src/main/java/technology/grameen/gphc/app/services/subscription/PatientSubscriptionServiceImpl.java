@@ -10,6 +10,7 @@ import technology.grameen.gphc.app.healthapp.entity.subscription.PatientSubscrip
 import technology.grameen.gphc.app.healthapp.repositories.PatientSubscriptionRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PatientSubscriptionServiceImpl implements PatientSubscriptionService{
@@ -26,6 +27,11 @@ public class PatientSubscriptionServiceImpl implements PatientSubscriptionServic
     @Override
     public Optional<?> getPatientSubscriptionByProfile(Profile profile) {
         return patientSubscriptionRepository.findSubscriptionByProfile(profile);
+    }
+
+    @Override
+    public Optional<?> getPatientSubscriptionById(String id) {
+        return patientSubscriptionRepository.findSubscriptionById(UUID.fromString(id));
     }
 
     @Override

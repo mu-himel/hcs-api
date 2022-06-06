@@ -63,12 +63,21 @@ public class SubscriptionController {
 
     }
 
-    @GetMapping("/individual/{id}")
+    @GetMapping("/individual/profile/{id}")
     public ResponseEntity<?> getIndividualSubscriptionByProfile(@PathVariable("id") String id) {
         Profile profile = new Profile();
         profile.setId(UUID.fromString(id));
         return new ResponseEntity<>(
                 patientSubscriptionService.getPatientSubscriptionByProfile(profile),
+                HttpStatus.OK
+        );
+
+    }
+
+    @GetMapping("/individual/{id}")
+    public ResponseEntity<?> getIndividualSubscriptionByID(@PathVariable("id") String id) {
+        return new ResponseEntity<>(
+                patientSubscriptionService.getPatientSubscriptionById(id),
                 HttpStatus.OK
         );
 
