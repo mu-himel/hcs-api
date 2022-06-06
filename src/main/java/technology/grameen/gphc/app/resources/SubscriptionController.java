@@ -3,15 +3,15 @@ package technology.grameen.gphc.app.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
 import technology.grameen.gphc.app.healthapp.entity.subscription.PatientSubscription;
 import technology.grameen.gphc.app.services.security.OtpService;
 import technology.grameen.gphc.app.services.subscription.PatientSubscriptionService;
 import technology.grameen.gphc.app.services.subscription.SitePackageSubscriptionService;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/subscription")
@@ -42,6 +42,17 @@ public class SubscriptionController {
         return new ResponseEntity<>(
                 HttpStatus.CREATED
         );
+    }
+
+    @GetMapping("/individual/{id}")
+    public ResponseEntity<?> getIndividualSubscriptionByProfile(@PathVariable("id") String id) {
+        Profile profile = new Profile();
+        profile.setId(UUID.fromString(id));
+        return new ResponseEntity<>(
+                patientSubscriptionService.getPatientSubscriptionByProfile(profile),
+                HttpStatus.OK
+        );
+
     }
 
 }
