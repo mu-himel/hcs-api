@@ -1,5 +1,6 @@
 package technology.grameen.gphc.app.services.subscription;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.subscription.PatientSubscription;
@@ -8,6 +9,7 @@ import technology.grameen.gphc.app.healthapp.repositories.PatientSubscriptionRep
 @Service
 public class PatientSubscriptionServiceImpl implements PatientSubscriptionService{
 
+    @Autowired
     private PatientSubscriptionRepository patientSubscriptionRepository;
 
     @Override

@@ -38,8 +38,8 @@ public class SubscriptionController {
     public ResponseEntity<?> subscribeIndividual(@RequestBody PatientSubscription patientSubscription){
         String code = patientSubscription.getSubscriptionPackage().getPackageCode()+"-"+otpService.generateOtpToken(6);
         patientSubscription.setCode(code);
+        patientSubscriptionService.subscribePackage(patientSubscription);
         return new ResponseEntity<>(
-                patientSubscriptionService.subscribePackage(patientSubscription),
                 HttpStatus.CREATED
         );
     }
