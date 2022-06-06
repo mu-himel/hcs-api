@@ -59,4 +59,15 @@ public class PackageController {
         );
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<?> getAll(
+            @RequestParam("name") Optional<String> name){
+        return new ResponseEntity<>(
+                packageService.getAll(name.orElse("")),
+                HttpStatus.OK
+        );
+    }
+
+
+
 }

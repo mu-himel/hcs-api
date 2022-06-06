@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.subscription.SubscriptionPackage;
 import technology.grameen.gphc.app.healthapp.repositories.SubscriptionPackageRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,5 +50,13 @@ public class PackageServiceImpl implements PackageService{
             return subscriptionPackageRepository.findAllPackagesByName(name,pageable);
         }
         return subscriptionPackageRepository.findAllPackages(pageable);
+    }
+
+    @Override
+    public List<?> getAll(String name) {
+        if(!name.isEmpty()){
+            return subscriptionPackageRepository.findAllPackagesByName(name);
+        }
+        return subscriptionPackageRepository.findAllPackages();
     }
 }

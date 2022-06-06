@@ -27,6 +27,13 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
                     " WHERE lower(p.packageTitle) LIKE (:name||'%')")
     Page<SubscriptionPackageListInfo> findAllPackagesByName(@Param("name") String name, Pageable pageable);
 
+    @Query(value = "SELECT p from SubscriptionPackage p JOIN FETCH p.services" +
+            " WHERE p.packageTitle=:name")
+    List<SubscriptionPackageInfo> findAllPackagesByName(@Param("name") String name);
+
+    @Query(value = "SELECT p from SubscriptionPackage p JOIN FETCH p.services")
+    List<SubscriptionPackageInfo> findAllPackages();
+
     interface SubscriptionPackageInfo{
         UUID getId();
         String getPackageTitle();

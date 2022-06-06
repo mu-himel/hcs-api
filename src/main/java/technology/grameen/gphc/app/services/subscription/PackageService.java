@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import technology.grameen.gphc.app.healthapp.entity.subscription.SubscriptionPackage;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PackageService {
@@ -15,4 +16,6 @@ public interface PackageService {
     Optional<?> getPackageById(String id);
 
     Page<?> getAll(String name, Pageable pageable);
+
+    List<?> getAll(String orElse);
 }
