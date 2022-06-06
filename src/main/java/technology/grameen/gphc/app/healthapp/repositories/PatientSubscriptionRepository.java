@@ -1,6 +1,9 @@
 package technology.grameen.gphc.app.healthapp.repositories;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +24,38 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
             "JOIN FETCH sp.services s " +
             "WHERE ps.profile=:profile")
     Optional<PatientSubscriptionInfo> findSubscriptionByProfile(@Param("profile") Profile profile);
+
+    @Query(value = "SELECT ps FROM PatientSubscription ps " +
+            "JOIN FETCH ps.subscriptionPackage sp " +
+            "JOIN FETCH ps.profile p ",
+    countQuery = "SELECT ps FROM PatientSubscription ps " +
+            "JOIN ps.subscriptionPackage sp " +
+            "JOIN ps.profile p ")
+    Page<PatientSubscriptionListInfo> findSubscriptions(Pageable pageable);
+
+    interface PatientSubscriptionListInfo{
+        UUID getId();
+        ProfileInfo getProfile();
+        PackageInfo getSubscriptionPackage();
+        BigDecimal getTotalAmount();
+        String getCode();
+        String getStatus();
+        String getPaymentStatus();
+
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        LocalDateTime getCreatedAt();
+    }
+
+    interface ProfileInfo{
+        UUID getId();
+        String getFirstName();
+        String getLastName();
+    }
+
+    interface PackageInfo{
+        UUID getId();
+        String getPackageTitle();
+    }
 
     interface PatientSubscriptionInfo{
         UUID getId();

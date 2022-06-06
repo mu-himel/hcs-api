@@ -1,6 +1,8 @@
 package technology.grameen.gphc.app.services.subscription;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
@@ -24,5 +26,10 @@ public class PatientSubscriptionServiceImpl implements PatientSubscriptionServic
     @Override
     public Optional<?> getPatientSubscriptionByProfile(Profile profile) {
         return patientSubscriptionRepository.findSubscriptionByProfile(profile);
+    }
+
+    @Override
+    public Page<?> getPatientSubscriptions(Pageable pageable) {
+        return patientSubscriptionRepository.findSubscriptions(pageable);
     }
 }
