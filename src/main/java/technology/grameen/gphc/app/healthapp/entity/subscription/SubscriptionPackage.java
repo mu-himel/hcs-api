@@ -24,6 +24,9 @@ public class SubscriptionPackage {
     private BigDecimal totalAmount;
     private BigDecimal discountedAmount;
 
+    private Integer duration;
+    private String durationType;
+
     @ManyToMany(mappedBy = "subscriptionPackages")
     private Set<Service> services = new LinkedHashSet<>();
 
@@ -103,5 +106,21 @@ public class SubscriptionPackage {
 
     public void setDiscountedAmount(BigDecimal discountedAmount) {
         this.discountedAmount = discountedAmount;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public String getDurationType() {
+        return durationType;
+    }
+
+    public void setDurationType(String durationType) {
+        this.durationType = durationType;
     }
 }

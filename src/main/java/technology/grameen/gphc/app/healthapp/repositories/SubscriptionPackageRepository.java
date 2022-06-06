@@ -42,6 +42,8 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
         String getPackageCode();
         BigDecimal getTotalAmount();
         BigDecimal getDiscountedAmount();
+        Integer getDuration();
+        String getDurationType();
     }
 
     interface SubscriptionPackageListInfo{
