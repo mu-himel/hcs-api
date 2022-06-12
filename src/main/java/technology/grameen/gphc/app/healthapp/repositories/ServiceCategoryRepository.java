@@ -22,6 +22,8 @@ public interface ServiceCategoryRepository extends JpaRepository<ServiceCategory
 
     Optional<ServiceCategory> findServiceCategoryById(UUID id);
 
+
+
     interface ServiceCategory {
         UUID getId();
         String getName();
@@ -38,4 +40,5 @@ public interface ServiceCategoryRepository extends JpaRepository<ServiceCategory
         String getCode();
     }
     Optional<IServiceCategory> findByCodeIgnoreCase(String code);
+    Optional<IServiceCategory> findByNameIgnoreCase(String name);
 }

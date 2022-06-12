@@ -21,4 +21,5 @@ public interface ServiceCategoryService {
     Optional<?> findById(UUID id);
 
     Optional<ServiceCategoryRepository.IServiceCategory> findByCode(String code);
+    Optional<ServiceCategoryRepository.IServiceCategory> findByName(String name);
 }

@@ -37,6 +37,8 @@ public interface HealthServiceRepository extends JpaRepository<Service, UUID> {
 
     Optional<ServiceDetail> findByCode(String code);
 
+    Optional<ServiceDetail> findByName(String name);
+
     interface ServiceDetailServiceCategory{
         UUID getId();
         String getName();

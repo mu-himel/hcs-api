@@ -27,10 +27,27 @@ public class HealthServiceImpl implements HealthService{
             throw new CustomException("Service code is required");
         }
 
-        Optional<?> serviceOp = findByCode(service.getCode());
+        Optional<HealthServiceRepository.ServiceDetail> serviceOp = findByName(service.getName());
+        if(service.getId()!=null && serviceOp.isPresent()){
+            if(!service.getId().equals(serviceOp.get().getId())){
+                throw new CustomException("Service name "+service.getName()+" already exist");
+            }
+        }
+        if(service.getId() == null && serviceOp.isPresent()){
+            throw new CustomException("Service Name "+service.getName()+" already exist");
+        }
+
+        serviceOp = findByCode(service.getCode());
+        if(service.getId()!=null && serviceOp.isPresent()){
+            if(!service.getId().equals(serviceOp.get().getId())){
+                throw new CustomException("Service Code "+service.getCode()+" already exist");
+            }
+        }
         if(service.getId() == null && serviceOp.isPresent()){
             throw new CustomException("Service Code "+service.getCode()+" already exist");
         }
+
+
         if(service.getId() == null){
             service.setId(UUID.randomUUID());
         }
@@ -44,9 +61,15 @@ public class HealthServiceImpl implements HealthService{
     }
 
     @Override
-    public Optional<?> findByCode(String code) {
-        Optional<?> codeOp = healthServiceRepository.findByCode(code);
+    public Optional<HealthServiceRepository.ServiceDetail> findByCode(String code) {
+        Optional<HealthServiceRepository.ServiceDetail> codeOp = healthServiceRepository.findByCode(code);
         return codeOp;
+    }
+
+    @Override
+    public Optional<HealthServiceRepository.ServiceDetail> findByName(String name) {
+        Optional<HealthServiceRepository.ServiceDetail> nameOp = healthServiceRepository.findByName(name);
+        return nameOp;
     }
 
     @Override

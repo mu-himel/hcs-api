@@ -38,8 +38,22 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
         if(serviceCategory.getCode() == null || serviceCategory.getCode().isEmpty()){
             throw new CustomException("Service Category Code required");
         }
-//        serviceCategory.setCode(serviceCategory.getName().toLowerCase().replaceAll(" ","-"));
-        Optional<?> categoryOp = findByCode(serviceCategory.getCode());
+
+        Optional<ServiceCategoryRepository.IServiceCategory> categoryOp = findByName(serviceCategory.getName());
+        if(serviceCategory.getId()!=null && categoryOp.isPresent()){
+            if(!serviceCategory.getId().equals(categoryOp.get().getId())){
+                throw new CustomException("Service Category already exist with name " + serviceCategory.getName());
+            }
+        }
+        if(serviceCategory.getId() == null && categoryOp.isPresent()){
+            throw new CustomException("Service Category already exist with name " + serviceCategory.getName());
+        }
+        categoryOp = findByCode(serviceCategory.getCode());
+        if(serviceCategory.getId()!=null && categoryOp.isPresent()){
+            if(!serviceCategory.getId().equals(categoryOp.get().getId())){
+                throw new CustomException("Service Category already exist with code " + serviceCategory.getCode());
+            }
+        }
         if(serviceCategory.getId() == null && categoryOp.isPresent()){
             throw new CustomException("Service Category already exist with code " + serviceCategory.getCode());
         }
@@ -58,5 +72,10 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService{
     @Override
     public Optional<ServiceCategoryRepository.IServiceCategory> findByCode(String code) {
         return serviceCategoryRepository.findByCodeIgnoreCase(code);
+    }
+
+    @Override
+    public Optional<ServiceCategoryRepository.IServiceCategory> findByName(String name) {
+        return serviceCategoryRepository.findByNameIgnoreCase(name);
     }
 }

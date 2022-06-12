@@ -17,6 +17,7 @@ public interface HealthService {
 
     Optional<?> findServiceById(UUID id);
     Optional<?> findByCode(String code);
+    Optional<?> findByName(String name);
 
     List<?> getAll();
     Page<?> getAll(String name, Pageable pageable);
