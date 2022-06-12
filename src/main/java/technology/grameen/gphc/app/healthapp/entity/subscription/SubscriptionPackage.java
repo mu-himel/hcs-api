@@ -16,7 +16,7 @@ import java.util.UUID;
 public class SubscriptionPackage {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private UUID id = null;
 
     private String packageTitle;
     private String packageCode;

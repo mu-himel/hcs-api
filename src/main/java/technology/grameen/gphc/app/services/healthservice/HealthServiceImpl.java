@@ -62,13 +62,15 @@ public class HealthServiceImpl implements HealthService{
 
     @Override
     public Optional<HealthServiceRepository.ServiceDetail> findByCode(String code) {
-        Optional<HealthServiceRepository.ServiceDetail> codeOp = healthServiceRepository.findByCode(code);
+        Optional<HealthServiceRepository.ServiceDetail> codeOp = healthServiceRepository
+                .findByCodeIgnoreCase(code);
         return codeOp;
     }
 
     @Override
     public Optional<HealthServiceRepository.ServiceDetail> findByName(String name) {
-        Optional<HealthServiceRepository.ServiceDetail> nameOp = healthServiceRepository.findByName(name);
+        Optional<HealthServiceRepository.ServiceDetail> nameOp = healthServiceRepository
+                .findByNameIgnoreCase(name);
         return nameOp;
     }
 

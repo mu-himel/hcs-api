@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.subscription.SubscriptionPackage;
 import technology.grameen.gphc.app.services.subscription.PackageService;
 
@@ -21,7 +22,8 @@ public class PackageController {
     private PackageService packageService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addPackage(@RequestBody SubscriptionPackage subscriptionPackage){
+    public ResponseEntity<?> addPackage(@RequestBody SubscriptionPackage subscriptionPackage)
+                                                throws CustomException {
         packageService.addPackage(subscriptionPackage);
         return new ResponseEntity<>(
                 HttpStatus.CREATED
@@ -30,7 +32,7 @@ public class PackageController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePackage(@PathVariable("id") String id,
-                                           @RequestBody SubscriptionPackage subscriptionPackage){
+                                           @RequestBody SubscriptionPackage subscriptionPackage) throws CustomException {
 
         packageService.updatePackage(id, subscriptionPackage);
         return new ResponseEntity<>(

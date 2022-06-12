@@ -34,6 +34,10 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
     @Query(value = "SELECT p from SubscriptionPackage p JOIN FETCH p.services")
     List<SubscriptionPackageInfo> findAllPackages();
 
+    Optional<SubscriptionPackageListInfo> findByPackageTitleIgnoreCase(String title);
+
+    Optional<SubscriptionPackageListInfo> findByPackageCodeIgnoreCase(String code);
+
     interface SubscriptionPackageInfo{
         UUID getId();
         String getPackageTitle();
