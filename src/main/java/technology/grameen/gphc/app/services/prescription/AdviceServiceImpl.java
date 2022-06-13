@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Advice;
 import technology.grameen.gphc.app.healthapp.repositories.AdviceRepository;
 
@@ -20,7 +21,21 @@ public class AdviceServiceImpl implements AdviceService{
 
     @Override
     @Transactional
-    public void add(Advice advice) {
+    public void add(Advice advice) throws CustomException {
+        Optional<Advice> adviceOp = adviceRepository.findByTitle(advice.getTitle());
+        if(advice.getId()!=null && adviceOp.isPresent()){
+            if(!advice.getId().equals(adviceOp.get().getId())){
+                throw new CustomException("Advice already exist");
+            }
+        }
+
+        if(advice.getId() == null && adviceOp.isPresent()){
+            throw new CustomException("Advice already exist");
+        }
+
+        if(advice.getId()==null){
+            advice.setId(UUID.randomUUID());
+        }
         adviceRepository.save(advice);
     }
 

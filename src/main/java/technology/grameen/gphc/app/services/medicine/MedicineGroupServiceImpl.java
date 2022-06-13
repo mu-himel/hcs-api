@@ -22,11 +22,43 @@ public class MedicineGroupServiceImpl implements MedicineGroupService{
     @Override
     @Transactional
     public void add(MedicineGroup medicineGroup) throws CustomException {
-        if(medicineGroup.getCreatedAt() == null) {
-            Integer exist = medicineGroupRepository.countByName(medicineGroup.getName());
-            if (exist > 0) {
-                throw new CustomException("Medicine Group already exist");
+
+        Optional<MedicineGroup> opMedicineGroup = medicineGroupRepository
+                .findByNameIgnoreCase(medicineGroup.getName());
+        if(medicineGroup.getId() != null){
+
+            if(opMedicineGroup.isPresent()) {
+                if (!medicineGroup.getId().equals(opMedicineGroup.get().getId())) {
+                    throw new CustomException("Medicine Group with name "+medicineGroup.getName()+" already exist");
+                }
             }
+        }
+
+        if(medicineGroup.getId() == null) {
+            if(opMedicineGroup.isPresent()) {
+                throw new CustomException("Medicine Group already with name "+medicineGroup.getName()+" exist");
+            }
+        }
+
+        opMedicineGroup = medicineGroupRepository
+                .findByAliasIgnoreCase(medicineGroup.getAlias());
+        if(medicineGroup.getId() != null){
+
+            if(opMedicineGroup.isPresent()) {
+                if (!medicineGroup.getId().equals(opMedicineGroup.get().getId())) {
+                    throw new CustomException("Medicine Group with alias "+medicineGroup.getAlias()+" already exist");
+                }
+            }
+        }
+
+        if(medicineGroup.getId() == null) {
+            if(opMedicineGroup.isPresent()) {
+                throw new CustomException("Medicine Group with alias "+medicineGroup.getAlias()+" already exist");
+            }
+        }
+
+        if(medicineGroup.getId() == null){
+            medicineGroup.setId(UUID.randomUUID());
         }
         medicineGroupRepository.save(medicineGroup);
     }

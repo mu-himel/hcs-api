@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Advice;
 import technology.grameen.gphc.app.services.prescription.AdviceService;
 
@@ -20,7 +21,7 @@ public class AdviceController {
     private AdviceService adviceService;
 
     @PostMapping
-    public ResponseEntity<?> addAdvice(@RequestBody Advice advice){
+    public ResponseEntity<?> addAdvice(@RequestBody Advice advice) throws CustomException {
         adviceService.add(advice);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

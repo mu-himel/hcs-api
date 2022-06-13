@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.medicine.MedicineGroup;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -17,4 +18,7 @@ public interface MedicineGroupRepository extends JpaRepository<MedicineGroup, UU
 
 
     Page<MedicineGroup> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+    Optional<MedicineGroup> findByNameIgnoreCase(String name);
+    Optional<MedicineGroup> findByAliasIgnoreCase(String alias);
 }

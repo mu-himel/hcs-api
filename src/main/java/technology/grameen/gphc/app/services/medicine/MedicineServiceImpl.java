@@ -38,6 +38,10 @@ public class MedicineServiceImpl implements MedicineService{
                 throw new CustomException("Medicine already exist under same group, Please try something else");
             }
         }
+
+        if(medicine.getId()==null){
+            medicine.setId(UUID.randomUUID());
+        }
         return medicineRepository.save(medicine);
     }
 

@@ -16,7 +16,7 @@ import java.util.UUID;
 public class MedicineGroup {
 
     @Id
-    private UUID id=UUID.randomUUID();
+    private UUID id=null;
     private String name;
     private String alias;
     private String description;

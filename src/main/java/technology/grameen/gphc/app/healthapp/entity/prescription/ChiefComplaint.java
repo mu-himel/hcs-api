@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ChiefComplaint {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private UUID id = null;
     private String title;
     private String description;
     private String createdBy;
@@ -66,7 +66,7 @@ public class ChiefComplaint {
         this.updatedBy = updatedBy;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -75,7 +75,7 @@ public class ChiefComplaint {
         this.createdAt = createdAt;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
