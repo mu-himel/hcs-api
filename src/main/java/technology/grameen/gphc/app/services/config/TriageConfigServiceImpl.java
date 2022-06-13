@@ -56,7 +56,9 @@ public class TriageConfigServiceImpl implements TriageConfigService{
                 map.put(key, tRef);
             }
         });
-        return map;
+        TreeMap<String,Object> newMap = new TreeMap<>();
+        newMap.putAll(map);
+        return newMap;
     }
     private String getFieldKey(TriageConfiguration triage){
         if(Objects.nonNull(triage.getAlias())) {

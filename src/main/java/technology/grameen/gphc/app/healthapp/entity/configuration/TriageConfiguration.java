@@ -33,6 +33,7 @@ public class TriageConfiguration {
     private String triageFor;
     private String stage;
     private String unit;
+    private String shortCode;
 
     @Column(updatable = false)
     private UUID createdBy;
@@ -196,5 +197,13 @@ public class TriageConfiguration {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getShortCode() {
+        return shortCode;
+    }
+
+    public void setShortCode(String shortCode) {
+        this.shortCode = shortCode;
     }
 }
