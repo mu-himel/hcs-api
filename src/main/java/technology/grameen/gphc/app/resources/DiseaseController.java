@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Disease;
 import technology.grameen.gphc.app.services.prescription.DiseaseService;
 
@@ -15,7 +16,7 @@ public class DiseaseController {
     private DiseaseService diseaseService;
 
     @PostMapping
-    public ResponseEntity<?> addDisease(@RequestBody Disease disease){
+    public ResponseEntity<?> addDisease(@RequestBody Disease disease) throws CustomException {
         diseaseService.add(disease);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

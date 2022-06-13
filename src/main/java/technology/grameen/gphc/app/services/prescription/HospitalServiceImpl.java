@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Hospital;
 import technology.grameen.gphc.app.healthapp.repositories.HospitalRepository;
 
@@ -20,7 +21,22 @@ public class HospitalServiceImpl implements HospitalService{
 
     @Override
     @Transactional
-    public void addHospital(Hospital hospital) {
+    public void addHospital(Hospital hospital) throws CustomException {
+
+        Optional<Hospital> hospitalOp = hospitalRepository.findByTitleIgnoreCase(hospital.getTitle());
+        if(hospital.getId() != null && hospitalOp.isPresent()){
+            if(!hospital.getId().equals(hospitalOp.get().getId())){
+                throw new CustomException("Hospital already exist with title "+hospital.getTitle());
+            }
+        }
+
+        if(hospital.getId() == null && hospitalOp.isPresent()){
+            throw new CustomException("Hospital already exist with title "+hospital.getTitle());
+        }
+
+        if(hospital.getId() == null){
+            hospital.setId(UUID.randomUUID());
+        }
         hospitalRepository.save(hospital);
     }
 

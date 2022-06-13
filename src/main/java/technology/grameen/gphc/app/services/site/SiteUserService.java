@@ -11,4 +11,6 @@ public interface SiteUserService {
    void assignUser(List<SiteUser> siteUsers) throws CustomException;
 
    List<?> getUsers(UUID siteId);
+
+    List<?> getSitesByUserId(String id);
 }

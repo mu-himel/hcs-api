@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Hospital {
 
     @Id
-    private UUID id= UUID.randomUUID();
+    private UUID id= null;
     @NotNull(message = "Title is required")
     private String title;
     private String description;

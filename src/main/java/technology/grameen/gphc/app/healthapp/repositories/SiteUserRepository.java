@@ -12,6 +12,21 @@ import java.util.UUID;
 @Repository
 public interface SiteUserRepository extends JpaRepository<SiteUser, UUID> {
 
+    @Query(value = "SELECT su FROM SiteUser su " +
+            "JOIN FETCH su.site s " +
+            "WHERE su.userId = :id")
+    List<SiteByUserId> getSitesByUserId(@Param("id") String id);
+
+    interface SiteByUserId{
+        String getUserId();
+        SiteInfo getSite();
+    }
+
+    interface SiteInfo{
+        UUID getId();
+        String getTitle();
+    }
+
     interface ProfileUser{
         String getFirstName();
         String getLastName();

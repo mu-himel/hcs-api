@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Dose {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private UUID id = null;
     private String title;
     private String description;
 

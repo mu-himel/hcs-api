@@ -32,6 +32,7 @@ public class PatientSubscription {
     private String paymentStatus = "pending";
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

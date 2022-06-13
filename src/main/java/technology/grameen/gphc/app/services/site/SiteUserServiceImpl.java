@@ -29,4 +29,9 @@ public class SiteUserServiceImpl implements SiteUserService{
     public List<?> getUsers(UUID siteId) {
         return siteUserRepository.getUsers(siteId);
     }
+
+    @Override
+    public List<?> getSitesByUserId(String id) {
+        return siteUserRepository.getSitesByUserId(id);
+    }
 }

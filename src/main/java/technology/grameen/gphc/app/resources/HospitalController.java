@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.prescription.Hospital;
 import technology.grameen.gphc.app.services.prescription.HospitalService;
 
@@ -22,7 +23,7 @@ public class HospitalController {
 
 
     @PostMapping
-    public ResponseEntity<?> addHospital(@RequestBody @Valid Hospital hospital){
+    public ResponseEntity<?> addHospital(@RequestBody @Valid Hospital hospital) throws CustomException {
         hospitalService.addHospital(hospital);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

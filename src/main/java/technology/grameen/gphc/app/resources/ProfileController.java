@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.auth.entity.User;
 import technology.grameen.gphc.app.component.UrlBuilder;
 import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
@@ -15,6 +16,7 @@ import technology.grameen.gphc.app.healthapp.entity.profile.ProfileUser;
 import technology.grameen.gphc.app.request.UserProfileRequest;
 import technology.grameen.gphc.app.services.network.NetworkService;
 import technology.grameen.gphc.app.services.profile.ProfileService;
+import technology.grameen.gphc.app.services.site.SiteUserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +30,10 @@ public class ProfileController {
     private static final Integer PAGE_SIZE = 10;
     @Autowired
     private ProfileService profileService;
+
+    @Autowired
+    private SiteUserService siteUserService;
+
 
     @GetMapping("")
     public ResponseEntity<?> all( @RequestParam Optional<Integer> page,
@@ -52,11 +58,17 @@ public class ProfileController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getProfile(@PathVariable("id") String id){
         Optional<?> profileUserOp = profileService.getProfileById(UUID.fromString(id));
-
-
         return new ResponseEntity<>(
                 profileUserOp,
           HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/user/{id}/sites")
+    public ResponseEntity<?> getSiteByUserId(@PathVariable("id") String id){
+        return new ResponseEntity<>(
+            siteUserService.getSitesByUserId(id),
+            HttpStatus.OK
         );
     }
 
