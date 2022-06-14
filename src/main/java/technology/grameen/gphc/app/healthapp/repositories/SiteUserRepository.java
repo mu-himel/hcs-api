@@ -14,6 +14,9 @@ public interface SiteUserRepository extends JpaRepository<SiteUser, UUID> {
 
     @Query(value = "SELECT su FROM SiteUser su " +
             "JOIN FETCH su.site s " +
+            "JOIN FETCH s.country co " +
+            "JOIN FETCH s.city ci " +
+            "JOIN FETCH s.state st " +
             "WHERE su.userId = :id")
     List<SiteByUserId> getSitesByUserId(@Param("id") String id);
 
@@ -25,6 +28,21 @@ public interface SiteUserRepository extends JpaRepository<SiteUser, UUID> {
     interface SiteInfo{
         UUID getId();
         String getTitle();
+        GeoCountry getCountry();
+        GeoCity getCity();
+        GeoState getState();
+    }
+
+    interface GeoCountry{
+        String getName();
+    }
+
+    interface GeoCity{
+        String getName();
+    }
+
+    interface GeoState{
+        String getName();
     }
 
     interface ProfileUser{
