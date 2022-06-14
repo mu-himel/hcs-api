@@ -32,8 +32,10 @@ public class SubscriptionController {
 
     @PostMapping("/org")
     public ResponseEntity<?> subscribeOrganization(@RequestBody SitePackage sitePackage){
+        String code = sitePackage.getSubscriptionPackage().getPackageCode()+"-"+otpService.generateOtpToken(6);
+        sitePackage.setCode(code);
+        siteSubscriptionService.subscribePackage(sitePackage);
         return new ResponseEntity<>(
-                siteSubscriptionService.subscribePackage(sitePackage),
                 HttpStatus.CREATED
         );
     }

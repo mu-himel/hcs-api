@@ -30,8 +30,8 @@ public class SitePackage {
     private Integer maxMemberLimit;
 
     private String code;
-    private String status;
-    private String paymentStatus;
+    private String status = "pending";
+    private String paymentStatus = "pending";
 
     public UUID getId() {
         return id;
