@@ -17,7 +17,7 @@ import java.util.UUID;
 public class TriageConfiguration {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    private UUID id = null;
 
     private String paramName;
     private String alias;

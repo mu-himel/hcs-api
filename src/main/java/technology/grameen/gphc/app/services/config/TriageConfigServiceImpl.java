@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.configuration.TriageConfiguration;
 import technology.grameen.gphc.app.healthapp.repositories.TriageConfigRepository;
 
@@ -19,7 +20,33 @@ public class TriageConfigServiceImpl implements TriageConfigService{
 
     @Override
     @Transactional
-    public TriageConfiguration addConfig(TriageConfiguration triageConfiguration) {
+    public TriageConfiguration addConfig(TriageConfiguration triageConfiguration) throws CustomException {
+
+        Optional<TriageConfiguration> triageConfigOp = triageConfigRepository.findByParamName(triageConfiguration.getParamName());
+        if(triageConfiguration.getId() != null && triageConfigOp.isPresent()){
+            if(!triageConfiguration.getId().equals(triageConfigOp.get().getId())){
+                throw new CustomException("Triage already exist with name "+triageConfiguration.getParamName());
+            }
+        }
+
+        if(triageConfiguration.getId() == null && triageConfigOp.isPresent()){
+            throw new CustomException("Triage already exist with name "+triageConfiguration.getParamName());
+        }
+
+        triageConfigOp = triageConfigRepository.findByAlias(triageConfiguration.getAlias());
+        if(triageConfiguration.getId() != null && triageConfigOp.isPresent()){
+            if(!triageConfiguration.getId().equals(triageConfigOp.get().getId())){
+                throw new CustomException("Triage already exist with alias "+triageConfiguration.getAlias());
+            }
+        }
+
+        if(triageConfiguration.getId() == null && triageConfigOp.isPresent()){
+            throw new CustomException("Triage already exist with alias "+triageConfiguration.getAlias());
+        }
+
+        if(triageConfiguration.getId() == null){
+            triageConfiguration.setId(UUID.randomUUID());
+        }
         return triageConfigRepository.save(triageConfiguration);
     }
 

@@ -2,6 +2,7 @@ package technology.grameen.gphc.app.services.config;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.configuration.TriageConfiguration;
 
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 public interface TriageConfigService {
 
-    TriageConfiguration addConfig(TriageConfiguration triageConfiguration);
+    TriageConfiguration addConfig(TriageConfiguration triageConfiguration) throws CustomException;
 
     Page<TriageConfiguration> getAll(Pageable pageable, String paramName);
 

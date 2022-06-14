@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.configuration.TriageConfiguration;
 import technology.grameen.gphc.app.services.config.TriageConfigService;
 
@@ -37,7 +38,7 @@ public class TriageConfigController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addConfig(@RequestBody TriageConfiguration triageConfiguration){
+    public ResponseEntity<?> addConfig(@RequestBody TriageConfiguration triageConfiguration) throws CustomException {
         return new ResponseEntity<>(
                 triageConfigService.addConfig(triageConfiguration),
                 HttpStatus.CREATED
