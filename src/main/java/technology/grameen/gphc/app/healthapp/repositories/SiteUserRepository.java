@@ -31,6 +31,7 @@ public interface SiteUserRepository extends JpaRepository<SiteUser, UUID> {
         GeoCountry getCountry();
         GeoCity getCity();
         GeoState getState();
+        String getLogo();
     }
 
     interface GeoCountry{
