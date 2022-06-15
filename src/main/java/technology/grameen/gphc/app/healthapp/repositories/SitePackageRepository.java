@@ -41,10 +41,10 @@ public interface SitePackageRepository extends JpaRepository<SitePackage, UUID> 
         String getStatus();
         String getPaymentStatus();
 
-        @JsonFormat(pattern = "yyyy-MM-dd")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime getStartDate();
 
-        @JsonFormat(pattern = "yyyy-MM-dd")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime getEndDate();
 
 
