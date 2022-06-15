@@ -27,7 +27,7 @@ public interface SitePackageRepository extends JpaRepository<SitePackage, UUID> 
                     "JOIN sp.site s ")
     Page<SitePackageListInfo> findAllSubscriptions(Pageable pageable);
 
-    Page<SitePackageListInfo> findBySite(Site site,Pageable pageable);
+    List<SitePackageListInfo> findBySite(Site site);
 
     Optional<SitePackageListInfo> findSubscriptionById(UUID fromString);
 

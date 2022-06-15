@@ -63,7 +63,7 @@ public class SubscriptionController {
 
         Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(PAGE_SIZE));
         return new ResponseEntity<>(
-                siteSubscriptionService.getSiteSubscriptionsBySite(site, pageable),
+                siteSubscriptionService.getSiteSubscriptionsBySite(site),
                 HttpStatus.OK
         );
     }

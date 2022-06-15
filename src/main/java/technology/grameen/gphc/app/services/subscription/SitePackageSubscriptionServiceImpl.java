@@ -31,8 +31,8 @@ public class SitePackageSubscriptionServiceImpl implements SitePackageSubscripti
     }
 
     @Override
-    public Page<?> getSiteSubscriptionsBySite(Site site, Pageable pageable) {
-        return sitePackageRepository.findBySite(site, pageable);
+    public List<?> getSiteSubscriptionsBySite(Site site) {
+        return sitePackageRepository.findBySite(site);
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface SitePackageSubscriptionService {
 
     Page<?> getSiteSubscriptions(Pageable pageable);
 
-    Page<?> getSiteSubscriptionsBySite(Site site, Pageable pageable);
+    List<?> getSiteSubscriptionsBySite(Site site);
 
     Optional<?> getSiteSubscriptionsById(String id);
 }
