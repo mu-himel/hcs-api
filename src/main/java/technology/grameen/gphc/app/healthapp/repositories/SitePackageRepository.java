@@ -12,6 +12,7 @@ import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -58,5 +59,14 @@ public interface SitePackageRepository extends JpaRepository<SitePackage, UUID> 
         UUID getId();
         String getPackageTitle();
         String getPackageCode();
+        BigDecimal getTotalAmount();
+        Integer getDuration();
+        String getDurationType();
+        List<Service> getServices();
+    }
+
+    interface Service{
+        UUID getId();
+        String getName();
     }
 }
