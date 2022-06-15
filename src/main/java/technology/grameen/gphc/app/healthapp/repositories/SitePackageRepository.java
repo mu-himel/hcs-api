@@ -7,10 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import technology.grameen.gphc.app.healthapp.entity.site.Site;
 import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -24,10 +26,14 @@ public interface SitePackageRepository extends JpaRepository<SitePackage, UUID> 
                     "JOIN sp.site s ")
     Page<SitePackageListInfo> findAllSubscriptions(Pageable pageable);
 
+    Page<SitePackageListInfo> findBySite(Site site,Pageable pageable);
+
+    Optional<SitePackageListInfo> findSubscriptionById(UUID fromString);
+
     interface SitePackageListInfo{
         UUID getId();
         SubscriptionPackage getSubscriptionPackage();
-        Site getSite();
+        SiteInfo getSite();
         BigDecimal getTotalAmount();
         BigDecimal getDiscountedAmount();
         String getCode();
@@ -43,7 +49,7 @@ public interface SitePackageRepository extends JpaRepository<SitePackage, UUID> 
 
     }
 
-    interface Site{
+    interface SiteInfo{
         UUID getId();
         String getTitle();
     }
