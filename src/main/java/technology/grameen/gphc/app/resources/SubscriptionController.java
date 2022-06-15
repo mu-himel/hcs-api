@@ -13,6 +13,7 @@ import technology.grameen.gphc.app.services.security.OtpService;
 import technology.grameen.gphc.app.services.subscription.PatientSubscriptionService;
 import technology.grameen.gphc.app.services.subscription.SitePackageSubscriptionService;
 
+import javax.xml.ws.Response;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,6 +38,18 @@ public class SubscriptionController {
         siteSubscriptionService.subscribePackage(sitePackage);
         return new ResponseEntity<>(
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping("/org")
+    public ResponseEntity<?> getOrganizationSubscription(@RequestParam Optional<Integer> page,
+                                                         @RequestParam Optional<Integer> size) {
+
+        Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(PAGE_SIZE));
+
+        return new ResponseEntity<>(
+                siteSubscriptionService.getSiteSubscriptions(pageable),
+                HttpStatus.OK
         );
     }
 

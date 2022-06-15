@@ -1,6 +1,8 @@
 package technology.grameen.gphc.app.services.subscription;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
@@ -18,5 +20,10 @@ public class SitePackageSubscriptionServiceImpl implements SitePackageSubscripti
     @Transactional
     public SitePackage subscribePackage(SitePackage sitePackage) {
         return sitePackageRepository.save(sitePackage);
+    }
+
+    @Override
+    public Page<?> getSiteSubscriptions(Pageable pageable) {
+        return sitePackageRepository.findAllSubscriptions(pageable);
     }
 }
