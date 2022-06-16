@@ -80,6 +80,7 @@ public class TriageConfigServiceImpl implements TriageConfigService{
                 tRef.put("paramName", triage.getParamName());
                 tRef.put("spec", triage.getSpec());
                 tRef.put("dataType", triage.getDataType());
+                tRef.put("shortCode",triage.getShortCode());
                 map.put(key, tRef);
             }
         });
