@@ -30,6 +30,8 @@ public class SubscriptionPackage {
     @ManyToMany(mappedBy = "subscriptionPackages")
     private Set<Service> services = new LinkedHashSet<>();
 
+    private Integer maxMemberLimit;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -122,5 +124,13 @@ public class SubscriptionPackage {
 
     public void setDurationType(String durationType) {
         this.durationType = durationType;
+    }
+
+    public Integer getMaxMemberLimit() {
+        return maxMemberLimit;
+    }
+
+    public void setMaxMemberLimit(Integer maxMemberLimit) {
+        this.maxMemberLimit = maxMemberLimit;
     }
 }

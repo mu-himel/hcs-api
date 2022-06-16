@@ -48,6 +48,7 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
         BigDecimal getDiscountedAmount();
         Integer getDuration();
         String getDurationType();
+        Integer getMaxMemberLimit();
     }
 
     interface SubscriptionPackageListInfo{
@@ -57,6 +58,7 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
         String getPackageCode();
         BigDecimal getTotalAmount();
         BigDecimal getDiscountedAmount();
+        Integer getMaxMemberLimit();
     }
 
     interface Service{
