@@ -281,14 +281,24 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public Optional<?> getProfileByPid(String id) {
-        Optional<ProfileRepository.ProfilePageInfo> profileUserOp = profileRepository.findByPid(id);
 
+        Optional<ProfileRepository.ProfileUser> profileUserOp = profileRepository.findByPid(id);
+        Map<String, Object> map = new HashMap<>();
 
         if(profileUserOp.isPresent()) {
-            return Optional.of(profileUserOp.get());
+            ProfileRepository.ProfileUser profileUser = profileUserOp.get();
+            ResponseEntity<?> response = networkService.get(urlBuilder.getRoleEndPoint() + "/"
+                    + profileUser.getUserId(), null, Object.class);
+            Optional<?> userRole = Optional.ofNullable(response.getBody());
+
+            map.put("profile", profileUser.getProfile());
+            map.put("userId", profileUser.getUserId());
+            map.put("username", profileUser.getUsername());
+            map.put("id", profileUser.getId());
+            map.put("role", userRole);
         }
 
-        return Optional.empty();
+        return Optional.of(map);
     }
 
     @Override

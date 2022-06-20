@@ -64,6 +64,15 @@ public class ProfileController {
         );
     }
 
+    @GetMapping("/pid/{pid}")
+    public ResponseEntity<?> getProfileByPid(@PathVariable("pid") String pid){
+        Optional<?> profileUserOp = profileService.getProfileByPid(pid);
+        return new ResponseEntity<>(
+                profileUserOp,
+                HttpStatus.OK
+        );
+    }
+
     @GetMapping("/user/{id}/sites")
     public ResponseEntity<?> getSiteByUserId(@PathVariable("id") String id){
         return new ResponseEntity<>(

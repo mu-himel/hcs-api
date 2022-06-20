@@ -32,7 +32,11 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
 
     Optional<?> findByEmail(String email);
 
-    Optional<ProfilePageInfo> findByPid(String id);
+    @Query(value = "SELECT pu FROM ProfileUser pu " +
+            "JOIN FETCH pu.profile p " +
+            "LEFT JOIN FETCH p.site s " +
+            "WHERE p.pid = :pid")
+    Optional<ProfileUser> findByPid(String pid);
 
     @Modifying
     @Query(value = "UPDATE Profile p SET p.roleId = :role WHERE p.id=:id")
