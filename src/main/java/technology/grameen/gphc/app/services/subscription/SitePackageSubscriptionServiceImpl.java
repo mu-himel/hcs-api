@@ -39,4 +39,9 @@ public class SitePackageSubscriptionServiceImpl implements SitePackageSubscripti
     public Optional<?> getSiteSubscriptionsById(String id) {
         return sitePackageRepository.findSubscriptionById(UUID.fromString(id));
     }
+
+    @Override
+    public Optional<SitePackageRepository.SitePackageListInfo> getSiteSubscriptionsByCode(String code) {
+        return sitePackageRepository.findSubscriptionByCode(code);
+    }
 }

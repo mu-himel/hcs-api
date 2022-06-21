@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import technology.grameen.gphc.app.healthapp.entity.site.Site;
 import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
@@ -30,6 +31,13 @@ public interface SitePackageRepository extends JpaRepository<SitePackage, UUID> 
     List<SitePackageListInfo> findBySite(Site site);
 
     Optional<SitePackageListInfo> findSubscriptionById(UUID fromString);
+
+    @Query(value = "SELECT sp FROM SitePackage sp " +
+            "JOIN FETCH sp.subscriptionPackage sup " +
+            "JOIN FETCH sup.services ss " +
+            "JOIN FETCH sp.site si " +
+            " WHERE sp.code = :code")
+    Optional<SitePackageListInfo> findSubscriptionByCode(@Param("code") String code);
 
     interface SitePackageListInfo{
         UUID getId();

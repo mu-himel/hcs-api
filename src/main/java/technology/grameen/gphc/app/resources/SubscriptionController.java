@@ -6,15 +6,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import technology.grameen.gphc.app.exceptions.CustomException;
 import technology.grameen.gphc.app.healthapp.entity.profile.Profile;
 import technology.grameen.gphc.app.healthapp.entity.site.Site;
 import technology.grameen.gphc.app.healthapp.entity.site.SitePackage;
 import technology.grameen.gphc.app.healthapp.entity.subscription.PatientSubscription;
+import technology.grameen.gphc.app.healthapp.repositories.PatientSubscriptionRepository;
+import technology.grameen.gphc.app.healthapp.repositories.ProfileRepository;
+import technology.grameen.gphc.app.healthapp.repositories.SitePackageRepository;
+import technology.grameen.gphc.app.services.profile.ProfileService;
 import technology.grameen.gphc.app.services.security.OtpService;
 import technology.grameen.gphc.app.services.subscription.PatientSubscriptionService;
 import technology.grameen.gphc.app.services.subscription.SitePackageSubscriptionService;
 
 import javax.xml.ws.Response;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +34,9 @@ public class SubscriptionController {
 
     @Autowired
     private PatientSubscriptionService patientSubscriptionService;
+
+    @Autowired
+    private ProfileService profileService;
 
     @Autowired
     private OtpService otpService;
@@ -120,6 +129,49 @@ public class SubscriptionController {
                 HttpStatus.OK
         );
 
+    }
+
+    @GetMapping("/service/{code}/{patient}")
+    public ResponseEntity<?> getServicesBySubscriptionCodeAndPatient(@PathVariable("code") String code,
+                                                                     @PathVariable("patient") UUID profileId) throws CustomException {
+
+        // find patient by profile id
+        Optional<?> patientOp = profileService.getProfileById(profileId);
+
+        if(!patientOp.isPresent()){
+            throw new CustomException("Sorry! patient not exist");
+        }
+        // first search on site subscription by code
+        Optional<SitePackageRepository.SitePackageListInfo> siteSubscriptionOp = siteSubscriptionService.getSiteSubscriptionsByCode(code);
+
+
+        // if no record found search on patient subscription by code
+        if(!siteSubscriptionOp.isPresent()) {
+            Profile profile = new Profile();
+            profile.setId(profileId);
+            Optional<PatientSubscriptionRepository.PatientSubscriptionInfo> patientSubscriptionOp =
+
+                    patientSubscriptionService.getPatientSubscriptionByCodeAndProfile(code,profile);
+            if(!patientSubscriptionOp.isPresent()){
+                throw new CustomException("Sorry! Patient subscription does not matched with the given code");
+            }
+            return new ResponseEntity<>(
+                    patientSubscriptionOp,
+                    HttpStatus.OK
+            );
+        }
+
+
+        Map<String, Object> map = (Map<String, Object>)patientOp.get();
+        ProfileRepository.ProfilePageInfo profilePageInfo = (ProfileRepository.ProfilePageInfo)map.get("profile");
+        UUID profileSiteId = profilePageInfo.getSite().getId();
+        if(!profileSiteId.equals(siteSubscriptionOp.get().getSite().getId())){
+            throw new CustomException("Sorry! Patient Site does not matched with the site of given code");
+        }
+        return new ResponseEntity<>(
+            siteSubscriptionOp,
+            HttpStatus.OK
+        );
     }
 
 }

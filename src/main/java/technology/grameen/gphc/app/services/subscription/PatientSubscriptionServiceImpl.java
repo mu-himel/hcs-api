@@ -35,6 +35,12 @@ public class PatientSubscriptionServiceImpl implements PatientSubscriptionServic
     }
 
     @Override
+    public Optional<PatientSubscriptionRepository.PatientSubscriptionInfo> getPatientSubscriptionByCodeAndProfile(String code,
+                                                                                                                  Profile profile) {
+        return patientSubscriptionRepository.findSubscriptionByCodeAndProfile(code,profile);
+    }
+
+    @Override
     public Page<?> getPatientSubscriptions(Pageable pageable) {
         return patientSubscriptionRepository.findSubscriptions(pageable);
     }

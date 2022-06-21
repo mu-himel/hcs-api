@@ -39,6 +39,15 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
             "WHERE ps.id=:id")
     Optional<PatientSubscriptionInfo> findSubscriptionById(@Param("id") UUID id);
 
+    @Query(value = "SELECT ps FROM PatientSubscription ps " +
+            "JOIN FETCH ps.subscriptionPackage sp " +
+            "JOIN FETCH sp.services s " +
+            "WHERE ps.code=:code AND ps.profile = :profile")
+    Optional<PatientSubscriptionInfo> findSubscriptionByCodeAndProfile(@Param("code") String code,
+                                                                       @Param("profile") Profile profile);
+
+
+
     interface PatientSubscriptionListInfo{
         UUID getId();
         ProfileInfo getProfile();
@@ -56,6 +65,7 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
         UUID getId();
         String getFirstName();
         String getLastName();
+        ProfileRepository.SiteInfo getSite();
     }
 
     interface PackageInfo{
