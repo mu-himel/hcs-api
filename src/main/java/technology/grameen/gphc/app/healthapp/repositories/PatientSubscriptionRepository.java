@@ -66,6 +66,9 @@ public interface PatientSubscriptionRepository extends JpaRepository<PatientSubs
         String getFirstName();
         String getLastName();
         String getPid();
+        String getGender();
+        String getAge();
+        String getContactNumber();
         ProfileRepository.SiteInfo getSite();
     }
 

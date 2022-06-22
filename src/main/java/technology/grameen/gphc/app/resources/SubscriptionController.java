@@ -168,8 +168,9 @@ public class SubscriptionController {
         if(!profileSiteId.equals(siteSubscriptionOp.get().getSite().getId())){
             throw new CustomException("Sorry! Patient Site does not matched with the site of given code");
         }
+        map.put("subscription",siteSubscriptionOp.get());
         return new ResponseEntity<>(
-            siteSubscriptionOp,
+            map,
             HttpStatus.OK
         );
     }
