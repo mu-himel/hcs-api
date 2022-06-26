@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import technology.grameen.gphc.app.healthapp.entity.invoice.PatientInvoice;
 import technology.grameen.gphc.app.healthapp.repositories.InvoiceDetailRepository;
 import technology.grameen.gphc.app.healthapp.repositories.PatientInvoiceRepository;
+import technology.grameen.gphc.app.services.security.OtpService;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,12 +20,16 @@ public class PatientInvoiceServiceImpl implements PatientInvoiceService{
     @Autowired
     InvoiceDetailRepository invoiceDetailRepository;
 
+    @Autowired
+    OtpService otpService;
+
     @Override
     @Transactional
     public void saveInvoice(PatientInvoice patientInvoice) {
 
         if(patientInvoice.getId() == null){
             patientInvoice.setId(UUID.randomUUID());
+            patientInvoice.setInvoiceNumber("INV"+otpService.generateOtpToken(6));
         }
         PatientInvoice pn = patientInvoiceRepository.save(patientInvoice);
         if(pn.getCreatedAt()!=null){
