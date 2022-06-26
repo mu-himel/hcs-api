@@ -34,6 +34,7 @@ public class PatientInvoiceServiceImpl implements PatientInvoiceService{
         PatientInvoice pn = patientInvoiceRepository.save(patientInvoice);
 //        if(pn.getCreatedAt()!=null){
             patientInvoice.getDetails().stream().map((detail)->{
+                detail.setId(UUID.randomUUID());
                 detail.setPatientInvoice(pn);
                 return detail;
             }).collect(Collectors.toList());
