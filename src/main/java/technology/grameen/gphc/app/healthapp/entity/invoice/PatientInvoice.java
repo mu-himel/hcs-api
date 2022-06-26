@@ -19,7 +19,7 @@ public class PatientInvoice {
 
     private String invoiceNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Profile patient;
 
     private String subscriptionCode;
