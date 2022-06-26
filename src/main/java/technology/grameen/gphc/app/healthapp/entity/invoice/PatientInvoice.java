@@ -35,6 +35,7 @@ public class PatientInvoice {
     private Set<InvoiceDetail> details;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
