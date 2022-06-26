@@ -11,6 +11,7 @@ import technology.grameen.gphc.app.healthapp.repositories.InvoiceDetailRepositor
 import technology.grameen.gphc.app.healthapp.repositories.PatientInvoiceRepository;
 import technology.grameen.gphc.app.services.security.OtpService;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -54,5 +55,10 @@ public class PatientInvoiceServiceImpl implements PatientInvoiceService{
     @Override
     public Page<?> getAll(Profile patient, Pageable pageable) {
         return patientInvoiceRepository.findAllPatientInvoice(patient,pageable);
+    }
+
+    @Override
+    public Optional<?> getById(UUID id) {
+        return patientInvoiceRepository.findPatientInvoiceDetailById(id);
     }
 }

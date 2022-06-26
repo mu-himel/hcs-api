@@ -41,6 +41,14 @@ public class PatientInvoiceController {
         );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getInvoiceDetail(@PathVariable("id") UUID id){
+        return new ResponseEntity<>(
+                patientInvoiceService.getById(id),
+                HttpStatus.OK
+        );
+    }
+
     @GetMapping("/by-patient/{pid}")
     public ResponseEntity<?> getAllByPatient(@PathVariable("pid") UUID patientId, @RequestParam Optional<Integer> page,
                                              @RequestParam Optional<Integer> size){
