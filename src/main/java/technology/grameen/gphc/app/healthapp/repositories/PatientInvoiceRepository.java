@@ -21,13 +21,13 @@ public interface PatientInvoiceRepository extends JpaRepository<PatientInvoice, 
 
 
     @Query(value = "SELECT pi FROM PatientInvoice pi " +
-            "JOIN FETCH pi.details d " +
-            "JOIN FETCH pi.patient p " +
-            "JOIN FETCH d.service s",
+            "LEFT JOIN FETCH pi.details d " +
+            "LEFT JOIN FETCH pi.patient p " +
+            "LEFT JOIN FETCH d.service s",
     countQuery = "SELECT count(*) FROM PatientInvoice pi " +
-            "JOIN pi.details d " +
-            "JOIN pi.patient p " +
-            "JOIN d.service s")
+            "LEFT JOIN pi.details d " +
+            "LEFT JOIN pi.patient p " +
+            "LEFT JOIN d.service s")
     Page<PatientInvoiceListItem> findAllPatientInvoice(Pageable pageable);
 
     @Query(value = "SELECT pi FROM PatientInvoice pi " +
