@@ -36,14 +36,14 @@ public class PatientInvoiceServiceImpl implements PatientInvoiceService{
             patientInvoice.setInvoiceNumber("INV"+otpService.generateOtpToken(6));
         }
         PatientInvoice pn = patientInvoiceRepository.save(patientInvoice);
-        if(pn.getCreatedAt()!=null){
-            patientInvoice.getDetails().stream().map((detail)->{
-                detail.setId(UUID.randomUUID());
-                detail.setPatientInvoice(pn);
-                return detail;
-            }).collect(Collectors.toList());
-            invoiceDetailRepository.saveAll(patientInvoice.getDetails());
-        }
+        //if(pn.getCreatedAt()!=null){
+        patientInvoice.getDetails().stream().map((detail)->{
+            detail.setId(UUID.randomUUID());
+            detail.setPatientInvoice(pn);
+            return detail;
+        }).collect(Collectors.toList());
+        invoiceDetailRepository.saveAll(patientInvoice.getDetails());
+        //}
 
     }
 
