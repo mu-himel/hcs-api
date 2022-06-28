@@ -73,6 +73,8 @@ public interface PatientInvoiceRepository extends JpaRepository<PatientInvoice, 
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime getCreatedAt();
         BigDecimal getDiscountAmount();
+        BigDecimal getPaidAmount();
+        String getPatientType();
         String getInvoiceNumber();
         Boolean getPosted();
         BigDecimal getServiceAmount();
