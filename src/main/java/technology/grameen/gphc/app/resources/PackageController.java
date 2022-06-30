@@ -24,7 +24,8 @@ public class PackageController {
     @PostMapping("/add")
     public ResponseEntity<?> addPackage(@RequestBody SubscriptionPackage subscriptionPackage)
                                                 throws CustomException {
-        subscriptionPackage.setPackageCode("P"+packageService.getCount());
+        Optional<Long> count = packageService.getCount();
+        subscriptionPackage.setPackageCode("P"+(count.isPresent()? count.get(): 0));
         packageService.addPackage(subscriptionPackage);
         return new ResponseEntity<>(
                 HttpStatus.CREATED
