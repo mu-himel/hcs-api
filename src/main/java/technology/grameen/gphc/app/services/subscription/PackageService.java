@@ -23,4 +23,6 @@ public interface PackageService {
     Page<?> getAll(String name, Pageable pageable);
 
     List<?> getAll(String orElse);
+
+    Optional<Long> getCount();
 }

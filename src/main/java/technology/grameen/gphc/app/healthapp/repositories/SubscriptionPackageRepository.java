@@ -70,5 +70,8 @@ public interface SubscriptionPackageRepository extends JpaRepository<Subscriptio
             " WHERE p.id = :id")
     Optional<SubscriptionPackageInfo> findPackageById(@Param("id") UUID fromString);
 
+    @Query(value = "SELECT count(p) FROM SubscriptionPackage p")
+    Optional<Long> getTotalCount();
+
 
 }

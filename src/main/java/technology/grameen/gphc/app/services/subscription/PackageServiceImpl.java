@@ -102,4 +102,9 @@ public class PackageServiceImpl implements PackageService{
         }
         return subscriptionPackageRepository.findAllPackages();
     }
+
+    @Override
+    public Optional<Long> getCount() {
+        return subscriptionPackageRepository.getTotalCount();
+    }
 }
